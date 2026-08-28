@@ -144,7 +144,14 @@ ListNode* sortList(ListNode* head) {
     ListNode *s=head,*f=head->next;
     while (f&&f->next) s=s->next,f=f->next->next;
     auto r=s->next; s->next=nullptr;
-    return mergeTwoLists(sortList(head),sortList(r));
+    auto a=sortList(head),b=sortList(r);
+    ListNode dummy,*p=&dummy;
+    while (a&&b) {
+        if (a->val<b->val) p->next=a,a=a->next;
+        else p->next=b,b=b->next;
+        p=p->next;
+    }
+    p->next=a?a:b; return dummy.next;
 }
 ```
 
