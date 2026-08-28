@@ -1,6 +1,7 @@
 const OLD_KEY='hot100-review-v2';
 const STORE_KEY='hot100-practice-v3';
 const DAYS_KEY='hot100-study-days-v3';
+const QUEUE_KEY='hot100-daily-queue-v3';
 let DATA=[],CPP={},mode='all',focusId=null,timerLeft=20*60,timerId=null,timerRunning=false;
 let store=readJSON(STORE_KEY,{});
 const old=readJSON(OLD_KEY,{});
@@ -15,7 +16,7 @@ function dayString(d=new Date()){return `${d.getFullYear()}-${pad(d.getMonth()+1
 function addDays(days){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);return dayString(d)}
 function markStudyDay(){const days=new Set(readJSON(DAYS_KEY,[]));days.add(dayString());localStorage.setItem(DAYS_KEY,JSON.stringify([...days].sort()))}
 function streak(){const days=new Set(readJSON(DAYS_KEY,[]));let d=new Date();d.setHours(12,0,0,0);if(!days.has(dayString(d)))d.setDate(d.getDate()-1);let n=0;while(days.has(dayString(d))){++n;d.setDate(d.getDate()-1)}return n}
-function hash(s){let h=2166136261;for(let i=0;i<s.length;++i)h=(h^s.charCodeAt(i))*16777619;return h>>>0}
+function hash(s){let h=2166136261;for(let i=0;i<s.length;++i)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0}
 const stageLabel=n=>['未刷','首刷','二刷','三刷'][n||0];
 const escapeHTML=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const diffClass=d=>d==='简单'?'easy':d==='中等'?'mid':'hard';
@@ -31,10 +32,7 @@ function parseCards(md){
   }
   return out;
 }
-function parseCpp(md){
-  const out={};const re=/^### (\d+)\s*\n```cpp\n([\s\S]*?)```/gm;let m;
-  while((m=re.exec(md)))out[m[1]]=m[2].trim();return out;
-}
+function parseCpp(md){const out={};const re=/^### (\d+)\s*\n```cpp\n([\s\S]*?)```/gm;let m;while((m=re.exec(md)))out[m[1]]=m[2].trim();return out}
 
 async function load(){
   try{
@@ -48,19 +46,18 @@ async function load(){
     if(DATA.length!==100)throw new Error(`题卡数量校验失败：${DATA.length}/100`);
     if(Object.keys(CPP).length!==100||missing.length)throw new Error(`C++ 模板校验失败：${100-missing.length}/100`);
     [...new Set(DATA.map(x=>x.topic))].forEach(t=>topic.insertAdjacentHTML('beforeend',`<option>${t}</option>`));
-    render();
+    ensureDailyQueue();render();
   }catch(e){loadError.innerHTML=`<div class="error">载入失败：${escapeHTML(e.message)}</div>`;progressText.textContent='数据载入失败'}
 }
 
-function todayQueue(){
-  const today=dayString();
-  return DATA.filter(x=>{const r=rec(x.id);return !r.nextReview||r.nextReview<=today})
-    .sort((a,b)=>{
-      const A=rec(a.id),B=rec(b.id);
-      const pa=(A.weak?0:A.mistakes?1:A.stage===0?2:3),pb=(B.weak?0:B.mistakes?1:B.stage===0?2:3);
-      return pa-pb||A.stage-B.stage||hash(today+a.id)-hash(today+b.id);
-    }).slice(0,12);
+function ensureDailyQueue(){
+  const today=dayString(),cached=readJSON(QUEUE_KEY,{});
+  if(cached.date===today&&Array.isArray(cached.ids)) return cached.ids;
+  const candidates=DATA.filter(x=>{const r=rec(x.id);return !r.nextReview||r.nextReview<=today})
+    .sort((a,b)=>{const A=rec(a.id),B=rec(b.id);const pa=A.weak?0:A.mistakes?1:A.stage===0?2:3,pb=B.weak?0:B.mistakes?1:B.stage===0?2:3;return pa-pb||A.stage-B.stage||hash(today+a.id)-hash(today+b.id)});
+  const ids=candidates.slice(0,12).map(x=>x.id);localStorage.setItem(QUEUE_KEY,JSON.stringify({date:today,ids}));return ids;
 }
+function todayQueue(){const today=dayString(),ids=new Set(ensureDailyQueue());return DATA.filter(x=>ids.has(x.id)&&rec(x.id).lastReviewed!==today)}
 function baseList(){
   if(mode==='today'){const ids=new Set(todayQueue().map(x=>x.id));return DATA.filter(x=>ids.has(x.id))}
   if(mode==='starred')return DATA.filter(x=>rec(x.id).star);
@@ -69,14 +66,10 @@ function baseList(){
   if(mode==='random'||mode==='interview')return DATA.filter(x=>x.id===focusId);
   return DATA;
 }
-function filtered(){
-  const qq=q.value.trim().toLowerCase(),tp=topic.value,df=diff.value,rv=rf.value;
-  return baseList().filter(x=>(!qq||`${x.id}${x.title}${x.core}${x.topic}`.toLowerCase().includes(qq))&&(!tp||x.topic===tp)&&(!df||x.diff===df)&&(rv===''||String(rec(x.id).stage)===rv));
-}
+function filtered(){const qq=q.value.trim().toLowerCase(),tp=topic.value,df=diff.value,rv=rf.value;return baseList().filter(x=>(!qq||`${x.id}${x.title}${x.core}${x.topic}`.toLowerCase().includes(qq))&&(!tp||x.topic===tp)&&(!df||x.diff===df)&&(rv===''||String(rec(x.id).stage)===rv))}
 
 function render(){
-  const arr=filtered();
-  resultCount.textContent=`当前 ${arr.length} 题 · ${modeName()}`;
+  const arr=filtered();resultCount.textContent=`当前 ${arr.length} 题 · ${modeName()}`;
   grid.innerHTML=arr.length?arr.map(cardHTML).join(''):`<div class="empty">这里暂时没有题目。可以切回“全部题卡”，或调整筛选条件。</div>`;
   bindCards();stats();updateModes();
   if(focusId){const el=document.querySelector(`.card[data-id="${focusId}"]`);if(el){el.classList.add('open');setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'start'}),20)}}
@@ -113,33 +106,33 @@ function bindCards(){
   document.querySelectorAll('.summary').forEach(x=>x.addEventListener('click',()=>x.parentElement.classList.toggle('open')));
   document.querySelectorAll('.star').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();toggleStar(b.closest('.card').dataset.id)}));
   document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const c=b.closest('.card');c.querySelectorAll('.tab-btn,.pane').forEach(x=>x.classList.remove('active'));b.classList.add('active');c.querySelector(`[data-pane="${b.dataset.tab}"]`).classList.add('active')}));
-  document.querySelectorAll('.copy-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const c=b.closest('.card'),id=c.dataset.id,x=DATA.find(v=>v.id===id),txt=b.dataset.copy==='cpp'?CPP[id]:x.py;navigator.clipboard.writeText(txt).then(()=>{const old=b.textContent;b.textContent='已复制';setTimeout(()=>b.textContent=old,900)})}));
+  document.querySelectorAll('.copy-btn').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const c=b.closest('.card'),id=c.dataset.id,x=DATA.find(v=>v.id===id),txt=b.dataset.copy==='cpp'?CPP[id]:x.py;navigator.clipboard.writeText(txt).then(()=>{const old=b.textContent;b.textContent='已复制';setTimeout(()=>b.textContent=old,900)}).catch(()=>b.textContent='复制失败')}));
   document.querySelectorAll('[data-result]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();applyResult(b.closest('.card').dataset.id,b.dataset.result)}));
   document.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();setStage(b.closest('.card').dataset.id,+b.dataset.stage)}));
 }
 
 function stats(){
   const stages=DATA.map(x=>rec(x.id).stage);total.textContent=DATA.length;first.textContent=stages.filter(x=>x>=1).length;second.textContent=stages.filter(x=>x>=2).length;third.textContent=stages.filter(x=>x>=3).length;streakEl.textContent=streak();
-  const done=stages.filter(x=>x>=3).length;bar.style.width=(DATA.length?done/DATA.length*100:0)+'%';progressText.textContent=`三刷完成 ${done} / ${DATA.length} · 今日队列 ${todayQueue().length} 题`;
+  const done=stages.filter(x=>x>=3).length;bar.style.width=(DATA.length?done/DATA.length*100:0)+'%';progressText.textContent=`三刷完成 ${done} / ${DATA.length} · 今日剩余 ${todayQueue().length} 题`;
 }
-function updateModes(){
-  todayN.textContent=todayQueue().length;starN.textContent=DATA.filter(x=>rec(x.id).star).length;mistakeN.textContent=DATA.filter(x=>rec(x.id).mistakes>0).length;weakN.textContent=DATA.filter(x=>rec(x.id).weak).length;
-  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
-}
-function setMode(m){mode=m;focusId=null;if(m!=='interview')stopTimer(false);render()}
+function updateModes(){todayN.textContent=todayQueue().length;starN.textContent=DATA.filter(x=>rec(x.id).star).length;mistakeN.textContent=DATA.filter(x=>rec(x.id).mistakes>0).length;weakN.textContent=DATA.filter(x=>rec(x.id).weak).length;document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode))}
+function clearFilters(){q.value='';topic.value='';diff.value='';rf.value=''}
+function setMode(m){mode=m;focusId=null;if(m!=='interview')stopTimer(true);render()}
 function randomCard(interview=false){
-  const pool=DATA.filter(x=>interview?(rec(x.id).stage<3||rec(x.id).weak):true);const pick=pool[Math.floor(Math.random()*pool.length)]||DATA[0];focusId=pick.id;mode=interview?'interview':'random';
-  if(interview)startInterview();render();
+  clearFilters();if(!interview)stopTimer(true);
+  const preferred=DATA.filter(x=>rec(x.id).stage<3||rec(x.id).weak),pool=interview&&preferred.length?preferred:DATA;
+  const pick=pool[Math.floor(Math.random()*pool.length)]||DATA[0];focusId=pick.id;mode=interview?'interview':'random';if(interview)startInterview();render();
 }
 
 function fmtTime(s){return `${pad(Math.floor(s/60))}:${pad(s%60)}`}
 function drawTimer(){timerClock.textContent=fmtTime(timerLeft);timerToggle.textContent=timerRunning?'暂停':'继续'}
-function startInterview(){clearInterval(timerId);timerLeft=20*60;timerRunning=true;timerPanel.classList.add('show');drawTimer();timerId=setInterval(()=>{if(timerRunning&&timerLeft>0){--timerLeft;drawTimer()}if(timerLeft===0){timerRunning=false;clearInterval(timerId);timerClock.textContent='00:00 · 时间到'}},1000)}
+function runTimer(){clearInterval(timerId);timerId=setInterval(()=>{if(timerRunning&&timerLeft>0){--timerLeft;drawTimer()}if(timerLeft===0){timerRunning=false;clearInterval(timerId);timerId=null;timerClock.textContent='00:00 · 时间到'}},1000)}
+function startInterview(){timerLeft=20*60;timerRunning=true;timerPanel.classList.add('show');drawTimer();runTimer()}
 function stopTimer(hide=true){clearInterval(timerId);timerId=null;timerRunning=false;if(hide)timerPanel.classList.remove('show')}
-function resetTimer(){timerLeft=20*60;timerRunning=true;drawTimer()}
+function resetTimer(){timerLeft=20*60;timerRunning=true;timerPanel.classList.add('show');drawTimer();runTimer()}
 
 ['q','topic','diff','rf'].forEach(id=>document.querySelector('#'+id).addEventListener(id==='q'?'input':'change',render));
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 randomBtn.addEventListener('click',()=>randomCard(false));interviewBtn.addEventListener('click',()=>randomCard(true));
-timerToggle.addEventListener('click',()=>{timerRunning=!timerRunning;drawTimer()});timerReset.addEventListener('click',resetTimer);timerExit.addEventListener('click',()=>{stopTimer(true);setMode('all')});
+timerToggle.addEventListener('click',()=>{if(timerLeft===0){resetTimer();return}timerRunning=!timerRunning;drawTimer()});timerReset.addEventListener('click',resetTimer);timerExit.addEventListener('click',()=>setMode('all'));
 load();
