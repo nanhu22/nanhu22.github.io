@@ -3,32 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hunan | AI Agent & GIS</title>
+  <meta name="description" content="胡楠的个人主页：AI Agent、Memory、Skill、Harness、Context Engineering 与个人 Knowledge Lab。">
+  <title>Hunan | AI Agent & Context Engineering</title>
   <style>
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; line-height: 1.7; color: #263238; background: #f5f8fc; }
     header { padding: 90px 24px; text-align: center; color: white; background: linear-gradient(135deg, #2563eb, #0f766e); }
     header img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid white; }
     header h1 { margin: 20px 0 8px; font-size: 42px; }
-    header p { margin: 0; font-size: 19px; opacity: 0.9; }
+    header p { margin: 0; font-size: 19px; opacity: .9; }
     nav { margin-top: 28px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
     nav a { color: white; text-decoration: none; }
     main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    section { margin-bottom: 28px; padding: 30px; background: white; border-radius: 14px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06); }
+    section { margin-bottom: 28px; padding: 30px; background: white; border-radius: 14px; box-shadow: 0 5px 20px rgba(0, 0, 0, .06); }
     h2 { margin-top: 0; color: #2563eb; }
     .project { margin: 18px 0; padding-left: 18px; border-left: 4px solid #2563eb; }
-    .lab { position: relative; overflow: hidden; color: #4c352b; background: radial-gradient(circle at 92% 0,#f8d7b5 0,transparent 28%), linear-gradient(135deg,#fff8ef,#f9eadb); border: 1px solid #ead0b9; box-shadow: 0 12px 34px rgba(116,72,44,.10); }
-    .lab::after { content: "100"; position: absolute; right: 22px; top: -24px; font-size: 120px; line-height: 1; font-weight: 800; color: rgba(162,81,47,.06); }
+    .lab { position: relative; overflow: hidden; color: #4c352b; border: 1px solid #ead0b9; background: radial-gradient(circle at 92% 0, #f8d7b5 0, transparent 28%), linear-gradient(135deg, #fff8ef, #f9eadb); box-shadow: 0 12px 34px rgba(116, 72, 44, .10); }
+    .lab::after { content: "100"; position: absolute; right: 22px; top: -24px; font-size: 120px; line-height: 1; font-weight: 800; color: rgba(162, 81, 47, .06); pointer-events: none; }
     .lab h2 { color: #a84f35; }
+    .lab h3 { margin-bottom: 8px; }
     .lab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
-    .lab-stat { padding: 12px; border: 1px solid #e6ccb5; border-radius: 12px; background: rgba(255,253,248,.72); }
+    .lab-stat { padding: 12px; border: 1px solid #e6ccb5; border-radius: 12px; background: rgba(255, 253, 248, .72); }
     .lab-stat strong { display: block; color: #78402d; font-size: 22px; }
     .lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .lab-tags span { border: 1px solid #dfbea2; background: #fff8ef; border-radius: 999px; padding: 4px 9px; font-size: 13px; color: #74584b; }
-    .lab-button { display: inline-block; margin-top: 6px; padding: 11px 18px; border-radius: 10px; background: #b8563a; color: white; text-decoration: none; font-weight: 700; }
+    .lab-tags span { padding: 4px 9px; color: #74584b; font-size: 13px; border: 1px solid #dfbea2; border-radius: 999px; background: #fff8ef; }
+    .lab-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+    .lab-button { display: inline-block; padding: 11px 18px; color: white; font-weight: 700; text-decoration: none; border-radius: 10px; background: #b8563a; }
+    .lab-button.secondary { color: #8f472f; border: 1px solid #dfbea2; background: #fff8ef; }
     a { color: #2563eb; }
     footer { padding: 30px; text-align: center; color: #64748b; }
-    @media (max-width: 620px) { header { padding: 64px 20px; } header h1 { font-size: 34px; } .lab-grid { grid-template-columns: repeat(2, 1fr); } section { padding: 24px; } }
+    @media (max-width: 620px) {
+      header { padding: 64px 20px; }
+      header h1 { font-size: 34px; }
+      .lab-grid { grid-template-columns: repeat(2, 1fr); }
+      section { padding: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -36,44 +46,63 @@
     <img src="https://avatars.githubusercontent.com/u/75598308?v=4" alt="胡楠的头像">
     <h1>胡楠</h1>
     <p>AI Agent · Memory · Skill · Harness · Context Engineering</p>
-    <nav>
+    <nav aria-label="主页导航">
       <a href="#about">关于我</a>
       <a href="#projects">项目经历</a>
       <a href="#knowledge-lab">Knowledge Lab</a>
       <a href="#contact">联系方式</a>
     </nav>
   </header>
+
   <main>
     <section id="about">
       <h2>关于我</h2>
       <p>我是一名计算机方向的研究生，关注 AI Agent、多业务场景下的智能AI应用分解与设计、长期记忆机制、上下文管理以及Agent Harness极致的管控。</p>
       <p>目前正在研究可插拔 多业务协同工作流、多智能体协作、Agent Memory Harness 以及通用Agent 架构设计。</p>
     </section>
+
     <section id="projects">
       <h2>项目经历</h2>
-      <div class="project"><h3>GGAI：通用 General Geographical Agent</h3><p>基于 PocketFlow 构建主 Agent 与 Subagent 协作架构，集成 QGIS、OpenStreetMap、规划器和工具执行系统。</p></div>
-      <div class="project"><h3>Memory Hook</h3><p>从 Session 和 Agent Trace 中自动抽取长期记忆，实现混合检索、记忆巩固和 Benchmark 评测闭环，研究MEmory两大派系，一是Extract first，二是Evidence first，现研究第三大派系（敬请期待）。</p></div>
-      <div class="project"><h3>ELP-Mob</h3><p>面向城市移动预测开展大语言模型训练与复现实验，探索联合监督、词表扩展和移动序列建模。 探索Agent在轨迹生成、轨迹预测方向的实现和优化。 已发表并收录两篇CCFB文章</p></div>
+      <div class="project">
+        <h3>GGAI：通用 General Geographical Agent</h3>
+        <p>基于 PocketFlow 构建主 Agent 与 Subagent 协作架构，集成 QGIS、OpenStreetMap、规划器和工具执行系统。</p>
+      </div>
+      <div class="project">
+        <h3>Memory Hook</h3>
+        <p>从 Session 和 Agent Trace 中自动抽取长期记忆，实现混合检索、记忆巩固和 Benchmark 评测闭环，研究MEmory两大派系，一是Extract first，二是Evidence first，现研究第三大派系（敬请期待）。</p>
+      </div>
+      <div class="project">
+        <h3>ELP-Mob</h3>
+        <p>面向城市移动预测开展大语言模型训练与复现实验，探索联合监督、词表扩展和移动序列建模。 探索Agent在轨迹生成、轨迹预测方向的实现和优化。 已发表并收录两篇CCFB文章</p>
+      </div>
     </section>
+
     <section id="knowledge-lab" class="lab">
       <h2>常用应用</h2>
       <h3>Knowledge Lab · LeetCode Hot 100</h3>
-      <p>把 Hot 100 从“题单”推进成一个可以每天使用的刷题系统：100 道主卡同时提供 Python / C++ 最小模板、易错点、面试口述、关联与发散，并根据你的答题结果形成今日复习、错题本和薄弱题。</p>
+      <p>把 Hot 100 从“题单”推进成一个可以每天使用的刷题系统：100 道主卡同时提供 Python / C++ 最小模板、易错点、面试口述、关联与发散，并根据答题结果形成今日复习、错题本、薄弱题与训练记录。</p>
       <div class="lab-grid">
         <div class="lab-stat"><strong>100</strong>Hot 100 主卡</div>
         <div class="lab-stat"><strong>2</strong>Python + C++</div>
         <div class="lab-stat"><strong>12</strong>每日复习队列</div>
-        <div class="lab-stat"><strong>20m</strong>模拟面试</div>
+        <div class="lab-stat"><strong>v4</strong>考试 + 备份</div>
       </div>
-      <div class="lab-tags"><span>暖色知识卡</span><span>Python 模板</span><span>C++ 模板</span><span>今日复习</span><span>收藏 / 错题本</span><span>薄弱题</span><span>随机抽卡</span><span>三刷进度</span></div>
-      <a class="lab-button" href="./hot100/">进入 Hot 100 Practice Lab →</a>
+      <div class="lab-tags">
+        <span>暖色知识卡</span><span>Python 模板</span><span>C++ 模板</span><span>今日复习</span><span>收藏 / 错题本</span><span>薄弱题</span><span>考试模式</span><span>训练记录</span><span>进度备份</span>
+      </div>
+      <div class="lab-actions">
+        <a class="lab-button" href="./hot100/">进入 Hot 100 Practice Lab →</a>
+        <a class="lab-button secondary" href="./hot100/?mode=today">直接开始今日复习</a>
+      </div>
     </section>
+
     <section id="contact">
       <h2>联系方式</h2>
       <p>GitHub：<a href="https://github.com/nanhu22">github.com/nanhu22</a></p>
       <p>邮箱：<a href="mailto:nanhuu0222@163.com">nanhuu0222@163.com</a></p>
     </section>
   </main>
+
   <footer>© 2026 胡楠 · Hosted by GitHub Pages</footer>
 </body>
 </html>
