@@ -17,15 +17,15 @@
     section { margin-bottom: 28px; padding: 30px; background: white; border-radius: 14px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06); }
     h2 { margin-top: 0; color: #2563eb; }
     .project { margin: 18px 0; padding-left: 18px; border-left: 4px solid #2563eb; }
-    .lab { position: relative; overflow: hidden; background: linear-gradient(135deg, #0f172a, #102a43); color: #e2e8f0; }
-    .lab::after { content: "100"; position: absolute; right: 22px; top: -24px; font-size: 120px; line-height: 1; font-weight: 800; color: rgba(255,255,255,.04); }
-    .lab h2 { color: #7dd3fc; }
+    .lab { position: relative; overflow: hidden; color: #4c352b; background: radial-gradient(circle at 92% 0,#f8d7b5 0,transparent 28%), linear-gradient(135deg,#fff8ef,#f9eadb); border: 1px solid #ead0b9; box-shadow: 0 12px 34px rgba(116,72,44,.10); }
+    .lab::after { content: "100"; position: absolute; right: 22px; top: -24px; font-size: 120px; line-height: 1; font-weight: 800; color: rgba(162,81,47,.06); }
+    .lab h2 { color: #a84f35; }
     .lab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
-    .lab-stat { padding: 12px; border: 1px solid #334155; border-radius: 12px; background: rgba(15,23,42,.55); }
-    .lab-stat strong { display: block; color: white; font-size: 22px; }
+    .lab-stat { padding: 12px; border: 1px solid #e6ccb5; border-radius: 12px; background: rgba(255,253,248,.72); }
+    .lab-stat strong { display: block; color: #78402d; font-size: 22px; }
     .lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .lab-tags span { border: 1px solid #334155; border-radius: 999px; padding: 4px 9px; font-size: 13px; color: #cbd5e1; }
-    .lab-button { display: inline-block; margin-top: 6px; padding: 11px 18px; border-radius: 10px; background: #2563eb; color: white; text-decoration: none; font-weight: 700; }
+    .lab-tags span { border: 1px solid #dfbea2; background: #fff8ef; border-radius: 999px; padding: 4px 9px; font-size: 13px; color: #74584b; }
+    .lab-button { display: inline-block; margin-top: 6px; padding: 11px 18px; border-radius: 10px; background: #b8563a; color: white; text-decoration: none; font-weight: 700; }
     a { color: #2563eb; }
     footer { padding: 30px; text-align: center; color: #64748b; }
     @media (max-width: 620px) { header { padding: 64px 20px; } header h1 { font-size: 34px; } .lab-grid { grid-template-columns: repeat(2, 1fr); } section { padding: 24px; } }
@@ -57,15 +57,15 @@
     </section>
     <section id="knowledge-lab" class="lab">
       <h2>Knowledge Lab · LeetCode Hot 100</h2>
-      <p>把 Hot 100 从“题单”整理成可复习、可迁移的知识系统。主干是 100 道必记题，每题都有 Python 最小模板、易错点、面试口述、关联题与发散题。</p>
+      <p>把 Hot 100 从“题单”推进成一个可以每天使用的刷题系统：100 道主卡同时提供 Python / C++ 最小模板、易错点、面试口述、关联与发散，并根据你的答题结果形成今日复习、错题本和薄弱题。</p>
       <div class="lab-grid">
         <div class="lab-stat"><strong>100</strong>Hot 100 主卡</div>
-        <div class="lab-stat"><strong>17</strong>算法专题</div>
-        <div class="lab-stat"><strong>3</strong>轮复习状态</div>
-        <div class="lab-stat"><strong>2×</strong>关联与发散</div>
+        <div class="lab-stat"><strong>2</strong>Python + C++</div>
+        <div class="lab-stat"><strong>12</strong>每日复习队列</div>
+        <div class="lab-stat"><strong>20m</strong>模拟面试</div>
       </div>
-      <div class="lab-tags"><span>Python 模板</span><span>易错点</span><span>面试口述</span><span>专题筛选</span><span>题目搜索</span><span>首刷 / 二刷 / 三刷</span></div>
-      <a class="lab-button" href="./hot100/">进入 Hot 100 Knowledge Lab →</a>
+      <div class="lab-tags"><span>暖色知识卡</span><span>Python 模板</span><span>C++ 模板</span><span>今日复习</span><span>收藏 / 错题本</span><span>薄弱题</span><span>随机抽卡</span><span>三刷进度</span></div>
+      <a class="lab-button" href="./hot100/">进入 Hot 100 Practice Lab →</a>
     </section>
     <section id="contact">
       <h2>联系方式</h2>
