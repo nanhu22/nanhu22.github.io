@@ -1,12 +1,81 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hot 100 Knowledge Lab</title><style>
-:root{--bg:#07111f;--panel:#0d1b2d;--line:#20344f;--text:#e8f0fb;--muted:#91a4bd;--blue:#60a5fa;--cyan:#2dd4bf;--easy:#34d399;--mid:#fbbf24;--hard:#fb7185}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#122b48 0,#07111f 42%);color:var(--text);font:15px/1.65 system-ui,-apple-system,"Microsoft YaHei",sans-serif}.wrap{max-width:1240px;margin:auto;padding:28px 22px 70px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center}.top h1{margin:0;font-size:clamp(30px,4vw,48px)}.muted{color:var(--muted)}a{color:var(--blue)}.back{border:1px solid var(--line);border-radius:12px;padding:9px 14px;text-decoration:none;color:var(--text)}.hero,.card{background:rgba(13,27,45,.96);border:1px solid var(--line);border-radius:18px}.hero{margin:24px 0 10px;padding:20px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#091725;border:1px solid var(--line);border-radius:14px;padding:14px}.stat b{font-size:24px;display:block}.progress{height:8px;background:#07131f;border-radius:999px;overflow:hidden}.progress span{height:100%;display:block;background:linear-gradient(90deg,var(--blue),var(--cyan))}.toolbar{position:sticky;top:0;z-index:4;background:rgba(7,17,31,.94);backdrop-filter:blur(12px);padding:16px 0;display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:10px}.toolbar input,.toolbar select{background:#0a1726;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{overflow:hidden}.summary{padding:17px;cursor:pointer}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.num{font-weight:800;color:var(--blue)}.tag{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:2px 8px;color:var(--muted)}.简单{color:var(--easy)}.中等{color:var(--mid)}.困难{color:var(--hard)}.core{margin:10px 0 0;color:#cedcef}.detail{display:none;padding:0 17px 17px}.card.open .detail{display:block}.tabs,.review{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.tabs button,.review button,.copy{background:#091725;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:7px 10px;cursor:pointer}.tabs button.active,.review button.active{border-color:var(--cyan);color:var(--cyan)}.pane{display:none}.pane.active{display:block}.codebox{position:relative}.copy{position:absolute;right:8px;top:8px}pre{white-space:pre-wrap;background:#06101c;border:1px solid #182b43;padding:15px;border-radius:12px;overflow:auto;color:#dbeafe}.error{padding:14px;border:1px solid #7f1d1d;background:#2a1015;border-radius:12px;color:#fecaca}@media(max-width:850px){.grid{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}}@media(max-width:520px){.toolbar{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
-</style></head><body><div class="wrap"><div class="top"><div><h1>LeetCode Hot 100 · Knowledge Lab</h1><div class="muted">Python 模板 · 易错点 · 面试口述 · 关联发散 · 三刷进度</div></div><a class="back" href="../">← 返回主页</a></div><section class="hero"><h2>把题单变成可迁移的知识网络</h2><p class="muted">100 道 Hot100 主卡片，复习进度仅保存在当前浏览器。</p><div class="stats"><div class="stat"><b id="total">0</b>Hot100</div><div class="stat"><b id="first">0</b>首刷+</div><div class="stat"><b id="second">0</b>二刷+</div><div class="stat"><b id="third">0</b>三刷</div></div><div class="progress"><span id="bar" style="width:0"></span></div><p id="progressText" class="muted">正在载入题卡…</p><div id="loadError"></div></section><div class="toolbar"><input id="q" placeholder="搜索题号 / 题名 / 核心"><select id="topic"><option value="">全部专题</option></select><select id="diff"><option value="">全部难度</option><option>简单</option><option>中等</option><option>困难</option></select><select id="rf"><option value="">全部进度</option><option value="0">未刷</option><option value="1">首刷</option><option value="2">二刷</option><option value="3">三刷</option></select></div><main id="grid" class="grid"></main></div><script>
-const REVIEW_KEY='hot100-review-v2';let DATA=[];const state=JSON.parse(localStorage.getItem(REVIEW_KEY)||'{}');
-function parse(md){const blocks=md.split(/^### /m).slice(1),out=[];for(const b of blocks){const [head,...rest]=b.split('\n');const p=head.split('|').map(x=>x.trim());if(p.length<5)continue;const body=rest.join('\n');const get=k=>((body.match(new RegExp('\\*\\*'+k+'\\*\\*：([^\\n]+)'))||[])[1]||'').trim();const code=((body.match(/```python\n([\s\S]*?)```/)||[])[1]||'').trim();out.push({id:p[0],title:p[1],topic:p[2],diff:p[3],slug:p[4],core:get('核心'),pitfall:get('易错'),oral:get('口述'),related:get('关联'),expand:get('发散'),code})}return out}
-async function load(){try{const files=Array.from({length:15},(_,i)=>`./data/cards-${String(i+1).padStart(2,'0')}.md`);const texts=await Promise.all(files.map(x=>fetch(x).then(r=>{if(!r.ok)throw new Error(x);return r.text()})));DATA=parse(texts.join('\n')).sort((a,b)=>Number(a.id)-Number(b.id));if(DATA.length!==100)throw new Error(`题卡数量校验失败：${DATA.length}/100`);[...new Set(DATA.map(x=>x.topic))].forEach(t=>topic.insertAdjacentHTML('beforeend',`<option>${t}</option>`));render()}catch(e){loadError.innerHTML=`<div class="error">题卡载入失败：${e.message}</div>`;progressText.textContent='载入失败'}}
-const label=n=>['未刷','首刷','二刷','三刷'][n||0];const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function render(){const qq=q.value.trim().toLowerCase(),tp=topic.value,df=diff.value,r=rf.value;const arr=DATA.filter(x=>(!qq||`${x.id}${x.title}${x.core}${x.topic}`.toLowerCase().includes(qq))&&(!tp||x.topic===tp)&&(!df||x.diff===df)&&(r===''||String(state[x.id]||0)===r));grid.innerHTML=arr.map(x=>`<article class="card" data-id="${x.id}"><div class="summary"><div class="row"><span class="num">#${x.id}</span><strong>${x.title}</strong><span class="tag">${x.topic}</span><span class="tag ${x.diff}">${x.diff}</span><span class="tag">${label(state[x.id])}</span></div><p class="core">${x.core}</p></div><div class="detail"><div class="tabs"><button class="active" data-tab="code">Python 模板</button><button data-tab="pitfall">易错点</button><button data-tab="oral">面试口述</button><button data-tab="links">关联 / 发散</button></div><div class="pane active" data-pane="code"><div class="codebox"><button class="copy">复制</button><pre><code>${esc(x.code)}</code></pre></div></div><div class="pane" data-pane="pitfall"><p>${x.pitfall}</p></div><div class="pane" data-pane="oral"><p>${x.oral}</p></div><div class="pane" data-pane="links"><p><b>关联：</b>${x.related}</p><p><b>发散：</b>${x.expand}</p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/${x.slug}/">原题</a> · <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/${x.slug}/solutions/">LeetCode 题解</a></p></div><div class="review"><span class="muted">复习：</span>${[0,1,2,3].map(n=>`<button data-review="${n}" class="${(state[x.id]||0)===n?'active':''}">${label(n)}</button>`).join('')}</div></div></article>`).join('');bind();stats()}
-function bind(){document.querySelectorAll('.summary').forEach(x=>x.onclick=()=>x.parentElement.classList.toggle('open'));document.querySelectorAll('.tabs button').forEach(b=>b.onclick=e=>{e.stopPropagation();const c=b.closest('.card');c.querySelectorAll('.tabs button,.pane').forEach(x=>x.classList.remove('active'));b.classList.add('active');c.querySelector(`[data-pane="${b.dataset.tab}"]`).classList.add('active')});document.querySelectorAll('[data-review]').forEach(b=>b.onclick=e=>{e.stopPropagation();state[b.closest('.card').dataset.id]=+b.dataset.review;localStorage.setItem(REVIEW_KEY,JSON.stringify(state));render()});document.querySelectorAll('.copy').forEach(b=>b.onclick=e=>{e.stopPropagation();navigator.clipboard.writeText(b.nextElementSibling.innerText).then(()=>{b.textContent='已复制';setTimeout(()=>b.textContent='复制',900)})})}
-function stats(){const v=DATA.map(x=>state[x.id]||0),a=v.filter(x=>x>=1).length,b=v.filter(x=>x>=2).length,c=v.filter(x=>x===3).length;total.textContent=DATA.length;first.textContent=a;second.textContent=b;third.textContent=c;progressText.textContent=`三刷完成 ${c} / ${DATA.length}`;bar.style.width=(DATA.length?c/DATA.length*100:0)+'%'}['q','topic','diff','rf'].forEach(id=>document.querySelector('#'+id).addEventListener(id==='q'?'input':'change',render));load();
-</script></body></html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="LeetCode Hot 100 Knowledge Lab：Python/C++ 最小模板、关联发散与本地刷题复习系统。">
+  <title>Hot 100 Practice Lab</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Knowledge Lab · Practice System v3</div>
+        <h1>LeetCode Hot 100</h1>
+        <div class="muted">Python + C++ 最小模板 · 易错点 · 面试口述 · 关联发散 · 三刷复习</div>
+      </div>
+      <a class="back" href="../">← 返回个人主页</a>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h2>从“看过题解”走到“能稳定复现”</h2>
+          <p class="muted">100 道 Hot100 是主干；每次答题结果会更新本地复习状态。数据只保存在当前浏览器，不上传服务器。</p>
+          <div class="stats">
+            <div class="stat"><b id="total">0</b>Hot100</div>
+            <div class="stat"><b id="first">0</b>首刷+</div>
+            <div class="stat"><b id="second">0</b>二刷+</div>
+            <div class="stat"><b id="third">0</b>三刷</div>
+            <div class="stat"><b id="streakEl">0</b>连续天数</div>
+          </div>
+          <div class="progress"><span id="bar" style="width:0"></span></div>
+          <p id="progressText" class="muted">正在载入题卡…</p>
+          <div id="loadError"></div>
+        </div>
+
+        <aside class="practice-panel">
+          <div class="practice-title"><h3>刷题模式</h3><span class="tag">local-first</span></div>
+          <div class="mode-row">
+            <button class="mode-btn active" data-mode="all">全部题卡</button>
+            <button class="mode-btn" data-mode="today">今日复习 <strong id="todayN">0</strong></button>
+            <button class="mode-btn" data-mode="starred">收藏 <strong id="starN">0</strong></button>
+            <button class="mode-btn" data-mode="mistake">错题本 <strong id="mistakeN">0</strong></button>
+            <button class="mode-btn" data-mode="weak">薄弱题 <strong id="weakN">0</strong></button>
+            <button class="mode-btn" id="randomBtn">随机抽卡</button>
+            <button class="mode-btn" id="interviewBtn">20 分钟面试</button>
+          </div>
+          <p class="card-note">建议流程：先口述思路 → 写最小模板 → 看易错点 → 标记“掌握 / 模糊 / 不会”。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="timer-panel" id="timerPanel" aria-live="polite">
+      <div><div class="eyebrow">Interview Mode</div><strong>20 分钟模拟面试</strong></div>
+      <div class="timer-clock" id="timerClock">20:00</div>
+      <div class="timer-actions">
+        <button class="timer-btn" id="timerToggle">暂停</button>
+        <button class="timer-btn" id="timerReset">重置</button>
+        <button class="timer-btn" id="timerExit">退出面试</button>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <input id="q" autocomplete="off" placeholder="搜索题号 / 题名 / 核心模式">
+      <select id="topic"><option value="">全部专题</option></select>
+      <select id="diff"><option value="">全部难度</option><option>简单</option><option>中等</option><option>困难</option></select>
+      <select id="rf"><option value="">全部进度</option><option value="0">未刷</option><option value="1">首刷</option><option value="2">二刷</option><option value="3">三刷</option></select>
+    </div>
+
+    <div class="result-summary">
+      <strong id="resultCount">当前 0 题</strong>
+      <span class="muted">展开卡片可切换 <span class="kbd">Python</span> / <span class="kbd">C++</span></span>
+    </div>
+
+    <main id="grid" class="grid"></main>
+    <div class="footer-note">Hot 100 Practice Lab v3 · 复习状态、收藏、错题和连续天数均保存在浏览器 localStorage。</div>
+  </div>
+</body>
+</html>
