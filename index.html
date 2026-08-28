@@ -3,173 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Hunan | AI Agent & GIS</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, "Microsoft YaHei", sans-serif;
-      line-height: 1.7;
-      color: #263238;
-      background: #f5f8fc;
-    }
-
-    header {
-      padding: 90px 24px;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, #2563eb, #0f766e);
-    }
-
-    header img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 4px solid white;
-    }
-
-    header h1 {
-      margin: 20px 0 8px;
-      font-size: 42px;
-    }
-
-    header p {
-      margin: 0;
-      font-size: 19px;
-      opacity: 0.9;
-    }
-
-    nav {
-      margin-top: 28px;
-    }
-
-    nav a {
-      margin: 0 12px;
-      color: white;
-      text-decoration: none;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    section {
-      margin-bottom: 28px;
-      padding: 30px;
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #2563eb;
-    }
-
-    .project {
-      margin: 18px 0;
-      padding-left: 18px;
-      border-left: 4px solid #2563eb;
-    }
-
-    a {
-      color: #2563eb;
-    }
-
-    footer {
-      padding: 30px;
-      text-align: center;
-      color: #64748b;
-    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; line-height: 1.7; color: #263238; background: #f5f8fc; }
+    header { padding: 90px 24px; text-align: center; color: white; background: linear-gradient(135deg, #2563eb, #0f766e); }
+    header img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid white; }
+    header h1 { margin: 20px 0 8px; font-size: 42px; }
+    header p { margin: 0; font-size: 19px; opacity: 0.9; }
+    nav { margin-top: 28px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    nav a { color: white; text-decoration: none; }
+    main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    section { margin-bottom: 28px; padding: 30px; background: white; border-radius: 14px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06); }
+    h2 { margin-top: 0; color: #2563eb; }
+    .project { margin: 18px 0; padding-left: 18px; border-left: 4px solid #2563eb; }
+    .lab { position: relative; overflow: hidden; background: linear-gradient(135deg, #0f172a, #102a43); color: #e2e8f0; }
+    .lab::after { content: "100"; position: absolute; right: 22px; top: -24px; font-size: 120px; line-height: 1; font-weight: 800; color: rgba(255,255,255,.04); }
+    .lab h2 { color: #7dd3fc; }
+    .lab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+    .lab-stat { padding: 12px; border: 1px solid #334155; border-radius: 12px; background: rgba(15,23,42,.55); }
+    .lab-stat strong { display: block; color: white; font-size: 22px; }
+    .lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .lab-tags span { border: 1px solid #334155; border-radius: 999px; padding: 4px 9px; font-size: 13px; color: #cbd5e1; }
+    .lab-button { display: inline-block; margin-top: 6px; padding: 11px 18px; border-radius: 10px; background: #2563eb; color: white; text-decoration: none; font-weight: 700; }
+    a { color: #2563eb; }
+    footer { padding: 30px; text-align: center; color: #64748b; }
+    @media (max-width: 620px) { header { padding: 64px 20px; } header h1 { font-size: 34px; } .lab-grid { grid-template-columns: repeat(2, 1fr); } section { padding: 24px; } }
   </style>
 </head>
-
 <body>
   <header>
-    <img
-      src="https://avatars.githubusercontent.com/u/75598308?v=4"
-      alt="胡楠的头像"
-    >
-
+    <img src="https://avatars.githubusercontent.com/u/75598308?v=4" alt="胡楠的头像">
     <h1>胡楠</h1>
     <p>AI Agent · GIS · Memory Systems</p>
-
     <nav>
       <a href="#about">关于我</a>
       <a href="#projects">项目经历</a>
+      <a href="#knowledge-lab">Knowledge Lab</a>
       <a href="#contact">联系方式</a>
     </nav>
   </header>
-
   <main>
     <section id="about">
       <h2>关于我</h2>
-      <p>
-        我是一名计算机技术方向的研究生，关注 AI Agent、
-        GIS 智能系统、长期记忆机制与大语言模型应用。
-      </p>
-      <p>
-        目前正在研究可插拔 Skill/MCP、多智能体协作、
-        Agent Memory Harness 以及通用 GIS Agent。
-      </p>
+      <p>我是一名计算机技术方向的研究生，关注 AI Agent、GIS 智能系统、长期记忆机制与大语言模型应用。</p>
+      <p>目前正在研究可插拔 Skill/MCP、多智能体协作、Agent Memory Harness 以及通用 GIS Agent。</p>
     </section>
-
     <section id="projects">
       <h2>项目经历</h2>
-
-      <div class="project">
-        <h3>GGAI：通用 GIS Agent</h3>
-        <p>
-          基于 PocketFlow 构建主 Agent 与 Subagent 协作架构，
-          集成 QGIS、OpenStreetMap、规划器和工具执行系统。
-        </p>
-      </div>
-
-      <div class="project">
-        <h3>Memory Hook</h3>
-        <p>
-          从 Session 和 Agent Trace 中自动抽取长期记忆，
-          实现混合检索、记忆巩固和 Benchmark 评测闭环。
-        </p>
-      </div>
-
-      <div class="project">
-        <h3>ELP-Mob</h3>
-        <p>
-          面向城市移动预测开展大语言模型训练与复现实验，
-          探索联合监督、词表扩展和移动序列建模。
-        </p>
-      </div>
+      <div class="project"><h3>GGAI：通用 GIS Agent</h3><p>基于 PocketFlow 构建主 Agent 与 Subagent 协作架构，集成 QGIS、OpenStreetMap、规划器和工具执行系统。</p></div>
+      <div class="project"><h3>Memory Hook</h3><p>从 Session 和 Agent Trace 中自动抽取长期记忆，实现混合检索、记忆巩固和 Benchmark 评测闭环。</p></div>
+      <div class="project"><h3>ELP-Mob</h3><p>面向城市移动预测开展大语言模型训练与复现实验，探索联合监督、词表扩展和移动序列建模。</p></div>
     </section>
-
+    <section id="knowledge-lab" class="lab">
+      <h2>Knowledge Lab · LeetCode Hot 100</h2>
+      <p>把 Hot 100 从“题单”整理成可复习、可迁移的知识系统。主干是 100 道必记题，每题都有 Python 最小模板、易错点、面试口述、关联题与发散题。</p>
+      <div class="lab-grid">
+        <div class="lab-stat"><strong>100</strong>Hot 100 主卡</div>
+        <div class="lab-stat"><strong>17</strong>算法专题</div>
+        <div class="lab-stat"><strong>3</strong>轮复习状态</div>
+        <div class="lab-stat"><strong>2×</strong>关联与发散</div>
+      </div>
+      <div class="lab-tags"><span>Python 模板</span><span>易错点</span><span>面试口述</span><span>专题筛选</span><span>题目搜索</span><span>首刷 / 二刷 / 三刷</span></div>
+      <a class="lab-button" href="./hot100/">进入 Hot 100 Knowledge Lab →</a>
+    </section>
     <section id="contact">
       <h2>联系方式</h2>
-
-      <p>
-        GitHub：
-        <a href="https://github.com/nanhu22">
-          github.com/nanhu22
-        </a>
-      </p>
-
-      <p>
-        邮箱：
-        <a href="mailto:nanhuu0222@163.com">
-          nanhuu0222@163.com
-        </a>
-      </p>
+      <p>GitHub：<a href="https://github.com/nanhu22">github.com/nanhu22</a></p>
+      <p>邮箱：<a href="mailto:nanhuu0222@163.com">nanhuu0222@163.com</a></p>
     </section>
   </main>
-
-  <footer>
-    © 2026 胡楠 · Hosted by GitHub Pages
-  </footer>
+  <footer>© 2026 胡楠 · Hosted by GitHub Pages</footer>
 </body>
 </html>
