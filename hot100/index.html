@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="LeetCode Hot 100 Knowledge Lab：Python/C++ 最小模板、关联发散与本地刷题复习系统。">
+  <meta name="description" content="LeetCode Hot 100 Practice Lab：Python/C++ 最小模板、今日复习、考试模式、错题与间隔复习。">
   <title>Hot 100 Practice Lab</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
@@ -12,9 +12,9 @@
   <div class="wrap">
     <header class="top">
       <div>
-        <div class="eyebrow">Knowledge Lab · Practice System v3</div>
+        <div class="eyebrow">Knowledge Lab · Practice System v4</div>
         <h1>LeetCode Hot 100</h1>
-        <div class="muted">Python + C++ 最小模板 · 易错点 · 面试口述 · 关联发散 · 三刷复习</div>
+        <div class="muted">Python + C++ 最小模板 · 今日复习 · 考试模式 · 错题与薄弱追踪</div>
       </div>
       <a class="back" href="../">← 返回个人主页</a>
     </header>
@@ -22,10 +22,11 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <h2>从“看过题解”走到“能稳定复现”</h2>
-          <p class="muted">100 道 Hot100 是主干；每次答题结果会更新本地复习状态。数据只保存在当前浏览器，不上传服务器。</p>
-          <div class="stats">
+          <h2>从“刷过”走到“长期能复现”</h2>
+          <p class="muted">100 道 Hot100 是主干。每次训练结果都会更新复习阶段、薄弱状态和下次复习日期；数据默认只保存在你的浏览器。</p>
+          <div class="stats stats-v4">
             <div class="stat"><b id="total">0</b>Hot100</div>
+            <div class="stat"><b id="mastery">0%</b>掌握度</div>
             <div class="stat"><b id="first">0</b>首刷+</div>
             <div class="stat"><b id="second">0</b>二刷+</div>
             <div class="stat"><b id="third">0</b>三刷</div>
@@ -33,21 +34,32 @@
           </div>
           <div class="progress"><span id="bar" style="width:0"></span></div>
           <p id="progressText" class="muted">正在载入题卡…</p>
+          <div id="storageWarning" class="warning" hidden></div>
           <div id="loadError"></div>
         </div>
 
         <aside class="practice-panel">
           <div class="practice-title"><h3>刷题模式</h3><span class="tag">local-first</span></div>
           <div class="mode-row">
-            <button class="mode-btn active" data-mode="all">全部题卡</button>
-            <button class="mode-btn" data-mode="today">今日复习 <strong id="todayN">0</strong></button>
-            <button class="mode-btn" data-mode="starred">收藏 <strong id="starN">0</strong></button>
-            <button class="mode-btn" data-mode="mistake">错题本 <strong id="mistakeN">0</strong></button>
-            <button class="mode-btn" data-mode="weak">薄弱题 <strong id="weakN">0</strong></button>
-            <button class="mode-btn" id="randomBtn">随机抽卡</button>
-            <button class="mode-btn" id="interviewBtn">20 分钟面试</button>
+            <button type="button" class="mode-btn active" data-mode="all">全部题卡</button>
+            <button type="button" class="mode-btn" data-mode="today">今日复习 <strong id="todayN">0</strong></button>
+            <button type="button" class="mode-btn" data-mode="starred">收藏 <strong id="starN">0</strong></button>
+            <button type="button" class="mode-btn" data-mode="mistake">错题本 <strong id="mistakeN">0</strong></button>
+            <button type="button" class="mode-btn" data-mode="weak">薄弱题 <strong id="weakN">0</strong></button>
+            <button type="button" class="mode-btn" id="randomBtn">随机抽卡</button>
+            <button type="button" class="mode-btn" id="interviewBtn">20 分钟面试</button>
+            <button type="button" class="mode-btn exam-mode-btn" id="examBtn">考试模式</button>
           </div>
-          <p class="card-note">建议流程：先口述思路 → 写最小模板 → 看易错点 → 标记“掌握 / 模糊 / 不会”。</p>
+          <div class="daily-progress">
+            <div class="daily-title"><span>今日计划</span><b><span id="dailyDone">0</span> / <span id="dailyTotal">0</span></b></div>
+            <div class="mini-progress"><span id="dailyBar" style="width:0"></span></div>
+          </div>
+          <p class="card-note">推荐：先口述 → 独立写代码 → 再看模板与易错点 → 标记“掌握 / 模糊 / 不会”。</p>
+          <div class="data-actions">
+            <button type="button" class="ghost-btn" id="exportBtn">备份进度</button>
+            <button type="button" class="ghost-btn" id="importBtn">恢复进度</button>
+            <input id="importInput" type="file" accept="application/json,.json" hidden>
+          </div>
         </aside>
       </div>
     </section>
@@ -56,16 +68,20 @@
       <div><div class="eyebrow">Interview Mode</div><strong>20 分钟模拟面试</strong></div>
       <div class="timer-clock" id="timerClock">20:00</div>
       <div class="timer-actions">
-        <button class="timer-btn" id="timerToggle">暂停</button>
-        <button class="timer-btn" id="timerReset">重置</button>
-        <button class="timer-btn" id="timerExit">退出面试</button>
+        <button type="button" class="timer-btn" id="timerToggle">暂停</button>
+        <button type="button" class="timer-btn" id="timerReset">重置</button>
+        <button type="button" class="timer-btn" id="timerExit">退出面试</button>
       </div>
     </section>
 
     <div class="toolbar">
+      <label class="sr-only" for="q">搜索题目</label>
       <input id="q" autocomplete="off" placeholder="搜索题号 / 题名 / 核心模式">
+      <label class="sr-only" for="topic">专题</label>
       <select id="topic"><option value="">全部专题</option></select>
+      <label class="sr-only" for="diff">难度</label>
       <select id="diff"><option value="">全部难度</option><option>简单</option><option>中等</option><option>困难</option></select>
+      <label class="sr-only" for="rf">复习状态</label>
       <select id="rf"><option value="">全部进度</option><option value="0">未刷</option><option value="1">首刷</option><option value="2">二刷</option><option value="3">三刷</option></select>
     </div>
 
@@ -75,7 +91,16 @@
     </div>
 
     <main id="grid" class="grid"></main>
-    <div class="footer-note">Hot 100 Practice Lab v3 · 复习状态、收藏、错题和连续天数均保存在浏览器 localStorage。</div>
+
+    <section class="history-panel" aria-labelledby="historyTitle">
+      <div class="history-head">
+        <div><div class="eyebrow">Training Log</div><h2 id="historyTitle">最近训练记录</h2></div>
+        <span class="muted">最近 8 次操作</span>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <div class="footer-note">Hot 100 Practice Lab v4 · 复习状态、收藏、错题、训练记录和连续天数均保存在浏览器 localStorage，可手动备份为 JSON。</div>
   </div>
 </body>
 </html>
