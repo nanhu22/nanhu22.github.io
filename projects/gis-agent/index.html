@@ -44,130 +44,30 @@
           <p>Navigation Agent 时代，一个 Agent 可以直接拥有决策与工具循环；进入 GIS 场景后，任务开始包含数据装载、schema 检查、空间运算、图层变换、共享 project state、错误恢复以及最终 Artifact 交付。为避免单个 Agent 同时背负计划、执行和全局控制，GIS Agent 把职责拆成四个清晰角色。</p>
 
           <div class="case-board" aria-label="GIS Agent watermarked case-study board">
-            <div class="case-board-head">
-              <div><h3>GIS Agent — Planner → Executor → Orchestrator → Answer</h3><p>Middle architecture era · multi-agent execution for complex GIS business</p></div>
-              <div class="case-board-badge"><strong>Architecture evolution</strong><br>Longer workflows · shared state · recovery · real GIS artifacts.</div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">1</span>User Request</div>
-              <div class="board-card blue"><strong>Solar-power site suitability</strong><p>Find suitable candidate areas by combining terrain, land cover, transmission access and protected-area constraints.</p></div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">2</span>Multi-Agent Architecture</div>
-              <div class="board-grid cols-4">
-                <div class="board-card"><span class="mono">Plan</span><strong>Planner</strong><p>Understand the spatial goal, decompose the request into ordered sub-tasks, and define dependencies / success conditions.</p></div>
-                <div class="board-card blue"><span class="mono">Execute</span><strong>ExecutorFlow</strong><p>Run each planned step with ReAct-style reasoning, GIS tools and observations.</p></div>
-                <div class="board-card"><span class="mono">Control</span><strong>Orchestrator</strong><p>Coordinate state, agent hand-offs, retries, human interaction and shared GIS workspace consistency.</p></div>
-                <div class="board-card green"><span class="mono">Deliver</span><strong>Answer</strong><p>Synthesize maps, files and analytical evidence into a clear final answer.</p></div>
-              </div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">3</span>Agent Trace — End-to-End Workflow</div>
-              <div class="board-flow" style="--steps:9">
-                <div class="board-step"><span class="step-no">1</span><strong>Understand Goal</strong><span>Parse suitability criteria and spatial constraints.</span></div>
-                <div class="board-step"><span class="step-no">2</span><strong>Plan Sub-Tasks</strong><span>Create an ordered GIS plan and dependencies.</span></div>
-                <div class="board-step"><span class="step-no">3</span><strong>Load Layers</strong><span>Bring required vector / raster data into the shared workspace.</span></div>
-                <div class="board-step"><span class="step-no">4</span><strong>Inspect Data</strong><span>Check schema, attributes, projection and coverage.</span></div>
-                <div class="board-step"><span class="step-no">5</span><strong>Geoprocess</strong><span>Execute QGIS / PostGIS transformations and analysis.</span></div>
-                <div class="board-step"><span class="step-no">6</span><strong>Validate</strong><span>Inspect intermediate outputs and artifact state.</span></div>
-                <div class="board-step"><span class="step-no">7</span><strong>Recover</strong><span>Retry, clarify or switch execution path when required.</span></div>
-                <div class="board-step"><span class="step-no">8</span><strong>Finalize</strong><span>Generate layers, maps, tables and other artifacts.</span></div>
-                <div class="board-step"><span class="step-no">9</span><strong>Answer</strong><span>Summarize findings and recommendations.</span></div>
-              </div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">4</span>Results &amp; Artifacts</div>
-              <div class="board-result">
-                <div class="board-result-panel"><h4>Spatial Result</h4><p>A final suitability layer and ranked candidate areas are produced from multiple GIS criteria rather than a text-only answer.</p></div>
-                <div class="board-result-panel"><h4>Delivered Artifacts</h4><p>Map / layer · candidate-zone table · analytical summary. The workflow is expected to leave verifiable GIS outputs behind.</p></div>
-              </div>
-              <div class="board-takeaways"><span>Multi-Agent Pattern</span><span>Stateful Workflow</span><span>Spatial Execution</span><span>Recovery &amp; Validation</span></div>
-            </div>
+            <div class="case-board-head"><div><h3>GIS Agent — Planner → Executor → Orchestrator → Answer</h3><p>Middle architecture era · multi-agent execution for complex GIS business</p></div><div class="case-board-badge"><strong>Architecture evolution</strong><br>Longer workflows · shared state · recovery · real GIS artifacts.</div></div>
+            <div class="board-section"><div class="board-title"><span class="num">1</span>User Request</div><div class="board-card blue"><strong>Solar-power site suitability</strong><p>Find suitable candidate areas by combining terrain, land cover, transmission access and protected-area constraints.</p></div></div>
+            <div class="board-section"><div class="board-title"><span class="num">2</span>Multi-Agent Architecture</div><div class="board-grid cols-4"><div class="board-card"><span class="mono">Plan</span><strong>Planner</strong><p>Understand the spatial goal, decompose the request into ordered sub-tasks, and define dependencies / success conditions.</p></div><div class="board-card blue"><span class="mono">Execute</span><strong>ExecutorFlow</strong><p>Run each planned step with ReAct-style reasoning, GIS tools and observations.</p></div><div class="board-card"><span class="mono">Control</span><strong>Orchestrator</strong><p>Coordinate state, agent hand-offs, retries, human interaction and shared GIS workspace consistency.</p></div><div class="board-card green"><span class="mono">Deliver</span><strong>Answer</strong><p>Synthesize maps, files and analytical evidence into a clear final answer.</p></div></div></div>
+            <div class="board-section"><div class="board-title"><span class="num">3</span>Agent Trace — End-to-End Workflow</div><div class="board-flow" style="--steps:9"><div class="board-step"><span class="step-no">1</span><strong>Understand Goal</strong><span>Parse suitability criteria and spatial constraints.</span></div><div class="board-step"><span class="step-no">2</span><strong>Plan Sub-Tasks</strong><span>Create an ordered GIS plan and dependencies.</span></div><div class="board-step"><span class="step-no">3</span><strong>Load Layers</strong><span>Bring required vector / raster data into the shared workspace.</span></div><div class="board-step"><span class="step-no">4</span><strong>Inspect Data</strong><span>Check schema, attributes, projection and coverage.</span></div><div class="board-step"><span class="step-no">5</span><strong>Geoprocess</strong><span>Execute QGIS / PostGIS transformations and analysis.</span></div><div class="board-step"><span class="step-no">6</span><strong>Validate</strong><span>Inspect intermediate outputs and artifact state.</span></div><div class="board-step"><span class="step-no">7</span><strong>Recover</strong><span>Retry, clarify or switch execution path when required.</span></div><div class="board-step"><span class="step-no">8</span><strong>Finalize</strong><span>Generate layers, maps, tables and other artifacts.</span></div><div class="board-step"><span class="step-no">9</span><strong>Answer</strong><span>Summarize findings and recommendations.</span></div></div></div>
+            <div class="board-section"><div class="board-title"><span class="num">4</span>Results &amp; Artifacts</div><div class="board-result"><div class="board-result-panel"><h4>Spatial Result</h4><p>A final suitability layer and ranked candidate areas are produced from multiple GIS criteria rather than a text-only answer.</p></div><div class="board-result-panel"><h4>Delivered Artifacts</h4><p>Map / layer · candidate-zone table · analytical summary. The workflow is expected to leave verifiable GIS outputs behind.</p></div></div><div class="board-takeaways"><span>Multi-Agent Pattern</span><span>Stateful Workflow</span><span>Spatial Execution</span><span>Recovery &amp; Validation</span></div></div>
           </div>
           <div class="case-evidence-note"><span><strong>Watermarked case-study board:</strong> web rendition based on the supplied GIS Agent PDF.</span><span>© Hu Nan · public-safe / path-free</span></div>
 
-          <div class="story-evolution" aria-label="Agent architecture evolution">
-            <article class="story-era"><span class="mono">Era 01</span><strong>Navigation Agent</strong><p>One Agent owns the full Decision → Tool → Observation loop for domain tasks.</p></article>
-            <article class="story-era active"><span class="mono">Era 02</span><strong>GIS Agent</strong><p>Explicit Planner / Executor / Orchestrator / Answer roles separate planning, execution, shared-state control and delivery.</p></article>
-            <article class="story-era"><span class="mono">Era 03</span><strong>GGAI</strong><p>The domain-specific multi-agent workflow is later generalized into a reusable single-Agent Runtime and pluggable capability layer.</p></article>
-          </div>
+          <div class="story-evolution" aria-label="Agent architecture evolution"><article class="story-era"><span class="mono">Era 01</span><strong>Navigation Agent</strong><p>One Agent owns the full Decision → Tool → Observation loop for domain tasks.</p></article><article class="story-era active"><span class="mono">Era 02</span><strong>GIS Agent</strong><p>Explicit Planner / Executor / Orchestrator / Answer roles separate planning, execution, shared-state control and delivery.</p></article><article class="story-era"><span class="mono">Era 03</span><strong>GGAI</strong><p>The domain-specific multi-agent workflow is later generalized into a reusable single-Agent Runtime and pluggable capability layer.</p></article></div>
         </div>
       </div>
     </section>
 
-    <section class="case-section">
-      <div class="container case-grid">
-        <div class="case-label mono">02 / Agent Roles</div>
-        <div class="case-content">
-          <h2>Four roles, one shared GIS workflow.</h2>
-          <div class="case-outline">
-            <article><div class="mono">A / Planner</div><h3>Stable task decomposition</h3><p>把自然语言目标转成有依赖关系的 GIS 计划，并控制当前阶段需要暴露的领域能力；Planner 关注“做什么和先后关系”，不陷入每个工具参数细节。</p></article>
-            <article><div class="mono">B / ExecutorFlow</div><h3>ReAct inside each step</h3><p>围绕单个计划步骤进行推理、工具选择、Observation 读取和错误恢复，把 QGIS / PostGIS / MLIT 的具体操作落实到可执行状态。</p></article>
-            <article><div class="mono">C / Orchestrator</div><h3>State &amp; control</h3><p>维护共享任务状态、Agent hand-off、人机交互、重试与恢复，使多个角色在同一个 GIS workspace 中保持一致。</p></article>
-            <article><div class="mono">D / Answer</div><h3>Evidence to delivery</h3><p>不重新执行分析，只消费已经形成的结果、地图与文件，把执行证据整理成用户可理解的结论与交付物。</p></article>
-          </div>
-          <div class="case-visual-note"><strong>为什么不是简单并行：</strong>GIS 任务经常连续修改同一个 QGIS project / dataset，后一步依赖前一步 Artifact。因此 Multi-Agent 的价值主要是职责分离与控制，而不是把每一步同时跑起来。</div>
-        </div>
-      </div>
-    </section>
+    <section class="case-section"><div class="container case-grid"><div class="case-label mono">02 / Agent Roles</div><div class="case-content"><h2>Four roles, one shared GIS workflow.</h2><div class="case-outline"><article><div class="mono">A / Planner</div><h3>Stable task decomposition</h3><p>把自然语言目标转成有依赖关系的 GIS 计划，并控制当前阶段需要暴露的领域能力；Planner 关注“做什么和先后关系”，不陷入每个工具参数细节。</p></article><article><div class="mono">B / ExecutorFlow</div><h3>ReAct inside each step</h3><p>围绕单个计划步骤进行推理、工具选择、Observation 读取和错误恢复，把 QGIS / PostGIS / MLIT 的具体操作落实到可执行状态。</p></article><article><div class="mono">C / Orchestrator</div><h3>State &amp; control</h3><p>维护共享任务状态、Agent hand-off、人机交互、重试与恢复，使多个角色在同一个 GIS workspace 中保持一致。</p></article><article><div class="mono">D / Answer</div><h3>Evidence to delivery</h3><p>不重新执行分析，只消费已经形成的结果、地图与文件，把执行证据整理成用户可理解的结论与交付物。</p></article></div><div class="case-visual-note"><strong>为什么不是简单并行：</strong>GIS 任务经常连续修改同一个 QGIS project / dataset，后一步依赖前一步 Artifact。因此 Multi-Agent 的价值主要是职责分离与控制，而不是把每一步同时跑起来。</div></div></div></section>
 
-    <section class="case-section">
-      <div class="container case-grid">
-        <div class="case-label mono">03 / Representative Cases</div>
-        <div class="case-content">
-          <h2>A broader family of GIS production tasks.</h2>
-          <p>脱敏后的历史执行记录覆盖从基础空间运算到多条件业务分析。下面选择三类更能体现架构演进的案例，而不是只展示单一 QGIS 操作。</p>
-          <div class="representative-cases">
-            <article class="representative-case"><span class="mono">A</span><div><h4>Solar-power site suitability</h4><p>组合地形、土地覆盖、输电可达性与保护区约束，经过多步空间运算形成候选区域、排名与地图成果。</p></div><aside>Main PDF case · best example of long-horizon business workflow.</aside></article>
-            <article class="representative-case"><span class="mono">B</span><div><h4>County accessibility thematic analysis</h4><p>载入行政区与 POI → 检查字段 → 空间统计 → 新增 Count / Score → 计算指标 → 应用分级样式 → 输出地图与图层。</p></div><aside>Shows shared workspace mutation and ordered dependency.</aside></article>
-            <article class="representative-case"><span class="mono">C</span><div><h4>Reusable geoprocessing workflows</h4><p>Buffer、Clip、Centroid、CSV-to-Points、Hillshade、Contour 等任务反复验证 Planner / Executor 对 GIS processing 工具链的适配与恢复能力。</p></div><aside>Shows generality beyond one business demo.</aside></article>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="case-section"><div class="container case-grid"><div class="case-label mono">03 / Representative Cases</div><div class="case-content"><h2>A broader family of GIS production tasks.</h2><p>脱敏后的历史执行记录覆盖从基础空间运算到多条件业务分析。下面选择三类更能体现架构演进的案例，而不是只展示单一 QGIS 操作。</p><div class="representative-cases"><article class="representative-case"><span class="mono">A</span><div><h4>Solar-power site suitability</h4><p>组合地形、土地覆盖、输电可达性与保护区约束，经过多步空间运算形成候选区域、排名与地图成果。</p></div><aside>Main PDF case · best example of long-horizon business workflow.</aside></article><article class="representative-case"><span class="mono">B</span><div><h4>County accessibility thematic analysis</h4><p>载入行政区与 POI → 检查字段 → 空间统计 → 新增 Count / Score → 计算指标 → 应用分级样式 → 输出地图与图层。</p></div><aside>Shows shared workspace mutation and ordered dependency.</aside></article><article class="representative-case"><span class="mono">C</span><div><h4>Reusable geoprocessing workflows</h4><p>Buffer、Clip、Centroid、CSV-to-Points、Hillshade、Contour 等任务反复验证 Planner / Executor 对 GIS processing 工具链的适配与恢复能力。</p></div><aside>Shows generality beyond one business demo.</aside></article></div></div></div></section>
 
-    <section class="case-section">
-      <div class="container case-grid">
-        <div class="case-label mono">04 / Reliability</div>
-        <div class="case-content">
-          <h2>Long workflows need recovery, not just reasoning.</h2>
-          <p>历史 Trace 中可以看到真实 GIS 运行会经历 schema 查询、工具失败、人机澄清、重试、session state 读取与继续执行。系统因此把“失败后如何留下可恢复状态”作为 Runtime 能力，而不是让 LLM 只看到一串错误文本。</p>
-          <div class="metric-grid">
-            <div><strong>20+ tool steps</strong><span>复杂 GIS 任务可跨越大量连续工具步骤。</span></div>
-            <div><strong>Shared workspace</strong><span>QGIS project state 与中间 Artifact 必须持续一致。</span></div>
-            <div><strong>Human interaction</strong><span>权限、缺失输入或不确定约束需要可控澄清节点。</span></div>
-            <div><strong>Schema-aware tools</strong><span>先理解工具与数据 schema，再进行有效调用。</span></div>
-            <div><strong>Recovery metadata</strong><span>失败信息被组织为后续动作可消费的状态。</span></div>
-            <div><strong>Artifact delivery</strong><span>结果必须落实为可验证的空间数据、地图或文件。</span></div>
-          </div>
-          <div class="case-callout"><strong>What carried forward</strong><p>GIS Agent 证明显式角色划分可以控制复杂领域 Workflow；但它也暴露出新的问题——如果每个领域都拥有自己的一套 Planner / Executor / Runtime，系统会重新被业务逻辑绑住。GGAI 因此把这些经验进一步抽象为通用 Runtime、Skill/MCP 和 Harness。</p></div>
-        </div>
-      </div>
-    </section>
+    <section class="case-section"><div class="container case-grid"><div class="case-label mono">04 / Reliability</div><div class="case-content"><h2>Long workflows need recovery, not just reasoning.</h2><p>历史 Trace 中可以看到真实 GIS 运行会经历 schema 查询、工具失败、人机澄清、重试、session state 读取与继续执行。系统因此把“失败后如何留下可恢复状态”作为 Runtime 能力，而不是让 LLM 只看到一串错误文本。</p><div class="metric-grid"><div><strong>20+ tool steps</strong><span>复杂 GIS 任务可跨越大量连续工具步骤。</span></div><div><strong>Shared workspace</strong><span>QGIS project state 与中间 Artifact 必须持续一致。</span></div><div><strong>Human interaction</strong><span>权限、缺失输入或不确定约束需要可控澄清节点。</span></div><div><strong>Schema-aware tools</strong><span>先理解工具与数据 schema，再进行有效调用。</span></div><div><strong>Recovery metadata</strong><span>失败信息被组织为后续动作可消费的状态。</span></div><div><strong>Artifact delivery</strong><span>结果必须落实为可验证的空间数据、地图或文件。</span></div></div><div class="case-callout"><strong>What carried forward</strong><p>GIS Agent 证明显式角色划分可以控制复杂领域 Workflow；但它也暴露出新的问题——如果每个领域都拥有自己的一套 Planner / Executor / Runtime，系统会重新被业务逻辑绑住。GGAI 因此把这些经验进一步抽象为通用 Runtime、Skill/MCP 和 Harness。</p></div></div></div></section>
 
-    <section class="case-section">
-      <div class="container case-grid">
-        <div class="case-label mono">05 / Contribution</div>
-        <div class="case-content">
-          <h2>Building a controllable GIS multi-agent workflow.</h2>
-          <ul class="contribution-list">
-            <li><span class="mono">01</span><div><h3>Multi-Agent Runtime 设计</h3><p>设计 Planner、ExecutorFlow、Orchestrator、Answer 的 GIS 多步任务框架，并加入 human-interaction 节点；ExecutorFlow 采用 ReAct 范式完成计划步骤的具体执行。</p></div></li>
-            <li><span class="mono">02</span><div><h3>MCP 工具链接入</h3><p>接入 QGIS MCP Server 与 MLIT MCP Server，打通桌面 GIS、国土数据查询与 PostgreSQL/PostGIS 空间分析链路。</p></div></li>
-            <li><span class="mono">03</span><div><h3>Skill / Tool 渐进披露</h3><p>根据 Planner 当前阶段按需暴露 GIS 能力，减少工具过载和选择错误，提升复杂任务拆解稳定性。</p></div></li>
-            <li><span class="mono">04</span><div><h3>上下文与错误管理</h3><p>设计工具调用记录、错误状态、人机交互与恢复机制，使长链路任务在失败后仍然保留可继续执行的状态。</p></div></li>
-            <li><span class="mono">05</span><div><h3>复杂任务执行</h3><p>在不微调模型的情况下，通过任务编排、Prompt Engineering 与 Tool Use 支持 20+ 工具步骤的空间分析任务。</p></div></li>
-            <li><span class="mono">06</span><div><h3>Harness 经验沉淀</h3><p>把工具可见性控制、MCP 合约、共享状态、失败恢复和 Trace 记录等问题沉淀为后续 GGAI / Agent Harness 的核心设计输入。</p></div></li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <section class="case-section"><div class="container case-grid"><div class="case-label mono">05 / Contribution</div><div class="case-content"><h2>Building a controllable GIS multi-agent workflow.</h2><ul class="contribution-list"><li><span class="mono">01</span><div><h3>Multi-Agent Runtime 设计</h3><p>设计 Planner、ExecutorFlow、Orchestrator、Answer 的 GIS 多步任务框架，并加入 human-interaction 节点；ExecutorFlow 采用 ReAct 范式完成计划步骤的具体执行。</p></div></li><li><span class="mono">02</span><div><h3>MCP 工具链接入</h3><p>接入 QGIS MCP Server 与 MLIT MCP Server，打通桌面 GIS、国土数据查询与 PostgreSQL/PostGIS 空间分析链路。</p></div></li><li><span class="mono">03</span><div><h3>Skill / Tool 渐进披露</h3><p>根据 Planner 当前阶段按需暴露 GIS 能力，减少工具过载和选择错误，提升复杂任务拆解稳定性。</p></div></li><li><span class="mono">04</span><div><h3>上下文与错误管理</h3><p>设计工具调用记录、错误状态、人机交互与恢复机制，使长链路任务在失败后仍然保留可继续执行的状态。</p></div></li><li><span class="mono">05</span><div><h3>复杂任务执行</h3><p>在不微调模型的情况下，通过任务编排、Prompt Engineering 与 Tool Use 支持 20+ 工具步骤的空间分析任务。</p></div></li><li><span class="mono">06</span><div><h3>Harness 经验沉淀</h3><p>把工具可见性控制、MCP 合约、共享状态、失败恢复和 Trace 记录等问题沉淀为后续 GGAI / Agent Harness 的核心设计输入。</p></div></li></ul></div></div></section>
   </main>
 
   <div class="container"><a class="project-next" href="../ggai/"><span><span class="mono">Next architecture era</span><strong>GGAI</strong></span><span>→</span></a></div>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Project / GIS Agent</span></div></footer>
+  <script src="../../assets/project-interaction-v6.js" defer></script>
 </body>
 </html>
