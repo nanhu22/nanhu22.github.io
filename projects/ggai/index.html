@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — GGAI project case study: general agent runtime, pluggable Skill/MCP and trace-level evaluation.">
+  <meta name="description" content="Hu Nan — GGAI project case study: general agent runtime, pluggable Skill/MCP, subagent orchestration and trace-level evaluation.">
   <title>GGAI — Hu Nan</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
   <link rel="stylesheet" href="../../assets/project-detail-v2.css">
@@ -23,12 +24,12 @@
         <div>
           <div class="project-kicker mono">03 / Agent Application · 2026.04 – Present</div>
           <h1>GGAI</h1>
-          <p class="project-summary">生产级通用地理信息系统：以通用单 Agent Runtime 为核心，通过可插拔 Skill/MCP 扩展 QGIS、本地路线规划、OpenStreet、人流分析与灾害分析等领域能力，并用 Trace Eval 驱动可靠性迭代。</p>
+          <p class="project-summary">生产级通用地理 Agent 系统：以单 Agent Runtime 为核心，通过可插拔 Skill/MCP 扩展 QGIS、本地路线规划、OpenStreet、人流与灾害分析等领域能力；需要时把 SubAgent 当作工具派发，同时用 Trace Eval 驱动可靠性迭代。</p>
         </div>
         <dl class="project-facts">
           <div class="project-fact"><dt>Role</dt><dd><strong>设计负责人</strong></dd></div>
           <div class="project-fact"><dt>Period</dt><dd>2026.04 – 至今</dd></div>
-          <div class="project-fact"><dt>Focus</dt><dd>General Runtime · Skill/MCP · Eval</dd></div>
+          <div class="project-fact"><dt>Focus</dt><dd>Single-Agent Runtime · Skill/MCP · SubAgent · Eval</dd></div>
           <div class="project-fact"><dt>System</dt><dd>PocketFlow · QueryEngine · Tool Orchestrator</dd></div>
         </dl>
       </div>
@@ -36,33 +37,46 @@
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Overview</div>
+        <div class="case-label mono">01 / Execution Strategy</div>
         <div class="case-content">
-          <h2>From domain agents to a general runtime.</h2>
-          <p>GGAI 的目标不是继续增加一个新的领域 Agent，而是把此前 Navigation Agent、GIS Agent 中反复出现的运行、工具、上下文与评测问题抽象成通用基础设施。Runtime 保持业务无关，领域能力通过 Skill 与 MCP 按需挂载；主 Agent 还可以把不同业务状态的 Sub Agent 当作工具进行派发与组合。</p>
-          <div class="case-flow">
-            <div><span class="mono">01 / Request</span><strong>User Query</strong><p>任务、上下文与启用的能力集合。</p></div>
-            <div><span class="mono">02 / Runtime</span><strong>General Agent</strong><p>QueryEngine、Memory、上下文与运行状态。</p></div>
-            <div><span class="mono">03 / Capability</span><strong>Skill / MCP / Sub Agent</strong><p>按需暴露领域工具与业务能力。</p></div>
-            <div><span class="mono">04 / Observe</span><strong>Trace Eval</strong><p>记录行为、评估结果并反向驱动迭代。</p></div>
-          </div>
-          <div class="case-stack"><span>Python</span><span>PocketFlow</span><span>MCP</span><span>Agent Runtime</span><span>QueryEngine</span><span>Context Engineering</span><span>Tool Orchestrator</span><span>Skill</span><span>Memory</span><span>Trace Eval</span></div>
+          <h2>One runtime, different execution strategies.</h2>
+          <p>GGAI 不把“多 Agent”当作默认答案。主 Agent 先判断任务是否真正适合拆分：独立、无共享状态的任务可以派发多个 SubAgent 并行完成；会连续修改同一个外部状态的工作流，则保持在主 Agent 内顺序执行。SubAgent 是工具能力，不是第二套 Runtime。</p>
+          <figure class="case-visual">
+            <div class="case-visual-frame"><img src="../../assets/cases/ggai-orchestration.svg" alt="GGAI 主 Agent 在可并行的独立任务与共享状态的顺序任务之间选择执行策略，并在结果边界进行汇总" loading="eager" decoding="async"></div>
+            <figcaption><span class="mono">Dispatch model</span><span>OpenStreet 一类独立路线比较可以 fan-out 到多个隔离 SubAgent；QGIS 一类会修改共享 project state 的任务则由 Main Agent 直接顺序执行。两条路径最终都只把必要 Observation 与结果摘要带回主上下文。</span></figcaption>
+          </figure>
+          <div class="case-visual-note"><strong>核心约束：</strong>并行能力不是为了“看起来像多智能体”，而是受任务依赖、外部状态和上下文成本约束。只有满足隔离条件时才派发 SubAgent。</div>
         </div>
       </div>
     </section>
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">02 / Contribution</div>
+        <div class="case-label mono">02 / Harness</div>
+        <div class="case-content">
+          <h2>A restrained harness around a single agent.</h2>
+          <p>GGAI 把 Planner、Executor 的复杂度更多沉到工具与工作流层，而不是让主 Agent 长期持有一份越来越大的流程上下文。Runtime 负责决策、状态和控制；Skill/MCP 提供可插拔能力；工具执行层维护具体执行上下文；Memory 和 Trace Eval 分别负责长期信息与可观测性。</p>
+          <figure class="case-visual">
+            <div class="case-visual-frame"><img src="../../assets/cases/ggai-harness.svg" alt="GGAI 单 Agent Runtime、可插拔 Skill MCP、SubAgent as Tool、执行层、Memory Context 和 Trace Eval 的精简 Harness 架构" loading="lazy" decoding="async"></div>
+            <figcaption><span class="mono">Harness model</span><span>决策上下文与执行上下文显式隔离。Main Agent 只看到任务目标、必要历史、能力状态和 Observation 摘要；完整工具执行细节与 SubAgent trace 留在执行边界之外，减少长链路任务中的上下文污染。</span></figcaption>
+          </figure>
+          <div class="case-stack"><span>Single-Agent Runtime</span><span>Skill</span><span>MCP</span><span>SubAgent as Tool</span><span>Context Engineering</span><span>Memory</span><span>Tool Orchestrator</span><span>Trace Eval</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">03 / Contribution</div>
         <div class="case-content">
           <h2>Designing the harness around the model.</h2>
           <ul class="contribution-list">
             <li><span class="mono">01</span><div><h3>Runtime 架构重构</h3><p>将系统从领域 Agent 调整为通用 Agent Runtime，把领域能力下沉到 Skill 与 MCP，避免通用运行时被业务逻辑污染，并为后续扩展建立稳定边界。</p></div></li>
-            <li><span class="mono">02</span><div><h3>QueryEngine / Context Engineering</h3><p>参与设计消息构造、系统提示拼装、历史消息、Skill/MCP 状态、Memory 与压缩上下文管理，让模型在长链路执行中获得可控、可追踪的上下文。</p></div></li>
+            <li><span class="mono">02</span><div><h3>QueryEngine / Context Engineering</h3><p>参与设计消息构造、系统提示拼装、历史消息、Skill/MCP 状态、Memory 与压缩上下文管理，让模型在长链路执行中获得可控、可追踪的决策上下文。</p></div></li>
             <li><span class="mono">03</span><div><h3>Tool Orchestrator</h3><p>统一本地工具与 MCP 工具调用，支持参数 schema 校验、工具执行、失败识别与 recovery metadata 生成，让工具层具备一致的执行与恢复语义。</p></div></li>
             <li><span class="mono">04</span><div><h3>Skill / MCP 可插拔体系</h3><p>支持用户手动启用 local-route、openstreet、qgis、workspace 等自定义 Skill/MCP，在保持领域隔离的同时控制工具可见性与能力边界。</p></div></li>
-            <li><span class="mono">05</span><div><h3>Trace-level Eval</h3><p>基于用户短期记忆 Session 构建 Agent 轨迹评估 Skill，评测任务成功、工具选择、参数合法性、恢复和最终答案完整性，而不是只看最终回复。</p></div></li>
-            <li><span class="mono">06</span><div><h3>Eval 驱动迭代</h3><p>通过 LLM-as-Judge 发现并修复工具失败误判、低级工具调用过多、schema 缺字段、Skill loop、领域工具误触发等问题，并据此持续迭代领域知识与工作流。</p></div></li>
+            <li><span class="mono">05</span><div><h3>SubAgent as Tool</h3><p>把 SubAgent 纳入主 Agent 工具空间，只在任务独立、状态可隔离时派发；SubAgent 内部 trace 不直接污染主 Agent 上下文，结果以摘要边界回流。</p></div></li>
+            <li><span class="mono">06</span><div><h3>Trace-level Eval</h3><p>基于完整 Agent Trace 评估任务成功、工具选择、参数合法性、恢复和最终输出，并用 LLM-as-Judge 把失败定位到具体执行环节。</p></div></li>
           </ul>
         </div>
       </div>
@@ -70,19 +84,23 @@
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">03 / Evaluation</div>
+        <div class="case-label mono">04 / Evaluation</div>
         <div class="case-content">
-          <h2>Evaluate the trajectory, not only the answer.</h2>
-          <p>GGAI 将评测对象从“最终回答好不好”扩展到完整 Agent Trace。这样可以区分答案问题、工具选择问题、参数问题与恢复问题，并把错误定位到具体运行环节。</p>
+          <h2>Close the loop with a real business benchmark.</h2>
+          <p>在 GIS/QGIS 业务场景中，GGAI 的测试不只检查最终答案，而是让 benchmark 任务走完整生产 Runtime：执行真实工具、产出真实文件、保存 Trace 与 Artifact，再从业务成功、工具正确性、参数合法性、恢复质量和输出有效性等维度进行评估。</p>
+          <figure class="case-visual">
+            <div class="case-visual-frame"><img src="../../assets/cases/ggai-eval-loop.svg" alt="GGAI GIS benchmark 从验证任务集、真实 Runtime、Trace 收集、过程评测到失败分类、修复和重新运行的工程闭环" loading="lazy" decoding="async"></div>
+            <figcaption><span class="mono">Benchmark loop</span><span>当前经验证的 GIS 业务 benchmark 已达到 100% 业务任务完成。诸如缺失文件路径、外部环境未准备等 setup 问题单独记录，不与 Agent 在有效业务输入上的任务完成能力混为一个指标。</span></figcaption>
+          </figure>
           <div class="metric-grid">
-            <div><strong>Task success rate</strong><span>任务是否真正完成。</span></div>
-            <div><strong>Tool correctness</strong><span>工具选择与调用是否正确。</span></div>
-            <div><strong>Tool call F1</strong><span>工具调用行为的精确度与召回。</span></div>
-            <div><strong>Parameter validity</strong><span>工具参数是否满足 schema 与业务约束。</span></div>
-            <div><strong>Recovery success</strong><span>失败后能否识别原因并恢复。</span></div>
-            <div><strong>Answer completeness</strong><span>最终答案是否覆盖任务要求。</span></div>
+            <div class="metric-primary"><strong>100%</strong><span>validated business-task completion</span></div>
+            <div><strong>Stable runtime</strong><span>当前 GIS benchmark 中 Runtime 能稳定完成完整执行链路。</span></div>
+            <div><strong>Artifact validation</strong><span>检查最终回答引用的文件与空间成果是否真实存在。</span></div>
+            <div><strong>Tool correctness</strong><span>定位工具选择、调用顺序和执行结果是否符合任务。</span></div>
+            <div><strong>Parameter validity</strong><span>检查工具参数是否满足 schema 与业务约束。</span></div>
+            <div><strong>Recovery trace</strong><span>失败时确认原因识别、恢复路径与下一步行为是否合理。</span></div>
           </div>
-          <div class="case-callout"><strong>Core idea</strong><p>通用 Agent 的可靠性不只来自更强的模型，也来自 Runtime 边界、工具合约、上下文管理、可观测 Trace 与可重复的评测闭环。</p></div>
+          <div class="case-callout"><strong>Engineering takeaway</strong><p>Benchmark 的价值不是做一张高分报表，而是把每次失败转成可修复的问题类型：schema 缺字段、工具误选、恢复链过长、Skill loop、上下文泄漏等，再通过修复与 rerun 关闭工程闭环。</p></div>
         </div>
       </div>
     </section>
