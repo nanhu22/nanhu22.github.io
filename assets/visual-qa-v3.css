@@ -1,0 +1,80 @@
+/* V3 visual QA: tighter editorial scale, calmer hero, better project reading on small screens. */
+@media (min-width: 901px) {
+  .hero {
+    min-height: min(900px, 94svh);
+    padding-top: 108px;
+    padding-bottom: 64px;
+  }
+  .hero h1 { font-size: clamp(58px, 7.5vw, 104px); }
+  .spatial-card { min-height: 448px; }
+  .section-title { font-size: clamp(38px, 5vw, 64px); }
+  .section { padding-block: 100px; }
+  .projects-section { padding-block: 112px; }
+  .project-hero { padding-top: 136px; padding-bottom: 76px; }
+  .project-hero h1 { font-size: clamp(58px, 8vw, 104px); }
+}
+
+.hero-lede { max-width: 610px; }
+.section-intro { max-width: 720px; }
+.project-summary { max-width: 700px; }
+.project-detail p { max-width: 520px; }
+
+.project-visual { transition: border-color .28s var(--ease-out), transform .28s var(--ease-out); }
+.project-detail:hover .project-visual { border-color: rgba(125,168,255,.26); transform: translateY(-2px); }
+.spatial-card { transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .spatial-card:hover { transform: translateY(-3px); box-shadow: 0 24px 64px rgba(15,23,42,.075); }
+}
+
+@media (max-width: 900px) {
+  .hero { padding-top: 108px; padding-bottom: 58px; }
+  .hero-grid { gap: 44px; }
+  .spatial-card { min-height: 320px; }
+  .section { padding-block: 76px; }
+  .projects-section { padding-block: 86px; }
+  .section-head { margin-bottom: 46px; }
+  .section-title { font-size: clamp(38px, 9vw, 58px); }
+  .project-hero { padding-top: 118px; padding-bottom: 62px; }
+  .project-summary { font-size: 18px; }
+}
+
+@media (max-width: 620px) {
+  .container { width: min(calc(100% - 28px), var(--content)); }
+  .topbar-inner { height: 62px; }
+  .brand > span:last-child { font-size: 13px; }
+  .hero { padding-top: 92px; padding-bottom: 46px; }
+  .hero .kicker { max-width: 260px; line-height: 1.55; }
+  .hero h1 { margin: 18px 0 20px; font-size: clamp(52px, 18vw, 76px); }
+  .hero-meta { margin-top: 25px; gap: 8px 14px; }
+  .hero-actions { margin-top: 28px; }
+  .hero-actions .button { flex: 1 1 auto; }
+  .spatial-card { min-height: 250px; }
+  .spatial-label .mono { display: none; }
+  .section { padding-block: 64px; }
+  .projects-section { padding-block: 72px; }
+  .section-head { margin-bottom: 38px; }
+  .section-title { font-size: clamp(36px, 12vw, 50px); }
+  .section-intro { margin-top: 16px; font-size: 15px; line-height: 1.68; }
+  .profile-grid { gap: 34px; }
+  .editorial-card p { font-size: 16px; }
+  .experience-panel { padding-left: 18px; }
+  .experience-panel h3 { font-size: 28px; }
+  .experience-summary { font-size: 15px; }
+  .experience-arc { margin-top: 36px; }
+  .project-detail { min-height: 390px; }
+  .project-detail h3 { font-size: 40px; }
+  .project-visual { min-height: 168px; }
+  .publication { padding-block: 23px; }
+  .publication h3 { font-size: 20px; }
+  .lab-card { min-height: 250px; padding: 24px 0; }
+  .contact-panel { padding: 30px 20px; }
+  .contact-panel h2 { font-size: 42px; }
+  .project-hero h1 { font-size: clamp(50px, 16vw, 76px); }
+  .case-section { padding-block: 58px; }
+  .case-content h2 { font-size: clamp(32px, 10vw, 46px); }
+  .case-content > p { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spatial-card, .project-visual { transition: none !important; transform: none !important; }
+}
