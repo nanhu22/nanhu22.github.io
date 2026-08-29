@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — Navigation Agent project case study.">
+  <meta name="description" content="Hu Nan — Navigation Agent project case study: LangGraph ReAct agent for traffic navigation and analysis.">
   <title>Navigation Agent — Hu Nan</title>
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
+  <link rel="stylesheet" href="../../assets/project-detail-v2.css">
 </head>
 <body class="project-page-body">
   <header class="topbar project-topbar">
@@ -20,14 +21,15 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">01 / Agent Application</div>
+          <div class="project-kicker mono">01 / Agent Application · 2024.09 – 2025.08</div>
           <h1>Navigation<br>Agent</h1>
-          <p class="project-summary">以空间导航与决策任务为核心的 Agent 应用方向，关注 Agent 如何理解环境、组织上下文并完成连续决策。</p>
+          <p class="project-summary">面向交通场景的 ReAct 单智能体系统，用于路线规划、异常人流分析、交通知识问答与交通态势分析，并通过对话式界面连接地图、知识库、数据库与预测模型。</p>
         </div>
         <dl class="project-facts">
-          <div class="project-fact"><dt>Focus</dt><dd>Navigation · Spatial Reasoning</dd></div>
-          <div class="project-fact"><dt>Type</dt><dd>Agent Application</dd></div>
-          <div class="project-fact"><dt>Status</dt><dd>Case study in progress</dd></div>
+          <div class="project-fact"><dt>Role</dt><dd><strong>设计负责人</strong></dd></div>
+          <div class="project-fact"><dt>Period</dt><dd>2024.09 – 2025.08</dd></div>
+          <div class="project-fact"><dt>Agent</dt><dd>LangGraph · ReAct</dd></div>
+          <div class="project-fact"><dt>Interface</dt><dd>Chatbot · Map · Tool Results</dd></div>
         </dl>
       </div>
     </section>
@@ -36,15 +38,49 @@
       <div class="container case-grid">
         <div class="case-label mono">01 / Overview</div>
         <div class="case-content">
-          <h2>From environment context to navigation decisions.</h2>
-          <p>该项目会围绕 Navigation Agent 的任务定义、环境信息组织、决策过程与工程实现展开。当前页面先建立统一 Case Study 结构，后续项目材料会直接补充到对应章节。</p>
-          <div class="case-outline">
-            <article><div class="mono">A / Problem</div><h3>Task &amp; context</h3><p>任务场景、输入信息、导航目标与主要约束。</p></article>
-            <article><div class="mono">B / System</div><h3>Agent workflow</h3><p>Agent 如何感知环境、规划步骤并进行连续决策。</p></article>
-            <article><div class="mono">C / Contribution</div><h3>My work</h3><p>个人承担的设计、实现、实验与关键工程决策。</p></article>
-            <article><div class="mono">D / Output</div><h3>Results</h3><p>Demo、指标、案例、代码或与论文的关联。</p></article>
+          <h2>A traffic agent connected to real tools and data.</h2>
+          <p>Navigation Agent 是这条项目主线的起点：让一个 Agent 不只回答交通问题，而是能够理解用户意图、拆解任务、调用地图与数据工具，并将路线、知识检索、人流异常和预测结果组织成一次完整对话。</p>
+          <div class="case-flow">
+            <div><span class="mono">01 / Understand</span><strong>User Intent</strong><p>识别路线、知识、人流或态势分析任务。</p></div>
+            <div><span class="mono">02 / Reason</span><strong>ReAct Agent</strong><p>拆解任务并决定下一步工具调用。</p></div>
+            <div><span class="mono">03 / Use Tools</span><strong>MCP &amp; Data</strong><p>连接地图、检索、数据库和预测模型。</p></div>
+            <div><span class="mono">04 / Present</span><strong>Chat + Map</strong><p>返回对话答案、地图路线与分析结果。</p></div>
           </div>
-          <div class="case-note mono">Detailed project material will be added in the next content pass.</div>
+          <div class="case-stack"><span>LangGraph</span><span>MCP</span><span>Google Maps API</span><span>FAISS</span><span>MySQL</span><span>ReAct Agent</span><span>RAG</span><span>Deep Learning</span><span>Gradio</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">02 / Contribution</div>
+        <div class="case-content">
+          <h2>Building the first end-to-end agent loop.</h2>
+          <ul class="contribution-list">
+            <li><span class="mono">01</span><div><h3>Agent 状态流设计</h3><p>基于 LangGraph 设计交通 Agent 状态流，实现用户意图识别、任务拆解、工具调用与结果生成。</p></div></li>
+            <li><span class="mono">02</span><div><h3>ReAct 多步骤任务</h3><p>以 ReAct 范式组织路线规划、知识检索、异常人流查询与交通预测等多步骤任务，让模型在推理与工具执行之间形成闭环。</p></div></li>
+            <li><span class="mono">03</span><div><h3>统一工具接入</h3><p>通过 MCP 接入 Google Maps API、FAISS、MySQL 与深度学习预测模型，将地图、知识、数据库和模型能力统一到 Agent 工具层。</p></div></li>
+            <li><span class="mono">04</span><div><h3>对话式产品界面</h3><p>参与实现 Gradio 对话式前端，支持地图路线生成、地图和思维链展示、异常人流分析、交通知识问答与交通态势分析。</p></div></li>
+            <li><span class="mono">05</span><div><h3>领域经验沉淀</h3><p>沉淀交通领域 Prompt、工具描述与知识检索策略，为后续 GIS Agent 与通用 Agent Runtime 的工具设计和任务组织提供基础。</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">03 / Scope</div>
+        <div class="case-content">
+          <h2>One agent, several traffic capabilities.</h2>
+          <div class="metric-grid">
+            <div><strong>Route planning</strong><span>连接地图能力生成与展示路线。</span></div>
+            <div><strong>Crowd anomaly</strong><span>查询并分析异常人流信息。</span></div>
+            <div><strong>Traffic QA</strong><span>结合检索与领域知识完成问答。</span></div>
+            <div><strong>Traffic forecasting</strong><span>调用预测模型辅助交通态势分析。</span></div>
+            <div><strong>RAG</strong><span>通过 FAISS 等知识检索补充领域上下文。</span></div>
+            <div><strong>Chat + map</strong><span>用对话与地图共同承载 Agent 输出。</span></div>
+          </div>
+          <div class="case-callout"><strong>What carried forward</strong><p>这个项目建立了“Agent 状态流 + 工具调用 + 领域 Prompt + 对话交互”的第一套完整闭环，后续项目开始进一步处理更多工具、更长任务链和更强的运行控制。</p></div>
         </div>
       </div>
     </section>
