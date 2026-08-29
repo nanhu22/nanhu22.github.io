@@ -1,3 +1,5 @@
+@import url("./finish-v2.css");
+
 body.project-page-body { background: #f4f7fb; }
 .project-topbar .topbar-inner { grid-template-columns: 1fr auto; }
 .project-topbar .project-back { text-decoration: none; color: var(--muted); font-size: 13px; }
