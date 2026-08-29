@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — Agent Memory research case study.">
+  <meta name="description" content="Hu Nan — ongoing research on long-term agent memory, evidence, retrieval, consolidation and evaluation.">
   <title>Memory Research — Hu Nan</title>
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
+  <link rel="stylesheet" href="../../assets/project-detail-v2.css">
 </head>
 <body class="project-page-body">
   <header class="topbar project-topbar">
@@ -20,31 +21,48 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">04 / Agent Foundation</div>
+          <div class="project-kicker mono">04 / Ongoing Research</div>
           <h1>Memory<br>Research</h1>
-          <p class="project-summary">围绕长期 Agent Memory 的抽取、证据保留、检索、巩固与评测，研究记忆如何从 Session 与 Agent Trace 中形成，并持续影响后续任务。</p>
+          <p class="project-summary">围绕长期 Agent Memory 的抽取、证据保留、检索、巩固与评测，研究记忆如何从 Session 与 Agent Trace 中形成，并在后续任务中提供有效而可控的上下文。</p>
         </div>
         <dl class="project-facts">
-          <div class="project-fact"><dt>Focus</dt><dd>Memory · Retrieval · Context</dd></div>
+          <div class="project-fact"><dt>Focus</dt><dd><strong>Long-term Agent Memory</strong></dd></div>
+          <div class="project-fact"><dt>Source</dt><dd>Session · Agent Trace</dd></div>
           <div class="project-fact"><dt>Track</dt><dd>Extract-first · Evidence-first</dd></div>
-          <div class="project-fact"><dt>Status</dt><dd>Research in progress</dd></div>
+          <div class="project-fact"><dt>Mode</dt><dd>Ongoing research</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Overview</div>
+        <div class="case-label mono">01 / Question</div>
         <div class="case-content">
-          <h2>Memory as a system, not a storage feature.</h2>
-          <p>研究从 Session 和 Agent Trace 中自动抽取长期记忆，并关注混合检索、记忆巩固与 Benchmark 评测闭环。当前重点比较 Extract-first 与 Evidence-first 两类路径，并继续探索新的记忆组织方式。</p>
-          <div class="case-outline">
-            <article><div class="mono">A / Problem</div><h3>What should persist?</h3><p>哪些 Trace、事实、事件与证据值得长期保留，以及如何避免低质量记忆污染上下文。</p></article>
-            <article><div class="mono">B / System</div><h3>Memory lifecycle</h3><p>Extraction、evidence、retrieval、consolidation 与 evaluation 之间的完整闭环。</p></article>
-            <article><div class="mono">C / Research</div><h3>Competing paradigms</h3><p>比较不同 Memory 派系的假设、优缺点与适用场景。</p></article>
-            <article><div class="mono">D / Output</div><h3>Benchmark &amp; evidence</h3><p>评测设计、实验结果、失败案例与后续研究方向。</p></article>
+          <h2>What should an agent remember?</h2>
+          <p>长期记忆并不是简单地把历史对话保存下来。研究重点是从 Session 和 Agent Trace 中判断哪些事实、事件、证据与行为值得长期保留，以及如何在需要时检索它们，同时避免低质量记忆持续污染后续上下文。</p>
+          <div class="case-flow">
+            <div><span class="mono">01 / Observe</span><strong>Session &amp; Trace</strong><p>从真实交互与 Agent 行为中获得原始证据。</p></div>
+            <div><span class="mono">02 / Form</span><strong>Memory</strong><p>抽取或组织可长期保留的信息。</p></div>
+            <div><span class="mono">03 / Retrieve</span><strong>Context</strong><p>根据当前任务召回相关记忆与证据。</p></div>
+            <div><span class="mono">04 / Evaluate</span><strong>Benchmark</strong><p>评估记忆是否真正提升后续任务表现。</p></div>
           </div>
-          <div class="case-note mono">Benchmarks, diagrams and experiment results will be added with the full research material.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">02 / Research</div>
+        <div class="case-content">
+          <h2>Comparing different memory paradigms.</h2>
+          <p>当前研究持续比较不同长期记忆范式，尤其关注 Extract-first 与 Evidence-first 两条路径：前者强调先从交互中形成结构化记忆，后者强调保留更充分的原始证据，在检索与推理阶段再完成组织。</p>
+          <div class="case-outline">
+            <article><div class="mono">A / Extract-first</div><h3>Structured memory first</h3><p>先抽取可复用的事实或事件，再进入长期记忆存储与检索。</p></article>
+            <article><div class="mono">B / Evidence-first</div><h3>Evidence before summary</h3><p>优先保留可追溯证据，减少过早摘要带来的信息损失。</p></article>
+            <article><div class="mono">C / Retrieval</div><h3>Hybrid access</h3><p>探索结构化记忆与原始证据之间的混合检索和上下文组合。</p></article>
+            <article><div class="mono">D / Consolidation</div><h3>Memory lifecycle</h3><p>研究记忆更新、巩固、冲突处理与长期质量控制。</p></article>
+          </div>
+          <div class="case-callout"><strong>Research direction</strong><p>目标不是让 Agent “记得更多”，而是让记忆来源可追溯、检索有意义、对任务真正有帮助，并能够通过 Benchmark 持续验证。</p></div>
         </div>
       </div>
     </section>
@@ -52,10 +70,10 @@
 
   <div class="container">
     <a class="project-next" href="../agent-harness/">
-      <span><span class="mono">Next project</span><strong>Agent Harness</strong></span><span>→</span>
+      <span><span class="mono">Next research</span><strong>Agent Harness</strong></span><span>→</span>
     </a>
   </div>
 
-  <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Project / Memory Research</span></div></footer>
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Research / Memory</span></div></footer>
 </body>
 </html>
