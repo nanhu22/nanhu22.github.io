@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — GGAI project case study.">
+  <meta name="description" content="Hu Nan — GGAI project case study: general agent runtime, pluggable Skill/MCP and trace-level evaluation.">
   <title>GGAI — Hu Nan</title>
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
+  <link rel="stylesheet" href="../../assets/project-detail-v2.css">
 </head>
 <body class="project-page-body">
   <header class="topbar project-topbar">
@@ -20,14 +21,15 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">03 / Agent Application</div>
+          <div class="project-kicker mono">03 / Agent Application · 2026.04 – Present</div>
           <h1>GGAI</h1>
-          <p class="project-summary">General Geographical Agent：通过主 Agent 与 Subagent 协作，把规划、GIS 工具、OpenStreetMap 与任务执行连接成统一的地理智能系统。</p>
+          <p class="project-summary">生产级通用地理信息系统：以通用单 Agent Runtime 为核心，通过可插拔 Skill/MCP 扩展 QGIS、本地路线规划、OpenStreet、人流分析与灾害分析等领域能力，并用 Trace Eval 驱动可靠性迭代。</p>
         </div>
         <dl class="project-facts">
-          <div class="project-fact"><dt>Focus</dt><dd>Geographical AI · Multi-Agent</dd></div>
-          <div class="project-fact"><dt>System</dt><dd>PocketFlow · QGIS · OpenStreetMap</dd></div>
-          <div class="project-fact"><dt>Status</dt><dd>Case study in progress</dd></div>
+          <div class="project-fact"><dt>Role</dt><dd><strong>设计负责人</strong></dd></div>
+          <div class="project-fact"><dt>Period</dt><dd>2026.04 – 至今</dd></div>
+          <div class="project-fact"><dt>Focus</dt><dd>General Runtime · Skill/MCP · Eval</dd></div>
+          <div class="project-fact"><dt>System</dt><dd>PocketFlow · QueryEngine · Tool Orchestrator</dd></div>
         </dl>
       </div>
     </section>
@@ -36,15 +38,51 @@
       <div class="container case-grid">
         <div class="case-label mono">01 / Overview</div>
         <div class="case-content">
-          <h2>A general agent architecture for geographical tasks.</h2>
-          <p>当前项目基于 PocketFlow 构建主 Agent 与 Subagent 协作架构，并集成 QGIS、OpenStreetMap、规划器和工具执行系统。后续 Case Study 会进一步补充系统架构图、任务链路、Agent 分工与实际案例。</p>
-          <div class="case-outline">
-            <article><div class="mono">A / Problem</div><h3>General geo tasks</h3><p>如何让一个 Agent 系统处理具有不同工具需求和空间上下文的通用地理任务。</p></article>
-            <article><div class="mono">B / System</div><h3>Multi-agent architecture</h3><p>主 Agent、Subagent、规划器、GIS 工具与执行层之间的协作关系。</p></article>
-            <article><div class="mono">C / Contribution</div><h3>My work</h3><p>架构设计、Agent 编排、工具集成、任务分解与工程实现。</p></article>
-            <article><div class="mono">D / Output</div><h3>Results</h3><p>典型地理任务、运行 Trace、Demo 与可扩展能力。</p></article>
+          <h2>From domain agents to a general runtime.</h2>
+          <p>GGAI 的目标不是继续增加一个新的领域 Agent，而是把此前 Navigation Agent、GIS Agent 中反复出现的运行、工具、上下文与评测问题抽象成通用基础设施。Runtime 保持业务无关，领域能力通过 Skill 与 MCP 按需挂载；主 Agent 还可以把不同业务状态的 Sub Agent 当作工具进行派发与组合。</p>
+          <div class="case-flow">
+            <div><span class="mono">01 / Request</span><strong>User Query</strong><p>任务、上下文与启用的能力集合。</p></div>
+            <div><span class="mono">02 / Runtime</span><strong>General Agent</strong><p>QueryEngine、Memory、上下文与运行状态。</p></div>
+            <div><span class="mono">03 / Capability</span><strong>Skill / MCP / Sub Agent</strong><p>按需暴露领域工具与业务能力。</p></div>
+            <div><span class="mono">04 / Observe</span><strong>Trace Eval</strong><p>记录行为、评估结果并反向驱动迭代。</p></div>
           </div>
-          <div class="case-note mono">Architecture diagrams and project evidence will be added with the full project material.</div>
+          <div class="case-stack"><span>Python</span><span>PocketFlow</span><span>MCP</span><span>Agent Runtime</span><span>QueryEngine</span><span>Context Engineering</span><span>Tool Orchestrator</span><span>Skill</span><span>Memory</span><span>Trace Eval</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">02 / Contribution</div>
+        <div class="case-content">
+          <h2>Designing the harness around the model.</h2>
+          <ul class="contribution-list">
+            <li><span class="mono">01</span><div><h3>Runtime 架构重构</h3><p>将系统从领域 Agent 调整为通用 Agent Runtime，把领域能力下沉到 Skill 与 MCP，避免通用运行时被业务逻辑污染，并为后续扩展建立稳定边界。</p></div></li>
+            <li><span class="mono">02</span><div><h3>QueryEngine / Context Engineering</h3><p>参与设计消息构造、系统提示拼装、历史消息、Skill/MCP 状态、Memory 与压缩上下文管理，让模型在长链路执行中获得可控、可追踪的上下文。</p></div></li>
+            <li><span class="mono">03</span><div><h3>Tool Orchestrator</h3><p>统一本地工具与 MCP 工具调用，支持参数 schema 校验、工具执行、失败识别与 recovery metadata 生成，让工具层具备一致的执行与恢复语义。</p></div></li>
+            <li><span class="mono">04</span><div><h3>Skill / MCP 可插拔体系</h3><p>支持用户手动启用 local-route、openstreet、qgis、workspace 等自定义 Skill/MCP，在保持领域隔离的同时控制工具可见性与能力边界。</p></div></li>
+            <li><span class="mono">05</span><div><h3>Trace-level Eval</h3><p>基于用户短期记忆 Session 构建 Agent 轨迹评估 Skill，评测任务成功、工具选择、参数合法性、恢复和最终答案完整性，而不是只看最终回复。</p></div></li>
+            <li><span class="mono">06</span><div><h3>Eval 驱动迭代</h3><p>通过 LLM-as-Judge 发现并修复工具失败误判、低级工具调用过多、schema 缺字段、Skill loop、领域工具误触发等问题，并据此持续迭代领域知识与工作流。</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">03 / Evaluation</div>
+        <div class="case-content">
+          <h2>Evaluate the trajectory, not only the answer.</h2>
+          <p>GGAI 将评测对象从“最终回答好不好”扩展到完整 Agent Trace。这样可以区分答案问题、工具选择问题、参数问题与恢复问题，并把错误定位到具体运行环节。</p>
+          <div class="metric-grid">
+            <div><strong>Task success rate</strong><span>任务是否真正完成。</span></div>
+            <div><strong>Tool correctness</strong><span>工具选择与调用是否正确。</span></div>
+            <div><strong>Tool call F1</strong><span>工具调用行为的精确度与召回。</span></div>
+            <div><strong>Parameter validity</strong><span>工具参数是否满足 schema 与业务约束。</span></div>
+            <div><strong>Recovery success</strong><span>失败后能否识别原因并恢复。</span></div>
+            <div><strong>Answer completeness</strong><span>最终答案是否覆盖任务要求。</span></div>
+          </div>
+          <div class="case-callout"><strong>Core idea</strong><p>通用 Agent 的可靠性不只来自更强的模型，也来自 Runtime 边界、工具合约、上下文管理、可观测 Trace 与可重复的评测闭环。</p></div>
         </div>
       </div>
     </section>
