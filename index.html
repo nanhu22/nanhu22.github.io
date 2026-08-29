@@ -31,7 +31,7 @@
     </header>
 
     <main id="top">
-      <section class="hero">
+      <section class="hero" data-observe-section="Intro">
         <div class="container hero-grid">
           <div>
             <div class="kicker">AI Application R&amp;D Engineer · Personal Portfolio</div>
@@ -60,13 +60,13 @@
         </div>
       </section>
 
-      <section class="section" id="profile">
+      <section class="section" id="profile" data-observe-section="Profile">
         <div class="container">
           <div class="section-head">
             <div class="section-number mono">01 / Profile</div>
             <div>
-              <h2 class="section-title">A concise profile,<br>not a landing page.</h2>
-              <p class="section-intro">个人网站以履历与作品为主，交互只在需要表达研究关系的地方出现。这里保留清晰的信息层级，把 AI 的“技术感”放在细节里，而不是堆满视觉符号。</p>
+              <h2 class="section-title">Engineering AI systems,<br>informed by research.</h2>
+              <p class="section-intro">工作关注 AI 应用与 Agent 系统落地，也持续围绕空间智能、人类移动与 Agent 基础设施进行研究。工程和研究不是两条分开的线，而是相互验证的一套实践。</p>
             </div>
           </div>
 
@@ -88,13 +88,13 @@
         </div>
       </section>
 
-      <section class="section" id="experience">
+      <section class="section" id="experience" data-observe-section="Experience">
         <div class="container">
           <div class="section-head">
             <div class="section-number mono">02 / Experience</div>
             <div>
-              <h2 class="section-title">Experience that<br>stays scannable.</h2>
-              <p class="section-intro">履历区域先展示已经确认的职业定位和研究方向；单位、时间线、具体职责等信息可以在后续补充后直接扩展，不需要重新改版。</p>
+              <h2 class="section-title">Applied engineering,<br>continuous research.</h2>
+              <p class="section-intro">当前主线是把 Agent 应用设计、空间智能研究与可靠运行机制连接起来：一端面对真实任务，一端持续研究模型、记忆与系统行为。</p>
             </div>
           </div>
 
@@ -133,24 +133,24 @@
         </div>
       </section>
 
-      <section class="projects-section" id="projects">
+      <section class="projects-section" id="projects" data-observe-section="Projects">
         <div class="container">
           <div class="section-head">
             <div class="section-number mono">03 / Selected projects</div>
             <div>
-              <h2 class="section-title">From agent applications<br>to agent infrastructure.</h2>
-              <p class="section-intro">这里是全站交互最强的区域。先从关系视图理解五个项目方向，再进入单个项目；视觉用于解释项目结构，而不是作为整站装饰。</p>
+              <h2 class="section-title">Five directions,<br>one agent systems practice.</h2>
+              <p class="section-intro">Navigation Agent、GIS Agent 与 GGAI 聚焦 Agent 的应用与空间能力；Memory 与 Agent Harness 聚焦 Agent 的基础设施与可靠运行。通过关系视图先看整体，再进入单个项目。</p>
             </div>
           </div>
 
           <div class="project-browser">
-            <div class="project-map" aria-label="项目关系图">
+            <div class="project-map" aria-label="项目关系图" data-project-map="navigation">
               <svg viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
-                <path class="map-line" d="M500 330 L500 112"></path>
-                <path class="map-line" d="M500 330 L190 322"></path>
-                <path class="map-line" d="M500 330 L810 322"></path>
-                <path class="map-line" d="M500 330 L350 545"></path>
-                <path class="map-line" d="M500 330 L650 545"></path>
+                <path class="map-line active" data-project-line="navigation" d="M500 330 L500 112"></path>
+                <path class="map-line" data-project-line="gis" d="M500 330 L190 322"></path>
+                <path class="map-line" data-project-line="ggai" d="M500 330 L810 322"></path>
+                <path class="map-line" data-project-line="memory" d="M500 330 L350 545"></path>
+                <path class="map-line" data-project-line="harness" d="M500 330 L650 545"></path>
               </svg>
               <div class="map-core mono">Selected<br>Work</div>
               <button class="project-node node-navigation active" type="button" data-project="navigation">Navigation Agent</button>
@@ -166,19 +166,20 @@
               <p data-project-description></p>
               <div class="project-visual" data-project-visual="route" aria-hidden="true"></div>
               <div class="project-meta" data-project-tags></div>
-              <span class="project-link" aria-disabled="true">Case study structure ready · content pending</span>
+              <a class="project-link" data-project-link href="./projects/navigation-agent/">Open case study <span aria-hidden="true">↗</span></a>
             </article>
           </div>
+          <p class="project-hint mono">Hover / focus to preview · use arrow keys to move · open for case study</p>
         </div>
       </section>
 
-      <section class="section" id="publications">
+      <section class="section" id="publications" data-observe-section="Publications">
         <div class="container">
           <div class="section-head">
             <div class="section-number mono">04 / Publications</div>
             <div>
-              <h2 class="section-title">Research output,<br>kept quiet.</h2>
-              <p class="section-intro">论文区域刻意回到学术索引式排版。项目区负责视觉表达，Publication 负责准确、快速地阅读研究产出。</p>
+              <h2 class="section-title">Selected<br>publications.</h2>
+              <p class="section-intro">研究围绕人类移动预测、轨迹生成与 LLM 行为分析展开。这里保持学术索引式展示，让标题、作者、年份和论文入口成为主角。</p>
             </div>
           </div>
 
@@ -187,7 +188,7 @@
               <div class="publication-year mono">2026</div>
               <div>
                 <h3>Mobility tokens with routine-aware learning for LLM-based human mobility prediction</h3>
-                <p>Nan Hu et al. · GeoInformatica</p>
+                <p><strong>Nan Hu</strong> et al. · GeoInformatica</p>
                 <p>LLM-based human mobility prediction · mobility representation · routine-aware learning</p>
               </div>
               <div class="publication-links">
@@ -226,13 +227,13 @@
         </div>
       </section>
 
-      <section class="section" id="lab">
+      <section class="section" id="lab" data-observe-section="Lab">
         <div class="container">
           <div class="section-head">
             <div class="section-number mono">05 / Lab</div>
             <div>
-              <h2 class="section-title">A place for things<br>that keep growing.</h2>
-              <p class="section-intro">Lab 用于承载个人知识系统、实验和未来的文章输出，不与核心履历和项目争抢视觉权重。</p>
+              <h2 class="section-title">Knowledge that<br>stays in use.</h2>
+              <p class="section-intro">Lab 承载个人知识系统、训练工具和后续实验，让个人网站除了展示履历，也保留持续生长和反复使用的部分。</p>
             </div>
           </div>
 
@@ -249,15 +250,15 @@
             </article>
 
             <article class="lab-card">
-              <div class="eyebrow mono">Growing next</div>
-              <h3>Notes &amp; Experiments</h3>
-              <p>后续可以继续加入 Agent Notes、Paper Reading、Benchmarks 与小型交互实验，让个人网站随着研究持续增长。</p>
+              <div class="eyebrow mono">Notes / Experiments</div>
+              <h3>Research notes &amp; small tools</h3>
+              <p>Agent Notes、Paper Reading、Benchmarks 与小型交互实验会逐步沉淀在这里，作为项目与论文之外的个人工作台。</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="contact">
+      <section class="section" id="contact" data-observe-section="Contact">
         <div class="container">
           <div class="contact-panel">
             <div class="eyebrow mono">06 / Contact</div>
@@ -276,7 +277,7 @@
     <footer class="footer">
       <div class="container footer-inner">
         <span>© 2026 Hu Nan</span>
-        <span class="mono">Blue Editorial Tech · GitHub Pages</span>
+        <span class="mono">AI Application · Research · Systems</span>
       </div>
     </footer>
   </div>
