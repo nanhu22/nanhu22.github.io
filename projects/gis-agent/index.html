@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — GIS Agent project case study.">
+  <meta name="description" content="Hu Nan — GIS Agent project case study: multi-step GIS agent runtime with MCP, QGIS and PostGIS.">
   <title>GIS Agent — Hu Nan</title>
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
+  <link rel="stylesheet" href="../../assets/project-detail-v2.css">
 </head>
 <body class="project-page-body">
   <header class="topbar project-topbar">
@@ -20,14 +21,15 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">02 / Agent Application</div>
+          <div class="project-kicker mono">02 / Agent Application · 2025.08 – 2026.03</div>
           <h1>GIS<br>Agent</h1>
-          <p class="project-summary">面向 GIS 工作流与空间工具调用的 Agent 应用方向，探索自然语言任务如何转化为空间分析与工具执行过程。</p>
+          <p class="project-summary">面向 GIS 场景的多步 Agent 系统，将 QGIS、MCP Server、PostgreSQL/PostGIS 与大模型推理结合，用于灾害预警、土地价格、洪涝风险、人口流动等日本国土数据分析任务。</p>
         </div>
         <dl class="project-facts">
-          <div class="project-fact"><dt>Focus</dt><dd>GIS · Tool Use · Spatial AI</dd></div>
-          <div class="project-fact"><dt>Type</dt><dd>Agent Application</dd></div>
-          <div class="project-fact"><dt>Status</dt><dd>Case study in progress</dd></div>
+          <div class="project-fact"><dt>Role</dt><dd><strong>设计负责人</strong></dd></div>
+          <div class="project-fact"><dt>Period</dt><dd>2025.08 – 2026.03</dd></div>
+          <div class="project-fact"><dt>Runtime</dt><dd>Planner · ExecutorFlow · Orchestrator · Answer</dd></div>
+          <div class="project-fact"><dt>Tools</dt><dd>QGIS MCP · MLIT MCP · PostGIS</dd></div>
         </dl>
       </div>
     </section>
@@ -36,15 +38,50 @@
       <div class="container case-grid">
         <div class="case-label mono">01 / Overview</div>
         <div class="case-content">
-          <h2>Turning spatial intent into executable GIS work.</h2>
-          <p>该项目会重点呈现 GIS Agent 如何理解空间任务、选择和组织工具，并把自然语言需求转换为可执行的 GIS 工作流。当前保留清晰的 Case Study 骨架，等待完整项目材料补充。</p>
-          <div class="case-outline">
-            <article><div class="mono">A / Problem</div><h3>Spatial task</h3><p>GIS 场景中的用户目标、数据、约束和工具边界。</p></article>
-            <article><div class="mono">B / System</div><h3>Tool workflow</h3><p>从任务理解到工具选择、参数组织和结果返回的完整链路。</p></article>
-            <article><div class="mono">C / Contribution</div><h3>My work</h3><p>个人负责的 Agent 设计、GIS 集成、工程实现与实验。</p></article>
-            <article><div class="mono">D / Output</div><h3>Results</h3><p>典型空间任务、Demo、指标与后续扩展方向。</p></article>
+          <h2>Turning natural-language intent into multi-step GIS work.</h2>
+          <p>GIS Agent 面对的不是单次工具调用，而是需要规划、查询、空间分析、检查结果、错误恢复与最终回答的复杂工作流。系统把任务拆解与工具执行分开，并通过 human-interaction 节点在必要时引入澄清与人工反馈。</p>
+          <div class="case-flow">
+            <div><span class="mono">01 / Plan</span><strong>Planner</strong><p>理解目标、拆解步骤并按需暴露 GIS 能力。</p></div>
+            <div><span class="mono">02 / Execute</span><strong>ExecutorFlow</strong><p>ReAct 推理、调用 QGIS/PostGIS、读取观察并恢复错误。</p></div>
+            <div><span class="mono">03 / Control</span><strong>Orchestrator</strong><p>组织状态、上下文与多步执行节奏。</p></div>
+            <div><span class="mono">04 / Return</span><strong>Answer</strong><p>汇总分析结果并向用户解释任务输出。</p></div>
           </div>
-          <div class="case-note mono">Detailed project material will be added in the next content pass.</div>
+          <div class="case-stack"><span>PocketFlow</span><span>MCP</span><span>QGIS MCP Server</span><span>MLIT MCP Server</span><span>PostgreSQL</span><span>PostGIS</span><span>QGIS</span><span>ReAct</span><span>Prompt Engineering</span><span>DeepSeek</span><span>GPT-5-mini</span><span>Bedrock</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">02 / Contribution</div>
+        <div class="case-content">
+          <h2>Building a controllable GIS execution loop.</h2>
+          <ul class="contribution-list">
+            <li><span class="mono">01</span><div><h3>多智能体 Agent Runtime 设计</h3><p>设计 Planner、ExecutorFlow、Orchestrator、Answer 的 GIS 多步任务框架，并加入 human-interaction 节点。ExecutorFlow 采用 ReAct 范式，支持分步推理、工具调用、观察读取与错误恢复。</p></div></li>
+            <li><span class="mono">02</span><div><h3>MCP 工具链接入</h3><p>接入 QGIS MCP Server 与 MLIT MCP Server，打通 GIS 工具调用、国土数据查询与空间分析链路，并结合 PostgreSQL/PostGIS 处理结构化空间数据。</p></div></li>
+            <li><span class="mono">03</span><div><h3>Skill 渐进式披露</h3><p>在 Planner 阶段按需暴露 GIS 工具能力，避免大量工具一次性进入模型上下文，降低工具过载带来的选择错误并提升复杂任务拆解稳定性。</p></div></li>
+            <li><span class="mono">04</span><div><h3>上下文与错误管理</h3><p>设计工具调用记录、错误信息沉淀与人机交互反馈机制，使长链路任务在失败后能够获得可恢复的状态与澄清信息。</p></div></li>
+            <li><span class="mono">05</span><div><h3>复杂任务执行</h3><p>在未进行模型微调的情况下，通过 Prompt Engineering + Tool Use 支持 20+ 工具步骤的 GIS 分析任务。</p></div></li>
+            <li><span class="mono">06</span><div><h3>Harness 经验沉淀</h3><p>从 GIS Agent 中总结工具可见性控制、MCP 工具合约、失败恢复和 Trace 记录等模式，并迁移到后续通用 Agent Harness 与 GGAI 设计中。</p></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">03 / Scope</div>
+        <div class="case-content">
+          <h2>Designed for long, tool-heavy spatial tasks.</h2>
+          <div class="metric-grid">
+            <div><strong>20+ tool steps</strong><span>通过 Prompt Engineering + Tool Use 支持复杂 GIS 分析链路。</span></div>
+            <div><strong>QGIS + PostGIS</strong><span>同时覆盖桌面 GIS 操作与数据库空间查询。</span></div>
+            <div><strong>Human interaction</strong><span>在不确定或失败状态中引入澄清与人工反馈。</span></div>
+            <div><strong>Disaster analysis</strong><span>灾害预警与洪涝风险等空间任务。</span></div>
+            <div><strong>Land & population</strong><span>土地价格、人口流动等国土数据分析。</span></div>
+            <div><strong>No fine-tuning</strong><span>依靠任务编排、Prompt 与工具系统完成能力构建。</span></div>
+          </div>
+          <div class="case-callout"><strong>What carried forward</strong><p>GIS Agent 让工具选择、上下文、失败恢复和 Trace 从“实现细节”变成核心系统问题，这些经验直接推动了后续通用 Runtime 与 Agent Harness 的设计。</p></div>
         </div>
       </div>
     </section>
