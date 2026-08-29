@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — Agent Harness research case study.">
+  <meta name="description" content="Hu Nan — ongoing research on agent harness design: runtime, tool orchestration, context, trace and evaluation.">
   <title>Agent Harness — Hu Nan</title>
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
+  <link rel="stylesheet" href="../../assets/project-detail-v2.css">
 </head>
 <body class="project-page-body">
   <header class="topbar project-topbar">
@@ -20,31 +21,49 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">05 / Agent Foundation</div>
+          <div class="project-kicker mono">05 / Ongoing Research</div>
           <h1>Agent<br>Harness</h1>
-          <p class="project-summary">围绕 Agent 运行时与控制层展开研究，关注 Trace、工具执行、上下文、编排与可靠运行之间的系统关系。</p>
+          <p class="project-summary">从 Navigation Agent、GIS Agent 与 GGAI 的工程实践中抽象 Agent 模型之外的控制层：Runtime、工具合约、上下文、失败恢复、Trace 与 Evaluation 如何共同决定一个 Agent 系统是否可控、可观测和可迭代。</p>
         </div>
         <dl class="project-facts">
-          <div class="project-fact"><dt>Focus</dt><dd>Runtime · Trace · Control</dd></div>
-          <div class="project-fact"><dt>Type</dt><dd>Agent Infrastructure</dd></div>
-          <div class="project-fact"><dt>Status</dt><dd>Research in progress</dd></div>
+          <div class="project-fact"><dt>Focus</dt><dd><strong>Reliable Agent Systems</strong></dd></div>
+          <div class="project-fact"><dt>Runtime</dt><dd>Execution · State · Recovery</dd></div>
+          <div class="project-fact"><dt>Observe</dt><dd>Trace · Evaluation</dd></div>
+          <div class="project-fact"><dt>Mode</dt><dd>Cross-project research</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Overview</div>
+        <div class="case-label mono">01 / Model</div>
         <div class="case-content">
-          <h2>The control layer around an agent.</h2>
-          <p>Agent Harness 研究关注模型之外的运行系统：任务如何被编排、工具如何被约束、上下文如何被组织、Trace 如何被记录，以及整个 Agent 在长链路执行中如何保持可观测和可控。</p>
-          <div class="case-outline">
-            <article><div class="mono">A / Runtime</div><h3>Execution model</h3><p>Agent loop、任务状态、工具执行与运行边界。</p></article>
-            <article><div class="mono">B / Context</div><h3>Control &amp; context</h3><p>上下文装配、策略约束、重试与执行控制之间的关系。</p></article>
-            <article><div class="mono">C / Observability</div><h3>Trace &amp; evaluation</h3><p>如何记录 Agent 行为，并让错误、成本与性能可以被分析。</p></article>
-            <article><div class="mono">D / Output</div><h3>Harness patterns</h3><p>系统模式、原型、案例、实验与后续可复用的基础设施。</p></article>
+          <h2>The system around the agent.</h2>
+          <p>Agent Harness 关注的不是某个领域业务，而是跨项目重复出现的系统问题：模型如何获得正确上下文，工具如何被发现和执行，失败如何被识别与恢复，Trace 如何记录，以及评测如何把运行行为转化为下一轮工程改进。</p>
+          <div class="case-flow">
+            <div><span class="mono">01 / Context</span><strong>Query &amp; Memory</strong><p>构造任务、历史、能力状态与长期记忆。</p></div>
+            <div><span class="mono">02 / Execute</span><strong>Runtime</strong><p>组织 Agent loop、状态与任务执行边界。</p></div>
+            <div><span class="mono">03 / Tools</span><strong>Orchestrator</strong><p>统一工具合约、参数校验、执行与失败信息。</p></div>
+            <div><span class="mono">04 / Observe</span><strong>Trace Eval</strong><p>从行为轨迹定位错误并驱动系统迭代。</p></div>
           </div>
-          <div class="case-note mono">Runtime diagrams, traces and engineering evidence will be added with the full research material.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">02 / Patterns</div>
+        <div class="case-content">
+          <h2>Patterns carried across projects.</h2>
+          <ul class="contribution-list">
+            <li><span class="mono">01</span><div><h3>Runtime 与领域能力分离</h3><p>通用运行时负责 Agent loop、状态与控制，领域能力通过 Skill/MCP 等机制独立挂载，避免业务逻辑直接进入 Runtime。</p></div></li>
+            <li><span class="mono">02</span><div><h3>Tool contract &amp; orchestration</h3><p>统一工具描述、schema、参数合法性、执行结果和失败元数据，让本地工具与 MCP 工具共享一致的调用语义。</p></div></li>
+            <li><span class="mono">03</span><div><h3>Progressive capability exposure</h3><p>按任务阶段和领域状态控制模型看到的工具与 Skill，减少工具过载、误选择和不必要调用。</p></div></li>
+            <li><span class="mono">04</span><div><h3>Context Engineering</h3><p>将系统提示、历史消息、能力状态、Memory 与压缩上下文作为运行时资源组织，而不是简单拼接完整对话。</p></div></li>
+            <li><span class="mono">05</span><div><h3>Failure recovery</h3><p>让错误不只作为字符串返回，而是形成可被 Agent 理解和继续处理的 recovery metadata 与状态。</p></div></li>
+            <li><span class="mono">06</span><div><h3>Trace-level evaluation</h3><p>通过完整 Agent 轨迹观察工具选择、参数、恢复和最终结果，将评测从最终答案扩展到执行过程。</p></div></li>
+          </ul>
+          <div class="case-callout"><strong>Research direction</strong><p>Agent Harness 的目标是把模型能力转化为稳定软件系统：不仅能完成 Demo，也能够解释失败、约束能力、持续评测，并在复杂业务里逐步迭代。</p></div>
         </div>
       </div>
     </section>
@@ -52,10 +71,10 @@
 
   <div class="container">
     <a class="project-next" href="../navigation-agent/">
-      <span><span class="mono">Back to first project</span><strong>Navigation Agent</strong></span><span>↻</span>
+      <span><span class="mono">Back to applications</span><strong>Navigation Agent</strong></span><span>↻</span>
     </a>
   </div>
 
-  <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Project / Agent Harness</span></div></footer>
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Research / Agent Harness</span></div></footer>
 </body>
 </html>
