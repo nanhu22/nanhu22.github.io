@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Hu Nan — GIS Agent project case study: multi-step GIS agent runtime with MCP, QGIS and PostGIS.">
   <title>GIS Agent — Hu Nan</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
   <link rel="stylesheet" href="../../assets/project-detail-v2.css">
@@ -36,16 +37,15 @@
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Overview</div>
+        <div class="case-label mono">01 / Execution Case</div>
         <div class="case-content">
-          <h2>Turning natural-language intent into multi-step GIS work.</h2>
-          <p>GIS Agent 面对的不是单次工具调用，而是需要规划、查询、空间分析、检查结果、错误恢复与最终回答的复杂工作流。系统把任务拆解与工具执行分开，并通过 human-interaction 节点在必要时引入澄清与人工反馈。</p>
-          <div class="case-flow">
-            <div><span class="mono">01 / Plan</span><strong>Planner</strong><p>理解目标、拆解步骤并按需暴露 GIS 能力。</p></div>
-            <div><span class="mono">02 / Execute</span><strong>ExecutorFlow</strong><p>ReAct 推理、调用 QGIS/PostGIS、读取观察并恢复错误。</p></div>
-            <div><span class="mono">03 / Control</span><strong>Orchestrator</strong><p>组织状态、上下文与多步执行节奏。</p></div>
-            <div><span class="mono">04 / Return</span><strong>Answer</strong><p>汇总分析结果并向用户解释任务输出。</p></div>
-          </div>
+          <h2>Turning natural-language intent into long-horizon GIS work.</h2>
+          <p>GIS Agent 面对的不是单次工具调用，而是需要规划、执行、检查、恢复并最终产出真实空间数据文件的长链路任务。Planner 负责把目标拆成稳定步骤；ExecutorFlow 在每一步内进行 ReAct 推理和工具执行，QGIS/PostGIS/MLIT 等能力按需暴露。</p>
+          <figure class="case-visual">
+            <div class="case-visual-frame"><img src="../../assets/cases/gis-agent-flow.svg" alt="GIS Agent 将自然语言任务拆解为 Planner、ReAct ExecutorFlow、QGIS PostGIS 工具执行和最终空间成果校验的链路" loading="eager" decoding="async"></div>
+            <figcaption><span class="mono">QGIS case</span><span>示例任务是“统计 county → 新增评分字段 → 保存 shapefile → 应用分级样式”。因为多个步骤连续修改同一个 QGIS project state，这类任务不适合并发拆给多个 Agent，而更适合由单个执行链路按依赖顺序完成。</span></figcaption>
+          </figure>
+          <div class="case-visual-note"><strong>系统重点：</strong>Planner 不承担具体工具细节，ExecutorFlow 也不长期背负完整计划上下文。计划与执行被分开，工具结果以 Observation 形式回到执行状态；失败时保留 recovery metadata，而不是把错误堆成自由文本。</div>
           <div class="case-stack"><span>PocketFlow</span><span>MCP</span><span>QGIS MCP Server</span><span>MLIT MCP Server</span><span>PostgreSQL</span><span>PostGIS</span><span>QGIS</span><span>ReAct</span><span>Prompt Engineering</span><span>DeepSeek</span><span>GPT-5-mini</span><span>Bedrock</span></div>
         </div>
       </div>

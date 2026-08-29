@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Hu Nan — Navigation Agent project case study: LangGraph ReAct agent for traffic navigation and analysis.">
   <title>Navigation Agent — Hu Nan</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
   <link rel="stylesheet" href="../../assets/project-detail-v2.css">
@@ -36,16 +37,15 @@
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Overview</div>
+        <div class="case-label mono">01 / Execution Case</div>
         <div class="case-content">
           <h2>A traffic agent connected to real tools and data.</h2>
-          <p>Navigation Agent 是这条项目主线的起点：让一个 Agent 不只回答交通问题，而是能够理解用户意图、拆解任务、调用地图与数据工具，并将路线、知识检索、人流异常和预测结果组织成一次完整对话。</p>
-          <div class="case-flow">
-            <div><span class="mono">01 / Understand</span><strong>User Intent</strong><p>识别路线、知识、人流或态势分析任务。</p></div>
-            <div><span class="mono">02 / Reason</span><strong>ReAct Agent</strong><p>拆解任务并决定下一步工具调用。</p></div>
-            <div><span class="mono">03 / Use Tools</span><strong>MCP &amp; Data</strong><p>连接地图、检索、数据库和预测模型。</p></div>
-            <div><span class="mono">04 / Present</span><strong>Chat + Map</strong><p>返回对话答案、地图路线与分析结果。</p></div>
-          </div>
+          <p>Navigation Agent 是这条项目主线的起点：让一个 Agent 不只回答交通问题，而是理解用户目标、维护任务状态，根据每次 Observation 决定下一步工具调用，并把路线、知识检索、人流异常和预测结果收敛成一次完整回答。</p>
+          <figure class="case-visual">
+            <div class="case-visual-frame"><img src="../../assets/cases/navigation-agent-flow.svg" alt="Navigation Agent 从用户目标到 ReAct 决策、地图与交通工具调用、Observation 回流以及最终路线回答的执行链路" loading="eager" decoding="async"></div>
+            <figcaption><span class="mono">Route case</span><span>示例从“东京塔到涩谷并检查人流异常”出发。Agent 的核心不是把路线规划写死，而是在紧凑状态中记录当前目标，用 Observation 驱动下一次决策；地图、RAG、交通数据库和预测模型只是可被选择的能力。</span></figcaption>
+          </figure>
+          <div class="case-visual-note"><strong>上下文原则：</strong>决策上下文只保留目标、必要历史和工具返回的有效证据，不把完整工具日志持续堆回模型上下文。这一做法后来成为 GIS Agent 和 GGAI 的 Context Engineering 基础。</div>
           <div class="case-stack"><span>LangGraph</span><span>MCP</span><span>Google Maps API</span><span>FAISS</span><span>MySQL</span><span>ReAct Agent</span><span>RAG</span><span>Deep Learning</span><span>Gradio</span></div>
         </div>
       </div>
