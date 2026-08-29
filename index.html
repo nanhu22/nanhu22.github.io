@@ -3,106 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="胡楠的个人主页：AI Agent、Memory、Skill、Harness、Context Engineering 与个人 Knowledge Lab。">
-  <title>Hunan | AI Agent & Context Engineering</title>
-  <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; line-height: 1.7; color: #263238; background: #f5f8fc; }
-    header { padding: 90px 24px; text-align: center; color: white; background: linear-gradient(135deg, #2563eb, #0f766e); }
-    header img { width: 130px; height: 130px; border-radius: 50%; border: 4px solid white; }
-    header h1 { margin: 20px 0 8px; font-size: 42px; }
-    header p { margin: 0; font-size: 19px; opacity: .9; }
-    nav { margin-top: 28px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    nav a { color: white; text-decoration: none; }
-    main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    section { margin-bottom: 28px; padding: 30px; background: white; border-radius: 14px; box-shadow: 0 5px 20px rgba(0, 0, 0, .06); }
-    h2 { margin-top: 0; color: #2563eb; }
-    .project { margin: 18px 0; padding-left: 18px; border-left: 4px solid #2563eb; }
-    .lab { position: relative; overflow: hidden; color: #4c352b; border: 1px solid #ead0b9; background: radial-gradient(circle at 92% 0, #f8d7b5 0, transparent 28%), linear-gradient(135deg, #fff8ef, #f9eadb); box-shadow: 0 12px 34px rgba(116, 72, 44, .10); }
-    .lab::after { content: "100"; position: absolute; right: 22px; top: -24px; font-size: 120px; line-height: 1; font-weight: 800; color: rgba(162, 81, 47, .06); pointer-events: none; }
-    .lab h2 { color: #a84f35; }
-    .lab h3 { margin-bottom: 8px; }
-    .lab-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
-    .lab-stat { padding: 12px; border: 1px solid #e6ccb5; border-radius: 12px; background: rgba(255, 253, 248, .72); }
-    .lab-stat strong { display: block; color: #78402d; font-size: 22px; }
-    .lab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .lab-tags span { padding: 4px 9px; color: #74584b; font-size: 13px; border: 1px solid #dfbea2; border-radius: 999px; background: #fff8ef; }
-    .lab-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
-    .lab-button { display: inline-block; padding: 11px 18px; color: white; font-weight: 700; text-decoration: none; border-radius: 10px; background: #b8563a; }
-    .lab-button.secondary { color: #8f472f; border: 1px solid #dfbea2; background: #fff8ef; }
-    a { color: #2563eb; }
-    footer { padding: 30px; text-align: center; color: #64748b; }
-    @media (max-width: 620px) {
-      header { padding: 64px 20px; }
-      header h1 { font-size: 34px; }
-      .lab-grid { grid-template-columns: repeat(2, 1fr); }
-      section { padding: 24px; }
-    }
-  </style>
+  <meta name="description" content="胡楠的个人主页：AI Application R&D Engineer，关注 Agent Systems、Spatial AI、Memory、Agent Harness 与人类移动智能研究。">
+  <meta name="theme-color" content="#f4f7fb">
+  <title>Hu Nan — AI Application R&D Engineer</title>
+  <link rel="stylesheet" href="./assets/site-v2.css">
 </head>
 <body>
-  <header>
-    <img src="https://avatars.githubusercontent.com/u/75598308?v=4" alt="胡楠的头像">
-    <h1>胡楠</h1>
-    <p>AI Agent · Memory · Skill · Harness · Context Engineering</p>
-    <nav aria-label="主页导航">
-      <a href="#about">关于我</a>
-      <a href="#projects">项目经历</a>
-      <a href="#knowledge-lab">Knowledge Lab</a>
-      <a href="#contact">联系方式</a>
-    </nav>
-  </header>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="#top" aria-label="回到首页">
+          <span class="brand-mark mono">HN</span>
+          <span>Hu Nan</span>
+        </a>
+        <nav class="nav" aria-label="主页导航">
+          <a href="#profile">Profile</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#publications">Publications</a>
+          <a href="#lab">Lab</a>
+        </nav>
+        <div class="topbar-actions">
+          <a class="hide-mobile" href="https://github.com/nanhu22" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a class="nav-cta" href="#contact">Contact</a>
+        </div>
+      </div>
+    </header>
 
-  <main>
-    <section id="about">
-      <h2>关于我</h2>
-      <p>我是一名计算机方向的研究生，关注 AI Agent、多业务场景下的智能AI应用分解与设计、长期记忆机制、上下文管理以及Agent Harness极致的管控。</p>
-      <p>目前正在研究可插拔 多业务协同工作流、多智能体协作、Agent Memory Harness 以及通用Agent 架构设计。</p>
-    </section>
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="kicker">AI Application R&amp;D Engineer · Personal Portfolio</div>
+            <h1>HU <span>NAN</span></h1>
+            <p class="hero-lede">Building practical AI systems across agent applications, spatial intelligence, memory and runtime.</p>
+            <div class="hero-meta" aria-label="研究方向">
+              <span>Agent Systems</span>
+              <span>Spatial AI</span>
+              <span>Memory</span>
+              <span>Agent Harness</span>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#projects">Explore projects <span aria-hidden="true">↓</span></a>
+              <a class="button" href="https://scholar.google.com/citations?user=amrbgKEAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">Google Scholar ↗</a>
+              <a class="button" href="https://github.com/nanhu22" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+          </div>
 
-    <section id="projects">
-      <h2>项目经历</h2>
-      <div class="project">
-        <h3>GGAI：通用 General Geographical Agent</h3>
-        <p>基于 PocketFlow 构建主 Agent 与 Subagent 协作架构，集成 QGIS、OpenStreetMap、规划器和工具执行系统。</p>
-      </div>
-      <div class="project">
-        <h3>Memory Hook</h3>
-        <p>从 Session 和 Agent Trace 中自动抽取长期记忆，实现混合检索、记忆巩固和 Benchmark 评测闭环，研究MEmory两大派系，一是Extract first，二是Evidence first，现研究第三大派系（敬请期待）。</p>
-      </div>
-      <div class="project">
-        <h3>ELP-Mob</h3>
-        <p>面向城市移动预测开展大语言模型训练与复现实验，探索联合监督、词表扩展和移动序列建模。 探索Agent在轨迹生成、轨迹预测方向的实现和优化。 已发表并收录两篇CCFB文章</p>
-      </div>
-    </section>
+          <div class="spatial-card" aria-label="动态空间关系背景">
+            <canvas id="spatial-field" aria-hidden="true"></canvas>
+            <div class="spatial-label">
+              <div><strong>Spatial Field</strong><br>trajectory · context · relation</div>
+              <div class="mono">Move pointer</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <section id="knowledge-lab" class="lab">
-      <h2>常用应用</h2>
-      <h3>Knowledge Lab · LeetCode Hot 100</h3>
-      <p>把 Hot 100 从“题单”推进成一个可以每天使用的刷题系统：100 道主卡同时提供 Python / C++ 最小模板、易错点、面试口述、关联与发散，并根据答题结果形成今日复习、错题本、薄弱题与训练记录。</p>
-      <div class="lab-grid">
-        <div class="lab-stat"><strong>100</strong>Hot 100 主卡</div>
-        <div class="lab-stat"><strong>2</strong>Python + C++</div>
-        <div class="lab-stat"><strong>12</strong>每日复习队列</div>
-        <div class="lab-stat"><strong>v4</strong>考试 + 备份</div>
-      </div>
-      <div class="lab-tags">
-        <span>暖色知识卡</span><span>Python 模板</span><span>C++ 模板</span><span>今日复习</span><span>收藏 / 错题本</span><span>薄弱题</span><span>考试模式</span><span>训练记录</span><span>进度备份</span>
-      </div>
-      <div class="lab-actions">
-        <a class="lab-button" href="./hot100/">进入 Hot 100 Practice Lab →</a>
-        <a class="lab-button secondary" href="./hot100/?mode=today">直接开始今日复习</a>
-      </div>
-    </section>
+      <section class="section" id="profile">
+        <div class="container">
+          <div class="section-head">
+            <div class="section-number mono">01 / Profile</div>
+            <div>
+              <h2 class="section-title">A concise profile,<br>not a landing page.</h2>
+              <p class="section-intro">个人网站以履历与作品为主，交互只在需要表达研究关系的地方出现。这里保留清晰的信息层级，把 AI 的“技术感”放在细节里，而不是堆满视觉符号。</p>
+            </div>
+          </div>
 
-    <section id="contact">
-      <h2>联系方式</h2>
-      <p>GitHub：<a href="https://github.com/nanhu22">github.com/nanhu22</a></p>
-      <p>邮箱：<a href="mailto:nanhuu0222@163.com">nanhuu0222@163.com</a></p>
-    </section>
-  </main>
+          <div class="profile-grid">
+            <article class="editorial-card">
+              <div class="eyebrow mono">About</div>
+              <p>我是一名 AI 应用研发工程师，也持续进行计算机方向研究。当前关注多业务场景下的 Agent 应用、空间智能、长期记忆、上下文管理，以及 Agent Harness 与可靠运行机制。</p>
+            </article>
+            <article class="editorial-card">
+              <div class="eyebrow mono">Current focus</div>
+              <ul class="focus-list">
+                <li><span>Agent Applications</span><small>Navigation · GIS · GGAI</small></li>
+                <li><span>Agent Memory</span><small>Retrieval · Context</small></li>
+                <li><span>Agent Harness</span><small>Runtime · Trace</small></li>
+                <li><span>Mobility Intelligence</span><small>Prediction · Generation</small></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
 
-  <footer>© 2026 胡楠 · Hosted by GitHub Pages</footer>
+      <section class="section" id="experience">
+        <div class="container">
+          <div class="section-head">
+            <div class="section-number mono">02 / Experience</div>
+            <div>
+              <h2 class="section-title">Experience that<br>stays scannable.</h2>
+              <p class="section-intro">履历区域先展示已经确认的职业定位和研究方向；单位、时间线、具体职责等信息可以在后续补充后直接扩展，不需要重新改版。</p>
+            </div>
+          </div>
+
+          <div class="experience-layout">
+            <div class="experience-index" aria-label="经历分类">
+              <button class="active" type="button" data-experience-tab="current"><span>Current role</span><span>Now</span></button>
+              <button type="button" data-experience-tab="research"><span>Research track</span><span>Ongoing</span></button>
+            </div>
+
+            <div>
+              <article class="experience-panel" data-experience-panel="current">
+                <div class="eyebrow mono">Current role</div>
+                <h3>AI Application R&amp;D Engineer</h3>
+                <p>面向真实业务场景设计和构建 AI 应用，重点关注 Agent 系统如何完成任务分解、工具调用、上下文组织、运行控制与多智能体协作。</p>
+                <div class="experience-tags">
+                  <span class="tag">Agent Systems</span>
+                  <span class="tag">AI Applications</span>
+                  <span class="tag">Context Engineering</span>
+                  <span class="tag">Multi-Agent</span>
+                </div>
+              </article>
+
+              <article class="experience-panel" data-experience-panel="research" hidden>
+                <div class="eyebrow mono">Research track</div>
+                <h3>Mobility, Spatial AI &amp; Agent Infrastructure</h3>
+                <p>研究从人类移动预测与轨迹生成延伸到空间 Agent、长期记忆和 Agent Harness，并通过论文、实验与工程项目持续沉淀。</p>
+                <div class="experience-tags">
+                  <span class="tag">Human Mobility</span>
+                  <span class="tag">Spatial Intelligence</span>
+                  <span class="tag">Memory</span>
+                  <span class="tag">Harness</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects-section" id="projects">
+        <div class="container">
+          <div class="section-head">
+            <div class="section-number mono">03 / Selected projects</div>
+            <div>
+              <h2 class="section-title">From agent applications<br>to agent infrastructure.</h2>
+              <p class="section-intro">这里是全站交互最强的区域。先从关系视图理解五个项目方向，再进入单个项目；视觉用于解释项目结构，而不是作为整站装饰。</p>
+            </div>
+          </div>
+
+          <div class="project-browser">
+            <div class="project-map" aria-label="项目关系图">
+              <svg viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+                <path class="map-line" d="M500 330 L500 112"></path>
+                <path class="map-line" d="M500 330 L190 322"></path>
+                <path class="map-line" d="M500 330 L810 322"></path>
+                <path class="map-line" d="M500 330 L350 545"></path>
+                <path class="map-line" d="M500 330 L650 545"></path>
+              </svg>
+              <div class="map-core mono">Selected<br>Work</div>
+              <button class="project-node node-navigation active" type="button" data-project="navigation">Navigation Agent</button>
+              <button class="project-node node-gis" type="button" data-project="gis">GIS Agent</button>
+              <button class="project-node node-ggai" type="button" data-project="ggai">GGAI</button>
+              <button class="project-node node-memory" type="button" data-project="memory">Memory</button>
+              <button class="project-node node-harness" type="button" data-project="harness">Harness</button>
+            </div>
+
+            <article class="project-detail" data-project-detail aria-live="polite">
+              <div class="eyebrow mono" data-project-index>01 / Agent Application</div>
+              <h3 data-project-title>Navigation Agent</h3>
+              <p data-project-description></p>
+              <div class="project-visual" data-project-visual="route" aria-hidden="true"></div>
+              <div class="project-meta" data-project-tags></div>
+              <span class="project-link" aria-disabled="true">Case study structure ready · content pending</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="publications">
+        <div class="container">
+          <div class="section-head">
+            <div class="section-number mono">04 / Publications</div>
+            <div>
+              <h2 class="section-title">Research output,<br>kept quiet.</h2>
+              <p class="section-intro">论文区域刻意回到学术索引式排版。项目区负责视觉表达，Publication 负责准确、快速地阅读研究产出。</p>
+            </div>
+          </div>
+
+          <div class="publications-list">
+            <article class="publication">
+              <div class="publication-year mono">2026</div>
+              <div>
+                <h3>Mobility tokens with routine-aware learning for LLM-based human mobility prediction</h3>
+                <p>Nan Hu et al. · GeoInformatica</p>
+                <p>LLM-based human mobility prediction · mobility representation · routine-aware learning</p>
+              </div>
+              <div class="publication-links">
+                <a href="https://link.springer.com/article/10.1007/s10707-026-00589-9" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </article>
+
+            <article class="publication">
+              <div class="publication-year mono">2026</div>
+              <div>
+                <h3>Diagnosing and mitigating teacher-forced copying in LLM-based POI trajectory generation</h3>
+                <p>Qingsen Ge, <strong>Nan Hu</strong>, Chenhao Wang, Xiaocheng Hu, Lisi Chen · GeoInformatica</p>
+                <p>LLM trajectory generation · copy diagnostics · motivation-conditioned retrieval</p>
+              </div>
+              <div class="publication-links">
+                <a href="https://link.springer.com/article/10.1007/s10707-026-00585-z" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </article>
+
+            <article class="publication">
+              <div class="publication-year mono">2025</div>
+              <div>
+                <h3>Co-movement aware trajectory generation via waypoint-guided generative adversarial networks</h3>
+                <p>Ziwen Chen, Ke Li, Lisi Chen, <strong>Nan Hu</strong>, et al. · GeoInformatica 29, 1093–1119</p>
+                <p>Trajectory generation · co-movement · waypoint-guided GAN</p>
+              </div>
+              <div class="publication-links">
+                <a href="https://link.springer.com/article/10.1007/s10707-025-00556-w" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="hero-actions">
+            <a class="button" href="https://scholar.google.com/citations?user=amrbgKEAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">View Google Scholar ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="lab">
+        <div class="container">
+          <div class="section-head">
+            <div class="section-number mono">05 / Lab</div>
+            <div>
+              <h2 class="section-title">A place for things<br>that keep growing.</h2>
+              <p class="section-intro">Lab 用于承载个人知识系统、实验和未来的文章输出，不与核心履历和项目争抢视觉权重。</p>
+            </div>
+          </div>
+
+          <div class="lab-grid">
+            <article class="lab-card primary">
+              <div class="eyebrow mono">Knowledge Lab / 01</div>
+              <h3>LeetCode Hot 100</h3>
+              <p>100 道主卡、Python / C++ 最小模板、今日复习、错题本、薄弱题、考试模式与训练记录。</p>
+              <div class="hero-actions">
+                <a class="button primary" href="./hot100/">Enter Hot 100 Lab →</a>
+                <a class="button" href="./hot100/?mode=today">Today review</a>
+              </div>
+              <div class="lab-stat">100</div>
+            </article>
+
+            <article class="lab-card">
+              <div class="eyebrow mono">Growing next</div>
+              <h3>Notes &amp; Experiments</h3>
+              <p>后续可以继续加入 Agent Notes、Paper Reading、Benchmarks 与小型交互实验，让个人网站随着研究持续增长。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="contact-panel">
+            <div class="eyebrow mono">06 / Contact</div>
+            <h2>Build useful AI,<br>carefully.</h2>
+            <p>Interested in AI applications, agent systems, spatial intelligence and research engineering.</p>
+            <div class="contact-links">
+              <a href="mailto:nanhuu0222@163.com">Email</a>
+              <a href="https://github.com/nanhu22" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a href="https://scholar.google.com/citations?user=amrbgKEAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">Google Scholar ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© 2026 Hu Nan</span>
+        <span class="mono">Blue Editorial Tech · GitHub Pages</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="./assets/site-v2.js" defer></script>
 </body>
 </html>
