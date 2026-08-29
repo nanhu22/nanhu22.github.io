@@ -14,6 +14,7 @@
   <title>Hu Nan — AI Application R&D Engineer</title>
   <link rel="stylesheet" href="./assets/site-v2.css">
   <link rel="stylesheet" href="./assets/resume-v2.css">
+  <link rel="stylesheet" href="./assets/resume-profile-v4.css">
   <link rel="stylesheet" href="./assets/finish-v2.css">
 </head>
 <body>
@@ -27,6 +28,7 @@
         <nav class="nav" id="site-nav" aria-label="主页导航">
           <a href="#profile">Profile</a>
           <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
           <a href="#projects">Projects</a>
           <a href="#publications">Publications</a>
           <a href="#lab">Lab</a>
@@ -76,22 +78,22 @@
             <div class="section-number mono">01 / Profile</div>
             <div>
               <h2 class="section-title">Engineering AI systems,<br>informed by research.</h2>
-              <p class="section-intro">从交通场景 Agent 到 GIS Agent，再到通用 Agent Runtime，我持续围绕真实业务中的空间智能、工具调用、上下文组织与可靠运行做工程实践。</p>
+              <p class="section-intro">从空间 Agent 到通用 Agent Runtime，我持续围绕真实业务中的工具调用、上下文组织、长期记忆与可靠运行做工程实践，也通过论文与系统实验验证这些问题。</p>
             </div>
           </div>
 
           <div class="profile-grid">
             <article class="editorial-card">
               <div class="eyebrow mono">About</div>
-              <p>我是一名 AI 应用研发工程师，关注 Agent 系统在复杂业务中的落地。工作与研究主要围绕 Navigation Agent、GIS Agent、GGAI，以及持续延伸的 Memory 与 Agent Harness 方向。</p>
+              <p>我是一名 AI 应用研发工程师，关注 Agent 系统从应用能力到基础设施的完整链路。当前重点包括 Agent Runtime、Memory、Skill/MCP、Context Engineering，以及 Navigation / GIS 等空间智能 Agent。</p>
             </article>
             <article class="editorial-card">
               <div class="eyebrow mono">Current focus</div>
               <ul class="focus-list">
-                <li><span>Agent Applications</span><small>Navigation · GIS · GGAI</small></li>
-                <li><span>Agent Runtime</span><small>Tools · Skills · MCP</small></li>
-                <li><span>Context &amp; Memory</span><small>Long-context · Retrieval</small></li>
-                <li><span>Evaluation</span><small>Trace · Reliability</small></li>
+                <li><span>Agent Runtime</span><small>State · Control · Recovery</small></li>
+                <li><span>Memory</span><small>Extract · Retrieve · Consolidate</small></li>
+                <li><span>Skill / MCP</span><small>Capability · Tool Contract</small></li>
+                <li><span>Spatial Agents</span><small>Navigation · GIS · GGAI</small></li>
               </ul>
             </article>
           </div>
@@ -103,55 +105,79 @@
           <div class="section-head">
             <div class="section-number mono">02 / Experience</div>
             <div>
-              <h2 class="section-title">Selected project<br>experience.</h2>
-              <p class="section-intro">近两年的项目主线围绕空间 Agent 与通用 Agent 系统展开。这里保留快速浏览所需的信息，技术设计与完整贡献放在各项目 Case Study 中。</p>
+              <h2 class="section-title">Agent engineering<br>across platform &amp; domain.</h2>
+              <p class="section-intro">实习经历覆盖两类互补场景：一端参与通用 Agent 平台基础设施建设，一端持续负责 GIS / Navigation 领域 Agent 与通用 Framework 的工程演进。</p>
             </div>
           </div>
 
           <div class="experience-layout">
-            <div class="experience-index" aria-label="项目履历">
-              <button class="active" type="button" data-experience-tab="ggai">
-                <span><strong>GGAI</strong><small>Design Lead</small></span><span>2026.04 – Now</span>
+            <div class="experience-index" aria-label="实习经历">
+              <button class="active" type="button" data-experience-tab="platform">
+                <span><strong>AI Agent Platform</strong><small>Confidential Internship</small></span><span>2026.07 – Now</span>
               </button>
-              <button type="button" data-experience-tab="gis">
-                <span><strong>GIS Agent</strong><small>Design Lead</small></span><span>2025.08 – 2026.03</span>
-              </button>
-              <button type="button" data-experience-tab="navigation">
-                <span><strong>Navigation Agent</strong><small>Design Lead</small></span><span>2024.09 – 2025.08</span>
+              <button type="button" data-experience-tab="locationmind">
+                <span><strong>LocationMind</strong><small>R&amp;D Division</small></span><span>2024.10 – Now</span>
               </button>
             </div>
 
             <div>
-              <article class="experience-panel" data-experience-panel="ggai">
-                <div class="eyebrow mono">2026.04 – Present</div>
-                <h3>GGAI · General Geographical Agent</h3>
-                <p class="experience-summary">负责通用地理 Agent 系统设计，将既有领域能力逐步收敛为通用 Agent Runtime，并通过可插拔能力扩展到 QGIS、路线规划、OpenStreet、人流与灾害分析等场景。</p>
-                <div class="experience-themes"><span>General Runtime</span><span>Pluggable Capability</span><span>Trace Evaluation</span></div>
-                <div class="experience-footer"><span class="experience-role-note">设计负责人</span><a class="experience-case-link" href="./projects/ggai/">View case study ↗</a></div>
+              <article class="experience-panel" data-experience-panel="platform">
+                <div class="eyebrow mono">2026.07 – Present · AI Model Engineer Intern</div>
+                <h3>Agent Platform Infrastructure</h3>
+                <p class="experience-summary">参与部门级 Agent 平台的架构设计与核心能力建设，面向 AI Coding / 通用 Agent 场景，主要投入 Agent Runtime、长期 Memory、Skill/MCP 接入与 Context 分层设计。Memory 方向关注 Extract、Consolidation、Retrieval、Supersede 与 Trace 组成的生命周期与自进化管理。</p>
+                <div class="experience-themes"><span>Agent Runtime</span><span>Memory Lifecycle</span><span>Skill / MCP</span><span>Context Architecture</span></div>
+                <div class="experience-privacy">受保密约束，当前实习单位与具体业务暂不公开。</div>
+                <div class="experience-footer"><span class="experience-role-note">AI Model Engineer Intern · Agent Systems</span><a class="experience-case-link" href="./projects/agent-harness/">Related research ↗</a></div>
               </article>
 
-              <article class="experience-panel" data-experience-panel="gis" hidden>
-                <div class="eyebrow mono">2025.08 – 2026.03</div>
-                <h3>GIS Agent</h3>
-                <p class="experience-summary">负责面向 GIS 场景的 Agent 系统设计，把自然语言任务、GIS 工具和国土空间数据连接成可执行的多步分析流程，覆盖灾害、土地、洪涝与人口流动等任务。</p>
-                <div class="experience-themes"><span>GIS Workflows</span><span>Multi-step Agent</span><span>Tool Use</span></div>
-                <div class="experience-footer"><span class="experience-role-note">设计负责人</span><a class="experience-case-link" href="./projects/gis-agent/">View case study ↗</a></div>
-              </article>
-
-              <article class="experience-panel" data-experience-panel="navigation" hidden>
-                <div class="eyebrow mono">2024.09 – 2025.08</div>
-                <h3>Navigation Agent</h3>
-                <p class="experience-summary">负责交通场景 Agent 系统设计，围绕路线规划、异常人流、交通知识问答与交通态势分析，构建对话式任务执行与工具调用流程。</p>
-                <div class="experience-themes"><span>Navigation</span><span>Traffic Analysis</span><span>ReAct Agent</span></div>
-                <div class="experience-footer"><span class="experience-role-note">设计负责人</span><a class="experience-case-link" href="./projects/navigation-agent/">View case study ↗</a></div>
+              <article class="experience-panel" data-experience-panel="locationmind" hidden>
+                <div class="eyebrow mono">2024.10 – Present · Intern Student</div>
+                <h3>LocationMind株式会社 · R&amp;D Division</h3>
+                <p class="experience-summary">主要负责 GIS / Navigation Agent 领域业务与通用 Agent Framework 的设计演进：从 LangChain + Chain-of-Thought，到 LangGraph 的图状态与多步骤任务管理，再到 PocketFlow 的轻量 Workflow 编排；同时将领域能力拆分为 Tool、Skill、MCP Server 与 Workflow，探索 General Agent + Domain Skill 的可扩展架构。</p>
+                <div class="experience-themes"><span>Spatial Agents</span><span>LangGraph → PocketFlow</span><span>Tool / Skill / MCP</span><span>General Runtime</span></div>
+                <div class="experience-footer"><span class="experience-role-note">Intern Student · R&amp;D Division</span><a class="experience-case-link" href="#projects">View related projects ↓</a></div>
               </article>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="experience-arc" aria-label="Agent 项目演进路线">
-            <a href="./projects/navigation-agent/"><span>2024.09</span><strong>Navigation Agent</strong>Traffic agent application</a>
-            <a href="./projects/gis-agent/"><span>2025.08</span><strong>GIS Agent</strong>Complex spatial workflows</a>
-            <a href="./projects/ggai/"><span>2026.04</span><strong>GGAI</strong>General agent system</a>
+      <section class="section" id="education" data-observe-section="Education">
+        <div class="container">
+          <div class="section-head">
+            <div class="section-number mono">03 / Education</div>
+            <div>
+              <h2 class="section-title">Computer science,<br>from foundations to practice.</h2>
+              <p class="section-intro">本科阶段建立计算机科学基础，硕士阶段继续围绕计算机技术、空间智能与 Agent 系统开展研究与工程实践。</p>
+            </div>
+          </div>
+
+          <div class="education-list">
+            <article class="education-item">
+              <div class="education-period mono">2024.09 – 2027.06</div>
+              <div class="education-school">
+                <h3>电子科技大学 · 计算机科学与工程学院</h3>
+                <p>计算机技术 · 硕士</p>
+                <div class="education-honors"><span>校级二等学业奖学金</span></div>
+              </div>
+              <div class="education-meta">
+                <span><small>GPA</small><strong>3.90 / 4.00</strong></span>
+                <span><small>Average</small><strong>87.96 / 100</strong></span>
+              </div>
+            </article>
+
+            <article class="education-item">
+              <div class="education-period mono">2020.09 – 2024.06</div>
+              <div class="education-school">
+                <h3>北京交通大学 · 计算机与信息技术学院</h3>
+                <p>计算机科学与技术 · 学士</p>
+                <div class="education-honors"><span>校级三等学业奖学金</span><span>校级优秀共青团员</span></div>
+              </div>
+              <div class="education-meta">
+                <span><small>GPA</small><strong>3.57 / 4.00</strong></span>
+                <span><small>Average</small><strong>86.20 / 100</strong></span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -159,7 +185,7 @@
       <section class="projects-section" id="projects" data-observe-section="Projects">
         <div class="container">
           <div class="section-head">
-            <div class="section-number mono">03 / Selected projects</div>
+            <div class="section-number mono">04 / Selected projects</div>
             <div>
               <h2 class="section-title">Applications evolve<br>into infrastructure.</h2>
               <p class="section-intro">Navigation Agent、GIS Agent 与 GGAI 是连续的应用演进；Memory 与 Agent Harness 则把跨项目反复出现的上下文、运行与可靠性问题抽象为持续研究方向。</p>
@@ -201,7 +227,7 @@
       <section class="section" id="publications" data-observe-section="Publications">
         <div class="container">
           <div class="section-head">
-            <div class="section-number mono">04 / Publications</div>
+            <div class="section-number mono">05 / Publications</div>
             <div>
               <h2 class="section-title">Selected<br>publications.</h2>
               <p class="section-intro">研究围绕人类移动预测、轨迹生成与 LLM 轨迹生成行为分析展开。论文区保持学术索引式展示，让标题、作者与正式论文入口成为主角。</p>
@@ -249,7 +275,7 @@
       <section class="section" id="lab" data-observe-section="Lab">
         <div class="container">
           <div class="section-head">
-            <div class="section-number mono">05 / Lab</div>
+            <div class="section-number mono">06 / Lab</div>
             <div>
               <h2 class="section-title">Knowledge that<br>stays in use.</h2>
               <p class="section-intro">Lab 承载个人知识系统和训练工具，让个人网站除了展示项目与论文，也保留持续生长和反复使用的部分。</p>
@@ -284,7 +310,7 @@
       <section class="section" id="contact" data-observe-section="Contact">
         <div class="container">
           <div class="contact-panel">
-            <div class="eyebrow mono">06 / Contact</div>
+            <div class="eyebrow mono">07 / Contact</div>
             <h2>Build useful AI,<br>carefully.</h2>
             <p>Interested in AI applications, agent systems, spatial intelligence and research engineering.</p>
             <div class="contact-links">
