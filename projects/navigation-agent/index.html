@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — Navigation Agent project case study: LangGraph ReAct agent for traffic navigation and analysis.">
+  <meta name="description" content="Hu Nan — Navigation Agent: single-agent runtime for route planning, mobility analysis and traffic tasks.">
   <title>Navigation Agent — Hu Nan</title>
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
   <link rel="stylesheet" href="../../assets/project-detail-v2.css">
+  <link rel="stylesheet" href="../../assets/project-story-v5.css">
 </head>
 <body class="project-page-body">
   <header class="topbar project-topbar">
@@ -22,46 +23,106 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">01 / Agent Application · 2024.09 – 2025.08</div>
+          <div class="project-kicker mono">Era 01 · Single-Agent Runtime · 2024.09 – 2025.08</div>
           <h1>Navigation<br>Agent</h1>
-          <p class="project-summary">面向交通场景的 ReAct 单智能体系统，用于路线规划、异常人流分析、交通知识问答与交通态势分析，并通过对话式界面连接地图、知识库、数据库与预测模型。</p>
+          <p class="project-summary">面向交通与导航场景的单 Agent Runtime。一个 Agent 持有任务状态，在 ReAct 式 Decision → Tool → Observation 循环中动态选择地图、知识检索、数据库与预测能力，并把执行结果组织成对话与地图输出。</p>
         </div>
         <dl class="project-facts">
           <div class="project-fact"><dt>Role</dt><dd><strong>设计负责人</strong></dd></div>
           <div class="project-fact"><dt>Period</dt><dd>2024.09 – 2025.08</dd></div>
-          <div class="project-fact"><dt>Agent</dt><dd>LangGraph · ReAct</dd></div>
-          <div class="project-fact"><dt>Interface</dt><dd>Chatbot · Map · Tool Results</dd></div>
+          <div class="project-fact"><dt>Runtime</dt><dd>Single Agent · LangGraph · ReAct</dd></div>
+          <div class="project-fact"><dt>Domains</dt><dd>Navigation · Traffic · Mobility</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Execution Case</div>
+        <div class="case-label mono">01 / Architecture</div>
         <div class="case-content">
-          <h2>A traffic agent connected to real tools and data.</h2>
-          <p>Navigation Agent 是这条项目主线的起点：让一个 Agent 不只回答交通问题，而是理解用户目标、维护任务状态，根据每次 Observation 决定下一步工具调用，并把路线、知识检索、人流异常和预测结果收敛成一次完整回答。</p>
-          <figure class="case-visual">
-            <div class="case-visual-frame"><img src="../../assets/cases/navigation-agent-flow.svg" alt="Navigation Agent 从用户目标到 ReAct 决策、地图与交通工具调用、Observation 回流以及最终路线回答的执行链路" loading="eager" decoding="async"></div>
-            <figcaption><span class="mono">Route case</span><span>示例从“东京塔到涩谷并检查人流异常”出发。Agent 的核心不是把路线规划写死，而是在紧凑状态中记录当前目标，用 Observation 驱动下一次决策；地图、RAG、交通数据库和预测模型只是可被选择的能力。</span></figcaption>
-          </figure>
-          <div class="case-visual-note"><strong>上下文原则：</strong>决策上下文只保留目标、必要历史和工具返回的有效证据，不把完整工具日志持续堆回模型上下文。这一做法后来成为 GIS Agent 和 GGAI 的 Context Engineering 基础。</div>
-          <div class="case-stack"><span>LangGraph</span><span>MCP</span><span>Google Maps API</span><span>FAISS</span><span>MySQL</span><span>ReAct Agent</span><span>RAG</span><span>Deep Learning</span><span>Gradio</span></div>
+          <h2>One agent owns the decision loop.</h2>
+          <p>这一阶段的核心是先建立一套完整的 Agent 闭环：用户以自然语言给出交通任务，单个 Navigation Agent 负责识别意图、维护当前目标、决定下一步工具，并根据 Observation 继续推理。工具层承载领域能力，Runtime 负责“什么时候调用什么能力”，而不是把整条路线流程写成固定脚本。</p>
+
+          <div class="case-board" aria-label="Navigation Agent watermarked case-study board">
+            <div class="case-board-head">
+              <div><h3>Navigation Agent — Single-Agent Runtime</h3><p>Earliest architecture era · transportation &amp; navigation</p></div>
+              <div class="case-board-badge"><strong>Core idea</strong><br>One runtime · one decision owner · ReAct-like tool loop.</div>
+            </div>
+
+            <div class="board-section">
+              <div class="board-title"><span class="num">1</span>User Request</div>
+              <div class="board-card blue"><strong>Tokyo Tower → University of Tokyo Hongo Campus</strong><p>Plan a route, compare travel modes, and summarize the easiest option.</p></div>
+            </div>
+
+            <div class="board-section">
+              <div class="board-title"><span class="num">2</span>Runtime Structure</div>
+              <div class="board-grid cols-4">
+                <div class="board-card"><span class="mono">Input</span><strong>User</strong><p>Natural-language transportation request.</p></div>
+                <div class="board-card blue"><span class="mono">Decision</span><strong>Single Navigation Agent</strong><p>Reason → choose tool → read observation → next action.</p></div>
+                <div class="board-card"><span class="mono">Capability</span><strong>Domain Tool Layer</strong><p>Maps · route planner · retrieval · traffic / mobility context.</p></div>
+                <div class="board-card green"><span class="mono">Output</span><strong>Answer</strong><p>Comparison, recommendation and map-oriented result.</p></div>
+              </div>
+            </div>
+
+            <div class="board-section">
+              <div class="board-title"><span class="num">3</span>Agent Trace — ReAct-like Loop</div>
+              <div class="board-flow" style="--steps:6">
+                <div class="board-step"><span class="step-no">1</span><strong>Intent Detection</strong><span>Route planning + travel-mode comparison.</span></div>
+                <div class="board-step"><span class="step-no">2</span><strong>Plan Route</strong><span>Establish origin, destination and task constraints.</span></div>
+                <div class="board-step"><span class="step-no">3</span><strong>Geocode</strong><span>Resolve origin and destination into spatial entities.</span></div>
+                <div class="board-step"><span class="step-no">4</span><strong>Retrieve Options</strong><span>Call routing / traffic capabilities and collect observations.</span></div>
+                <div class="board-step"><span class="step-no">5</span><strong>Compare Modes</strong><span>Time · cost · transfers · convenience.</span></div>
+                <div class="board-step"><span class="step-no">6</span><strong>Synthesize</strong><span>Return the clearest recommendation and supporting evidence.</span></div>
+              </div>
+            </div>
+
+            <div class="board-section">
+              <div class="board-title"><span class="num">4</span>Result</div>
+              <div class="board-result">
+                <div class="board-result-panel"><h4>Travel Mode Comparison</h4><table class="board-table"><thead><tr><th>Mode</th><th>Trade-off</th><th>Role in answer</th></tr></thead><tbody><tr><td>Transit</td><td>balanced time / cost</td><td>recommended</td></tr><tr><td>Walking</td><td>zero fare / longer time</td><td>alternative</td></tr><tr><td>Driving</td><td>fast but traffic-sensitive</td><td>contextual option</td></tr></tbody></table></div>
+                <div class="board-result-panel"><h4>Final Recommendation</h4><p>The Agent does not merely return one route. It compares candidate modes, cites observations, and produces an actionable answer for the user.</p></div>
+              </div>
+              <div class="board-takeaways"><span>Single-Agent</span><span>ReAct Loop</span><span>Tool-Using</span><span>Chat + Map Output</span></div>
+            </div>
+          </div>
+          <div class="case-evidence-note"><span><strong>Watermarked case-study board:</strong> web rendition based on the supplied PDF.</span><span>© Hu Nan · sanitized for public display</span></div>
+
+          <div class="story-evolution" aria-label="Agent architecture evolution">
+            <article class="story-era active"><span class="mono">Era 01</span><strong>Navigation Agent</strong><p>Single Agent owns reasoning, state and tool selection. The central problem is closing the Decision → Tool → Observation loop.</p></article>
+            <article class="story-era"><span class="mono">Era 02</span><strong>GIS Agent</strong><p>Business complexity grows into explicit Planner → Executor → Orchestrator → Answer roles and long-running GIS workflows.</p></article>
+            <article class="story-era"><span class="mono">Era 03</span><strong>GGAI</strong><p>Domain roles are generalized into a reusable Runtime with pluggable Skill/MCP and selective SubAgent execution.</p></article>
+          </div>
+          <div class="case-visual-note"><strong>What this era solved:</strong> 从纯问答走向可执行 Agent。它证明单 Agent 可以在交通领域完成意图识别、连续工具调用和结果组织；下一阶段真正暴露的问题，是 GIS 业务需要更长任务链、更清晰的角色职责与共享状态控制。</div>
         </div>
       </div>
     </section>
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">02 / Contribution</div>
+        <div class="case-label mono">02 / Representative Cases</div>
+        <div class="case-content">
+          <h2>From a route request to a domain agent.</h2>
+          <p>Navigation Agent 的业务并不只是一条路线 Demo，而是围绕交通场景把多个能力统一进入同一决策循环。公开页面只展示脱敏后的任务类型，不展示原始 session、内部路径或运行标识。</p>
+          <div class="representative-cases">
+            <article class="representative-case"><span class="mono">A</span><div><h4>Point-to-point route planning</h4><p>识别起终点与交通目标，调用地图 / 路线能力，比较候选出行方式并给出推荐。</p></div><aside>Best for showing the single-Agent decision loop.</aside></article>
+            <article class="representative-case"><span class="mono">B</span><div><h4>Crowd anomaly analysis</h4><p>把异常人流查询与交通上下文纳入同一对话任务，让 Agent 根据用户问题选择数据与分析能力。</p></div><aside>Demonstrates domain-tool composition.</aside></article>
+            <article class="representative-case"><span class="mono">C</span><div><h4>Traffic knowledge &amp; situation analysis</h4><p>结合检索、结构化数据与预测模型，把知识问答扩展为面向交通态势的辅助分析。</p></div><aside>Shows why RAG + data + prediction became tools.</aside></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">03 / Contribution</div>
         <div class="case-content">
           <h2>Building the first end-to-end agent loop.</h2>
           <ul class="contribution-list">
             <li><span class="mono">01</span><div><h3>Agent 状态流设计</h3><p>基于 LangGraph 设计交通 Agent 状态流，实现用户意图识别、任务拆解、工具调用与结果生成。</p></div></li>
             <li><span class="mono">02</span><div><h3>ReAct 多步骤任务</h3><p>以 ReAct 范式组织路线规划、知识检索、异常人流查询与交通预测等多步骤任务，让模型在推理与工具执行之间形成闭环。</p></div></li>
-            <li><span class="mono">03</span><div><h3>统一工具接入</h3><p>通过 MCP 接入 Google Maps API、FAISS、MySQL 与深度学习预测模型，将地图、知识、数据库和模型能力统一到 Agent 工具层。</p></div></li>
-            <li><span class="mono">04</span><div><h3>对话式产品界面</h3><p>参与实现 Gradio 对话式前端，支持地图路线生成、地图和思维链展示、异常人流分析、交通知识问答与交通态势分析。</p></div></li>
-            <li><span class="mono">05</span><div><h3>领域经验沉淀</h3><p>沉淀交通领域 Prompt、工具描述与知识检索策略，为后续 GIS Agent 与通用 Agent Runtime 的工具设计和任务组织提供基础。</p></div></li>
+            <li><span class="mono">03</span><div><h3>统一工具接入</h3><p>通过 MCP 接入 Google Maps API、FAISS、MySQL 与预测模型，将地图、知识、数据库和模型能力统一到 Agent 工具层。</p></div></li>
+            <li><span class="mono">04</span><div><h3>对话式产品界面</h3><p>参与实现 Gradio 对话式前端，支持地图路线生成、地图与过程信息展示、异常人流分析、交通知识问答与交通态势分析。</p></div></li>
+            <li><span class="mono">05</span><div><h3>领域经验沉淀</h3><p>沉淀交通领域 Prompt、工具描述与知识检索策略，为后续 GIS Agent 与通用 Agent Runtime 的能力组织提供基础。</p></div></li>
           </ul>
         </div>
       </div>
@@ -69,29 +130,24 @@
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">03 / Scope</div>
+        <div class="case-label mono">04 / Scope</div>
         <div class="case-content">
           <h2>One agent, several traffic capabilities.</h2>
           <div class="metric-grid">
-            <div><strong>Route planning</strong><span>连接地图能力生成与展示路线。</span></div>
-            <div><strong>Crowd anomaly</strong><span>查询并分析异常人流信息。</span></div>
-            <div><strong>Traffic QA</strong><span>结合检索与领域知识完成问答。</span></div>
-            <div><strong>Traffic forecasting</strong><span>调用预测模型辅助交通态势分析。</span></div>
-            <div><strong>RAG</strong><span>通过 FAISS 等知识检索补充领域上下文。</span></div>
-            <div><strong>Chat + map</strong><span>用对话与地图共同承载 Agent 输出。</span></div>
+            <div><strong>Route planning</strong><span>地图路线生成与比较。</span></div>
+            <div><strong>Crowd anomaly</strong><span>异常人流查询与分析。</span></div>
+            <div><strong>Traffic QA</strong><span>检索增强的领域知识问答。</span></div>
+            <div><strong>Traffic forecasting</strong><span>预测模型辅助态势分析。</span></div>
+            <div><strong>RAG</strong><span>FAISS 等知识检索补充上下文。</span></div>
+            <div><strong>Chat + map</strong><span>对话与地图共同承载 Agent 输出。</span></div>
           </div>
-          <div class="case-callout"><strong>What carried forward</strong><p>这个项目建立了“Agent 状态流 + 工具调用 + 领域 Prompt + 对话交互”的第一套完整闭环，后续项目开始进一步处理更多工具、更长任务链和更强的运行控制。</p></div>
+          <div class="case-callout"><strong>Architecture takeaway</strong><p>这一代解决“一个 Agent 如何真正用工具完成任务”。GIS Agent 随后把问题推进到“多个明确职责的 Agent 如何协作完成长期、状态化、可恢复的空间工作流”。</p></div>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="container">
-    <a class="project-next" href="../gis-agent/">
-      <span><span class="mono">Next project</span><strong>GIS Agent</strong></span><span>→</span>
-    </a>
-  </div>
-
+  <div class="container"><a class="project-next" href="../gis-agent/"><span><span class="mono">Next architecture era</span><strong>GIS Agent</strong></span><span>→</span></a></div>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Project / Navigation Agent</span></div></footer>
 </body>
 </html>
