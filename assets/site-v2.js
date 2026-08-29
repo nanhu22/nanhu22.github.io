@@ -10,24 +10,35 @@
         <circle class="viz-node faint" cx="270" cy="94" r="4" />
         <circle class="viz-node viz-moving" cx="405" cy="56" r="5" />
         <circle class="viz-node" cx="490" cy="68" r="4" />
+        <text x="34" y="200" fill="rgba(183,200,222,.68)" font-size="10">Decision</text>
+        <text x="242" y="116" fill="rgba(183,200,222,.68)" font-size="10">Tool</text>
+        <text x="425" y="45" fill="rgba(183,200,222,.68)" font-size="10">Observation</text>
       </svg>`,
-    layers: `
+    workflow: `
       <svg viewBox="0 0 520 220" preserveAspectRatio="none">
-        <path class="viz-panel" d="M90 38 L390 28 L448 74 L148 86 Z" />
-        <path class="viz-panel" d="M76 82 L376 72 L434 118 L134 130 Z" />
-        <path class="viz-panel" d="M62 126 L362 116 L420 162 L120 174 Z" />
-        <path class="viz-line faint" d="M148 86 L134 130 L120 174 M448 74 L434 118 L420 162" />
-        <circle class="viz-node" cx="302" cy="108" r="5" />
+        <path class="viz-line faint" d="M92 110 H158 M218 110 H284 M344 110 H410" />
+        <path class="viz-line viz-dash" d="M410 146 C350 190 170 190 92 146" />
+        <rect class="viz-panel" x="30" y="70" width="112" height="78" rx="9" />
+        <rect class="viz-panel" x="158" y="70" width="112" height="78" rx="9" />
+        <rect class="viz-panel" x="286" y="70" width="112" height="78" rx="9" />
+        <rect class="viz-panel" x="414" y="70" width="78" height="78" rx="9" />
+        <circle class="viz-node" cx="86" cy="70" r="4" /><circle class="viz-node" cx="214" cy="70" r="4" /><circle class="viz-node" cx="342" cy="70" r="4" /><circle class="viz-node" cx="453" cy="70" r="4" />
+        <text x="50" y="112" fill="rgba(229,239,255,.84)" font-size="11">Planner</text>
+        <text x="177" y="112" fill="rgba(229,239,255,.84)" font-size="11">Executor</text>
+        <text x="303" y="112" fill="rgba(229,239,255,.84)" font-size="11">Orchestrator</text>
+        <text x="431" y="112" fill="rgba(229,239,255,.84)" font-size="11">Answer</text>
       </svg>`,
-    network: `
+    general: `
       <svg viewBox="0 0 520 220" preserveAspectRatio="none">
-        <path class="viz-line faint" d="M260 110 L118 54 M260 110 L405 58 M260 110 L118 170 M260 110 L406 168" />
-        <path class="viz-line viz-dash" d="M118 54 L405 58 M118 170 L406 168" />
-        <circle class="viz-node" cx="260" cy="110" r="7" />
-        <circle class="viz-node faint" cx="118" cy="54" r="5" />
-        <circle class="viz-node faint" cx="405" cy="58" r="5" />
-        <circle class="viz-node faint" cx="118" cy="170" r="5" />
-        <circle class="viz-node faint" cx="406" cy="168" r="5" />
+        <path class="viz-line faint" d="M260 110 L95 56 M260 110 L425 56 M260 110 L95 170 M260 110 L425 170" />
+        <path class="viz-line viz-dash" d="M425 56 C468 89 468 135 425 170" />
+        <circle class="viz-node" cx="260" cy="110" r="8" />
+        <circle class="viz-node faint" cx="95" cy="56" r="5" /><circle class="viz-node faint" cx="425" cy="56" r="5" /><circle class="viz-node faint" cx="95" cy="170" r="5" /><circle class="viz-node faint" cx="425" cy="170" r="5" />
+        <text x="221" y="91" fill="rgba(229,239,255,.9)" font-size="11">Main Runtime</text>
+        <text x="49" y="45" fill="rgba(183,200,222,.72)" font-size="10">Skill / MCP</text>
+        <text x="397" y="45" fill="rgba(183,200,222,.72)" font-size="10">Workflow</text>
+        <text x="53" y="192" fill="rgba(183,200,222,.72)" font-size="10">Memory</text>
+        <text x="391" y="192" fill="rgba(183,200,222,.72)" font-size="10">SubAgent</text>
       </svg>`,
     memory: `
       <svg viewBox="0 0 520 220" preserveAspectRatio="none">
@@ -53,27 +64,27 @@
 
   const projectData = {
     navigation: {
-      index: '01 / Agent Application',
+      index: '01 / Era 01 · Single-Agent Runtime',
       title: 'Navigation Agent',
-      description: '以空间导航与决策任务为核心的 Agent 应用方向，关注 Agent 如何理解环境、组织上下文并完成连续决策。',
-      tags: ['Navigation', 'Spatial Reasoning', 'Agent'],
+      description: '第一代架构：单 Agent 持有任务状态，在 ReAct 式 Decision → Tool → Observation 循环中完成路线规划、交通问答、人流与态势分析。',
+      tags: ['Single-Agent Runtime', 'ReAct', 'Navigation'],
       visual: 'route',
       href: './projects/navigation-agent/'
     },
     gis: {
-      index: '02 / Agent Application',
+      index: '02 / Era 02 · Multi-Agent Workflow',
       title: 'GIS Agent',
-      description: '面向 GIS 工作流与空间工具调用的 Agent 应用方向，探索自然语言任务如何转化为空间分析与工具执行过程。',
-      tags: ['GIS', 'Tool Use', 'Spatial AI'],
-      visual: 'layers',
+      description: '第二代架构：随着 GIS 业务复杂度提升，显式拆分 Planner、ExecutorFlow、Orchestrator 与 Answer，分别负责规划、执行、共享状态控制和成果交付。',
+      tags: ['Planner → Executor', 'Orchestrator', 'GIS Workflow'],
+      visual: 'workflow',
       href: './projects/gis-agent/'
     },
     ggai: {
-      index: '03 / Agent Application',
+      index: '03 / Era 03 · General Runtime',
       title: 'GGAI',
-      description: '通用 General Geographical Agent：基于主 Agent 与 Subagent 协作架构，连接规划、GIS 工具、OpenStreetMap 与任务执行。',
-      tags: ['Geographical AI', 'Multi-Agent', 'Planning'],
-      visual: 'network',
+      description: '第三代架构：回归通用 Single-Agent Runtime，领域流程下沉到可插拔 Skill/MCP/Workflow；主 Agent 根据任务依赖选择 direct execution 或 selective SubAgent fan-out。',
+      tags: ['General Runtime', 'Skill / MCP', 'Selective SubAgent'],
+      visual: 'general',
       href: './projects/ggai/'
     },
     memory: {
