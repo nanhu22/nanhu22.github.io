@@ -1,0 +1,212 @@
+/* V7: restrained story toys + ambient execution trace field. */
+:root {
+  --ambient-x: 68%;
+  --ambient-y: 24%;
+  --ambient-scroll: 0px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .82;
+  background:
+    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(37,99,235,.055), transparent 26%),
+    repeating-linear-gradient(112deg, transparent 0 118px, rgba(37,99,235,.018) 119px, transparent 120px 246px),
+    radial-gradient(circle at 18% 78%, rgba(77,124,255,.035), transparent 24%);
+  background-position: 0 var(--ambient-scroll), 0 var(--ambient-scroll), 0 0;
+  transition: background-position .18s linear;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .22;
+  background-image: radial-gradient(circle, rgba(37,99,235,.2) 0 1px, transparent 1.2px);
+  background-size: 86px 86px;
+  transform: translate3d(calc((var(--ambient-x) - 50%) * .035), calc((var(--ambient-y) - 50%) * .025), 0);
+  animation: ambient-trace-drift 38s linear infinite;
+}
+.site-shell,
+.project-page-body > header,
+.project-page-body > main,
+.project-page-body > .container,
+.project-page-body > footer { position: relative; z-index: 1; }
+@keyframes ambient-trace-drift {
+  from { background-position: 0 0; }
+  to { background-position: 86px 43px; }
+}
+
+/* Hero / Agent Evolution Observatory */
+.agent-observatory {
+  position: relative;
+  min-height: 410px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(249,251,254,.8);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.45);
+}
+.agent-observatory::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(37,99,235,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), transparent 94%);
+}
+.observatory-inner { position: relative; z-index: 1; padding: 18px; }
+.observatory-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.observatory-head .mono { color: #72839a; font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.observatory-play {
+  border: 0;
+  background: transparent;
+  color: var(--blue-deep);
+  cursor: pointer;
+  font: 650 10px/1.2 "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.observatory-play:hover { color: var(--blue); }
+.observatory-play:disabled { opacity: .5; cursor: default; }
+.observatory-visual {
+  min-height: 184px;
+  display: grid;
+  place-items: center;
+  padding: 18px 0 8px;
+}
+.observatory-visual svg { width: 100%; height: 176px; overflow: visible; }
+.story-node { fill: rgba(255,255,255,.94); stroke: rgba(75,116,176,.48); stroke-width: 1; }
+.story-node.main { fill: rgba(230,239,255,.96); stroke: rgba(37,99,235,.72); }
+.story-node.warn { fill: rgba(255,247,235,.95); stroke: rgba(212,134,37,.5); }
+.story-line { fill: none; stroke: rgba(68,107,165,.42); stroke-width: 1.25; }
+.story-line.active { stroke: rgba(37,99,235,.78); stroke-dasharray: 5 5; animation: story-line-flow 1.8s linear infinite; }
+.story-label { fill: #31445f; font: 10px/1.2 "IBM Plex Mono", Consolas, monospace; }
+.story-label.muted { fill: #8391a4; font-size: 8px; }
+.story-pulse { fill: var(--blue); filter: drop-shadow(0 0 6px rgba(37,99,235,.26)); }
+@keyframes story-line-flow { to { stroke-dashoffset: -20; } }
+.observatory-copy {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  gap: 18px;
+  padding: 16px 0 14px;
+  border-top: 1px solid var(--line);
+}
+.observatory-copy .era { color: var(--blue); font-size: 9px; }
+.observatory-copy h3 { margin: 6px 0 0; font-size: 21px; letter-spacing: -.035em; }
+.observatory-copy p { margin: 0; color: #5a6c83; font-size: 12px; line-height: 1.65; }
+.observatory-pressure {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 12px;
+  padding: 12px 0 14px;
+  border-top: 1px solid var(--line);
+  color: #566981;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.observatory-pressure span { color: #9a6b2d; font: 9px "IBM Plex Mono", Consolas, monospace; text-transform: uppercase; letter-spacing: .06em; }
+.observatory-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.observatory-tab {
+  min-height: 50px;
+  padding: 8px 6px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: rgba(255,255,255,.38);
+  color: #7a899d;
+  cursor: pointer;
+  text-align: left;
+}
+.observatory-tab:last-child { border-right: 0; }
+.observatory-tab span { display: block; color: inherit; font: 8px "IBM Plex Mono", Consolas, monospace; text-transform: uppercase; }
+.observatory-tab strong { display: block; margin-top: 4px; color: #506179; font-size: 10px; }
+.observatory-tab.active { background: rgba(229,239,255,.7); color: var(--blue); }
+.observatory-tab.active strong { color: var(--blue-deep); }
+.agent-observatory.story-changing .observatory-visual { animation: observatory-swap .34s var(--ease-out); }
+@keyframes observatory-swap { from { opacity:.35; transform: translateY(5px); } to { opacity:1; transform:none; } }
+
+/* Context boundary mini toy */
+.context-toy { grid-column: 1 / -1; position: relative; overflow: hidden; }
+.context-toy-grid { display: grid; grid-template-columns: minmax(0,.62fr) minmax(0,1.38fr); gap: 28px; align-items: center; }
+.context-toy h3 { margin: 8px 0 10px; font-size: 26px; letter-spacing: -.035em; }
+.context-toy p { margin: 0; color: #6e7e92; font-size: 13px; line-height: 1.7; }
+.context-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.context-tabs button {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.55);
+  color: #60738c;
+  cursor: pointer;
+  font: 9px "IBM Plex Mono", Consolas, monospace;
+  text-transform: uppercase;
+}
+.context-tabs button.active { border-color: rgba(37,99,235,.45); background: rgba(229,239,255,.72); color: var(--blue-deep); }
+.context-stage {
+  min-height: 168px;
+  border-left: 1px solid var(--line);
+  padding-left: 26px;
+  display: grid;
+  grid-template-columns: 1fr 110px;
+  gap: 18px;
+  align-items: center;
+}
+.context-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.context-chip { padding: 9px 10px; border: 1px solid #d7e1ee; background: rgba(255,255,255,.7); color: #455a75; font-size: 11px; }
+.context-status { text-align: right; }
+.context-status strong { display: block; color: var(--blue-deep); font-size: 12px; }
+.context-status span { display: block; margin-top: 6px; color: #8996a6; font: 8px/1.4 "IBM Plex Mono", Consolas, monospace; text-transform: uppercase; }
+
+/* Footer traffic */
+.site-traffic {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #7b8b9f;
+  font-size: 10px;
+}
+.site-traffic span { display: inline-flex; align-items: baseline; gap: 5px; }
+.site-traffic strong { color: #42546d; font-weight: 650; font-variant-numeric: tabular-nums; }
+.site-traffic small { color: #a0acba; font-size: 9px; }
+
+@media (max-width: 900px) {
+  .agent-observatory { min-height: 390px; }
+  .observatory-copy { grid-template-columns: 1fr; gap: 8px; }
+  .context-toy-grid { grid-template-columns: 1fr; }
+  .context-stage { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
+}
+@media (max-width: 620px) {
+  body::after { opacity: .14; background-size: 110px 110px; }
+  .agent-observatory { min-height: 0; }
+  .observatory-inner { padding: 14px; }
+  .observatory-visual { min-height: 150px; padding-top: 12px; }
+  .observatory-visual svg { height: 148px; }
+  .observatory-tabs { grid-template-columns: 1fr 1fr; }
+  .observatory-tab:nth-child(2) { border-right: 0; }
+  .observatory-tab:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .observatory-pressure { grid-template-columns: 1fr; gap: 5px; }
+  .context-stage { grid-template-columns: 1fr; }
+  .context-status { text-align: left; }
+  .site-traffic { width: 100%; flex-wrap: wrap; gap: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::after, .story-line.active { animation: none !important; }
+  .agent-observatory.story-changing .observatory-visual { animation: none; }
+}
