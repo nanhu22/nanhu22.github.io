@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="胡楠的个人主页：AI Application R&D Engineer，关注 Agent Systems、Spatial AI、Memory、Agent Harness 与人类移动智能研究。">
   <meta name="theme-color" content="#f4f7fb">
+  <meta property="og:title" content="Hu Nan — AI Application R&D Engineer">
+  <meta property="og:description" content="Agent systems, spatial AI, memory, runtime and research.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nanhu22.github.io/">
+  <link rel="canonical" href="https://nanhu22.github.io/">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <title>Hu Nan — AI Application R&D Engineer</title>
   <link rel="stylesheet" href="./assets/site-v2.css">
   <link rel="stylesheet" href="./assets/resume-v2.css">
+  <link rel="stylesheet" href="./assets/finish-v2.css">
 </head>
 <body>
   <div class="site-shell">
@@ -17,16 +24,18 @@
           <span class="brand-mark mono">HN</span>
           <span>Hu Nan</span>
         </a>
-        <nav class="nav" aria-label="主页导航">
+        <nav class="nav" id="site-nav" aria-label="主页导航">
           <a href="#profile">Profile</a>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
           <a href="#publications">Publications</a>
           <a href="#lab">Lab</a>
+          <a class="mobile-nav-contact" href="#contact">Contact</a>
         </nav>
         <div class="topbar-actions">
           <a class="hide-mobile" href="https://github.com/nanhu22" target="_blank" rel="noreferrer">GitHub ↗</a>
           <a class="nav-cta" href="#contact">Contact</a>
+          <button class="menu-toggle" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false">Menu</button>
         </div>
       </div>
     </header>
@@ -166,6 +175,8 @@
                 <path class="map-line" data-project-line="memory" d="M500 330 L350 545"></path>
                 <path class="map-line" data-project-line="harness" d="M500 330 L650 545"></path>
               </svg>
+              <div class="project-map-label applications">Agent applications</div>
+              <div class="project-map-label foundations">Research / infrastructure</div>
               <div class="map-core mono">Selected<br>Work</div>
               <button class="project-node node-navigation active" type="button" data-project="navigation">Navigation Agent</button>
               <button class="project-node node-gis" type="button" data-project="gis">GIS Agent</button>
@@ -257,10 +268,14 @@
               <div class="lab-stat">100</div>
             </article>
 
-            <article class="lab-card">
+            <article class="lab-card research-card">
               <div class="eyebrow mono">Research directions</div>
               <h3>Memory &amp; Agent Harness</h3>
               <p>围绕长期记忆、Context Engineering、Runtime、Tool Orchestration 与 Trace Eval 的持续研究，会逐步沉淀成实验、Benchmark 与工程模式。</p>
+              <div class="lab-research-links">
+                <a href="./projects/memory/">Memory Research ↗</a>
+                <a href="./projects/agent-harness/">Agent Harness ↗</a>
+              </div>
             </article>
           </div>
         </div>
@@ -291,5 +306,6 @@
   </div>
 
   <script src="./assets/site-v2.js" defer></script>
+  <script src="./assets/finish-v2.js" defer></script>
 </body>
 </html>
