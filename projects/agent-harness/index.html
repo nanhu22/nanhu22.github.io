@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hu Nan — ongoing research on agent harness design: runtime, tool orchestration, context, trace and evaluation.">
+  <meta name="description" content="Hu Nan — research on restrained Agent Harness design, capability protocols, context isolation, tool orchestration and trace evaluation.">
   <title>Agent Harness — Hu Nan</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/site-v2.css">
   <link rel="stylesheet" href="../../assets/project-page.css">
   <link rel="stylesheet" href="../../assets/project-detail-v2.css">
@@ -21,30 +22,83 @@
     <section class="project-hero">
       <div class="container project-hero-grid">
         <div>
-          <div class="project-kicker mono">05 / Ongoing Research</div>
+          <div class="project-kicker mono">05 / Ongoing Research · Agent Harness</div>
           <h1>Agent<br>Harness</h1>
-          <p class="project-summary">从 Navigation Agent、GIS Agent 与 GGAI 的工程实践中抽象 Agent 模型之外的控制层：Runtime、工具合约、上下文、失败恢复、Trace 与 Evaluation 如何共同决定一个 Agent 系统是否可控、可观测和可迭代。</p>
+          <p class="project-summary">我更关注“克制的 Harness”：Runtime 保持稳定而通用，领域复杂度尽量停留在能力边界。与 Pi 的 minimal core、DeepSeek Harness 的 everything-is-a-plugin 相比，我当前实践更偏向 protocol pluralism——Skill、MCP、Workflow 与 SubAgent 都可插拔，但不强迫它们共享同一种插件协议。</p>
         </div>
         <dl class="project-facts">
-          <div class="project-fact"><dt>Focus</dt><dd><strong>Reliable Agent Systems</strong></dd></div>
-          <div class="project-fact"><dt>Runtime</dt><dd>Execution · State · Recovery</dd></div>
-          <div class="project-fact"><dt>Observe</dt><dd>Trace · Evaluation</dd></div>
-          <div class="project-fact"><dt>Mode</dt><dd>Cross-project research</dd></div>
+          <div class="project-fact"><dt>Principle</dt><dd><strong>Stable spine · pluggable perimeter</strong></dd></div>
+          <div class="project-fact"><dt>Protocols</dt><dd>Skill · MCP · Workflow · SubAgent</dd></div>
+          <div class="project-fact"><dt>Runtime</dt><dd>Decision · State · Context · Recovery</dd></div>
+          <div class="project-fact"><dt>Observe</dt><dd>Trace · Eval · Artifact</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">01 / Model</div>
+        <div class="case-label mono">01 / Comparison</div>
         <div class="case-content">
-          <h2>The system around the agent.</h2>
-          <p>Agent Harness 关注的不是某个领域业务，而是跨项目重复出现的系统问题：模型如何获得正确上下文，工具如何被发现和执行，失败如何被识别与恢复，Trace 如何记录，以及评测如何把运行行为转化为下一轮工程改进。</p>
-          <div class="case-flow">
-            <div><span class="mono">01 / Context</span><strong>Query &amp; Memory</strong><p>构造任务、历史、能力状态与长期记忆。</p></div>
-            <div><span class="mono">02 / Execute</span><strong>Runtime</strong><p>组织 Agent loop、状态与任务执行边界。</p></div>
-            <div><span class="mono">03 / Tools</span><strong>Orchestrator</strong><p>统一工具合约、参数校验、执行与失败信息。</p></div>
-            <div><span class="mono">04 / Observe</span><strong>Trace Eval</strong><p>从行为轨迹定位错误并驱动系统迭代。</p></div>
+          <h2>Three restrained harness philosophies.</h2>
+          <p>Pi、DeepSeek Harness 与我的 GGAI / Agent Harness 都在避免把模型周围的软件层做成巨型业务框架，但它们选择的“可插拔边界”并不相同。理解这个差异，比简单比较谁支持更多工具更有意义。</p>
+          <div class="harness-compare">
+            <article class="harness-card">
+              <div class="mono">Pi / Minimal coding harness</div>
+              <h3>Small core, multiple resource types.</h3>
+              <p>Pi 把核心 coding loop 保持得很小，主要通过 TypeScript Extensions、Agent Skills、Prompt Templates 与 Packages 扩展。Skills 按需加载，Extensions 可以注册工具、事件、命令和 UI；像 subagent / plan mode 这类能力并不默认塞进核心。</p>
+              <ul><li>扩展单位：Extension / Skill / Prompt / Package</li><li>Skill 强调 progressive disclosure</li><li>核心保持少机制、强可定制</li><li>用户可以组合自己真正需要的能力</li></ul>
+            </article>
+            <article class="harness-card">
+              <div class="mono">DeepSeek Harness / Cordis</div>
+              <h3>Everything is a plugin.</h3>
+              <p>DeepSeek Harness 把插件边界推进得更彻底：模型适配器、Session、System Prompt、Tool Registry、Agent Loop 等都以 Cordis plugin / service / typed event 组合。配置可以替换底层能力，Session 以 append-only event log 作为运行事实来源。</p>
+              <ul><li>扩展单位：Cordis Plugin / Service / Typed Event</li><li>Tool pipeline 有明确 pre / execute / post / result seam</li><li>Agent loop 本身也可替换</li><li>Trace / Session 是一等运行数据</li></ul>
+            </article>
+            <article class="harness-card mine">
+              <div class="mono">My direction / GGAI Harness</div>
+              <h3>Stable runtime, heterogeneous capability protocols.</h3>
+              <p>我的实践更偏向保留一个稳定的 Single-Agent Runtime，让不同能力使用最适合自己的协议接入：Skill 负责知识与流程披露，MCP 负责外部 Tool Contract，Workflow 承担状态化业务过程，SubAgent 负责隔离执行。</p>
+              <ul><li>扩展单位：Capability Contract</li><li>不要求 Skill / MCP / Workflow 统一成同一种插件</li><li>Runtime 不承载领域业务逻辑</li><li>Decision Context 与 Execution Context 明确隔离</li></ul>
+            </article>
+          </div>
+          <div class="reference-links"><a href="https://github.com/badlogic/pi-mono" target="_blank" rel="noreferrer">Pi ↗</a><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noreferrer">DeepSeek Harness ↗</a><a href="https://deepseek.com/harness/" target="_blank" rel="noreferrer">DeepSeek Harness docs ↗</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">02 / Plugin Boundary</div>
+        <div class="case-content">
+          <h2>“Pluggable” means different things.</h2>
+          <p>Pi 更像“在一个最小 coding harness 周围加载不同资源”；DeepSeek 更像“所有运行组件都通过统一插件 / event / service 模型组合”；我的方向则更强调领域能力协议本身的差异，不把所有东西为了统一而统一。</p>
+          <table class="harness-table">
+            <thead><tr><th>Dimension</th><th>Pi</th><th>DeepSeek Harness</th><th>GGAI / My Harness</th></tr></thead>
+            <tbody>
+              <tr><td>Core stance</td><td>Minimal coding loop</td><td>Everything is a plugin</td><td>Stable general runtime</td></tr>
+              <tr><td>Primary extension unit</td><td>Extension / Skill / Prompt / Package</td><td>Cordis Plugin / Service / Event</td><td>Skill / MCP / Workflow / SubAgent capability</td></tr>
+              <tr><td>Skill model</td><td>On-demand Agent Skills / progressive disclosure</td><td>Capability can be provided as plugins / services around the agent spine</td><td>Skill is an explicit domain knowledge / workflow disclosure protocol</td></tr>
+              <tr><td>Tool contract</td><td>Extensions register custom tools</td><td>Typed registry + guarded execution pipeline</td><td>Local Tool + MCP share normalized orchestration / recovery semantics</td></tr>
+              <tr><td>Workflow</td><td>Added by extensions / packages when needed</td><td>Composable through plugins and workflow capabilities</td><td>Stateful procedure lives near the capability layer, not in Runtime</td></tr>
+              <tr><td>SubAgent stance</td><td>Not a required built-in core feature</td><td>Subagent providers can vary behind extension seams</td><td>Selective SubAgent as Tool; only when task state can be isolated</td></tr>
+              <tr><td>Trace / state</td><td>Session / extension-facing state is intentionally exposed</td><td>Append-only SessionEvent log is the source of truth</td><td>Trace stays outside prompt and feeds recovery / evaluation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">03 / Thesis</div>
+        <div class="case-content">
+          <h2>Stable spine, pluggable perimeter.</h2>
+          <p>我的 Harness 研究重点不是追求“所有东西都可替换”，也不是把 Runtime 做成一个功能全集，而是寻找最小但稳定的控制脊柱：模型每一轮需要什么上下文、如何选择能力、如何执行、失败如何被结构化、完整 Trace 如何留在 Prompt 之外。</p>
+          <div class="case-outline">
+            <article><div class="mono">A / Runtime</div><h3>Keep the decision loop generic</h3><p>Runtime 负责 Turn / Step、状态、上下文、能力选择与恢复边界；领域 Planner / Executor 不应成为通用 Runtime 的硬编码节点。</p></article>
+            <article><div class="mono">B / Capability</div><h3>Use the right protocol for the job</h3><p>Skill 适合渐进披露知识和流程；MCP 适合外部工具服务；Workflow 适合有状态的确定 / 半确定过程；SubAgent 适合隔离且独立的执行。</p></article>
+            <article><div class="mono">C / Context</div><h3>Decision context ≠ execution context</h3><p>模型下一次决策只消费必要 Observation / Summary；完整工具输出、Worker transcript 和 Artifact 细节保留在执行边界与 Trace。</p></article>
+            <article><div class="mono">D / Evidence</div><h3>Trace is system evidence</h3><p>Trace 不是为了日志好看，而是用于恢复、评测、问题分类与工程闭环，并与长期 Memory / Experience 形成连接。</p></article>
           </div>
         </div>
       </div>
@@ -52,29 +106,42 @@
 
     <section class="case-section">
       <div class="container case-grid">
-        <div class="case-label mono">02 / Patterns</div>
+        <div class="case-label mono">04 / Patterns</div>
         <div class="case-content">
-          <h2>Patterns carried across projects.</h2>
+          <h2>Patterns carried across Navigation, GIS and GGAI.</h2>
           <ul class="contribution-list">
-            <li><span class="mono">01</span><div><h3>Runtime 与领域能力分离</h3><p>通用运行时负责 Agent loop、状态与控制，领域能力通过 Skill/MCP 等机制独立挂载，避免业务逻辑直接进入 Runtime。</p></div></li>
-            <li><span class="mono">02</span><div><h3>Tool contract &amp; orchestration</h3><p>统一工具描述、schema、参数合法性、执行结果和失败元数据，让本地工具与 MCP 工具共享一致的调用语义。</p></div></li>
-            <li><span class="mono">03</span><div><h3>Progressive capability exposure</h3><p>按任务阶段和领域状态控制模型看到的工具与 Skill，减少工具过载、误选择和不必要调用。</p></div></li>
-            <li><span class="mono">04</span><div><h3>Context Engineering</h3><p>将系统提示、历史消息、能力状态、Memory 与压缩上下文作为运行时资源组织，而不是简单拼接完整对话。</p></div></li>
-            <li><span class="mono">05</span><div><h3>Failure recovery</h3><p>让错误不只作为字符串返回，而是形成可被 Agent 理解和继续处理的 recovery metadata 与状态。</p></div></li>
-            <li><span class="mono">06</span><div><h3>Trace-level evaluation</h3><p>通过完整 Agent 轨迹观察工具选择、参数、恢复和最终结果，将评测从最终答案扩展到执行过程。</p></div></li>
+            <li><span class="mono">01</span><div><h3>Runtime ≠ Domain Logic</h3><p>通用运行时负责 Agent loop、状态与控制；领域行为通过 Skill / MCP / Workflow 等能力挂载，避免业务过程不断进入 Runtime。</p></div></li>
+            <li><span class="mono">02</span><div><h3>Tool Error ≠ String</h3><p>工具失败不只返回一段文本，而是形成可被 Runtime 与 Agent 消费的分类、recovery metadata、Artifact 状态和后续动作信息。</p></div></li>
+            <li><span class="mono">03</span><div><h3>Progressive Capability Exposure</h3><p>模型不必一直看到全部能力。按任务与阶段暴露 Skill / Tool，减少工具过载、错误选择和不必要的上下文成本。</p></div></li>
+            <li><span class="mono">04</span><div><h3>Decision Context ≠ Execution Context</h3><p>系统侧可以保留完整 execution evidence，但模型决策侧只读取最小充分信息，避免长期运行中的上下文污染。</p></div></li>
+            <li><span class="mono">05</span><div><h3>SubAgent is an Execution Strategy</h3><p>SubAgent 不是“系统高级”的象征；只有独立、可隔离的任务才值得 fan-out，共享外部状态的任务优先 direct execution。</p></div></li>
+            <li><span class="mono">06</span><div><h3>Evaluate the Trace, not only the Answer</h3><p>任务完成、工具选择、参数、恢复、Artifact 与最终回复共同组成可靠性；最终文字答案只是 Agent 轨迹的最后一层表现。</p></div></li>
           </ul>
-          <div class="case-callout"><strong>Research direction</strong><p>Agent Harness 的目标是把模型能力转化为稳定软件系统：不仅能完成 Demo，也能够解释失败、约束能力、持续评测，并在复杂业务里逐步迭代。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <div class="container case-grid">
+        <div class="case-label mono">05 / Design Trade-off</div>
+        <div class="case-content">
+          <h2>What I borrow—and what I keep different.</h2>
+          <p>Pi 给我的启发是核心越小，外围越应该有清晰的扩展资源；DeepSeek Harness 给我的启发是运行时扩展点、typed tool pipeline、append-only session / trajectory 应该成为一等架构对象。我的业务场景又要求 Skill、MCP、Workflow 和 SubAgent 保留各自的语义，所以当前更倾向“统一 Runtime 语义，不统一所有能力协议”。</p>
+          <div class="metric-grid">
+            <div><strong>From Pi</strong><span>Minimal core · progressive disclosure · user-owned extensibility.</span></div>
+            <div><strong>From DeepSeek</strong><span>Explicit seams · typed execution pipeline · trace as durable system data.</span></div>
+            <div><strong>Keep different</strong><span>Capability protocols remain heterogeneous when their semantics differ.</span></div>
+            <div><strong>Optimize for</strong><span>Domain isolation · context cleanliness · failure recovery · observability.</span></div>
+            <div><strong>Avoid</strong><span>Turning the general Runtime into a universal workflow engine.</span></div>
+            <div><strong>Next question</strong><span>How much of Memory / Eval should itself become pluggable without weakening the stable spine?</span></div>
+          </div>
+          <div class="case-callout"><strong>Research direction</strong><p>我想做的不是一个“能力最多”的 Harness，而是一个模型更换、领域扩展和 Workflow 增长之后，仍然保持边界清楚、上下文克制、Trace 可解释的软件层。</p></div>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="container">
-    <a class="project-next" href="../navigation-agent/">
-      <span><span class="mono">Back to applications</span><strong>Navigation Agent</strong></span><span>↻</span>
-    </a>
-  </div>
-
+  <div class="container"><a class="project-next" href="../navigation-agent/"><span><span class="mono">Back to architecture eras</span><strong>Navigation Agent</strong></span><span>↻</span></a></div>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Research / Agent Harness</span></div></footer>
 </body>
 </html>

@@ -48,42 +48,10 @@
               <div><h3>Navigation Agent — Single-Agent Runtime</h3><p>Earliest architecture era · transportation &amp; navigation</p></div>
               <div class="case-board-badge"><strong>Core idea</strong><br>One runtime · one decision owner · ReAct-like tool loop.</div>
             </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">1</span>User Request</div>
-              <div class="board-card blue"><strong>Tokyo Tower → University of Tokyo Hongo Campus</strong><p>Plan a route, compare travel modes, and summarize the easiest option.</p></div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">2</span>Runtime Structure</div>
-              <div class="board-grid cols-4">
-                <div class="board-card"><span class="mono">Input</span><strong>User</strong><p>Natural-language transportation request.</p></div>
-                <div class="board-card blue"><span class="mono">Decision</span><strong>Single Navigation Agent</strong><p>Reason → choose tool → read observation → next action.</p></div>
-                <div class="board-card"><span class="mono">Capability</span><strong>Domain Tool Layer</strong><p>Maps · route planner · retrieval · traffic / mobility context.</p></div>
-                <div class="board-card green"><span class="mono">Output</span><strong>Answer</strong><p>Comparison, recommendation and map-oriented result.</p></div>
-              </div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">3</span>Agent Trace — ReAct-like Loop</div>
-              <div class="board-flow" style="--steps:6">
-                <div class="board-step"><span class="step-no">1</span><strong>Intent Detection</strong><span>Route planning + travel-mode comparison.</span></div>
-                <div class="board-step"><span class="step-no">2</span><strong>Plan Route</strong><span>Establish origin, destination and task constraints.</span></div>
-                <div class="board-step"><span class="step-no">3</span><strong>Geocode</strong><span>Resolve origin and destination into spatial entities.</span></div>
-                <div class="board-step"><span class="step-no">4</span><strong>Retrieve Options</strong><span>Call routing / traffic capabilities and collect observations.</span></div>
-                <div class="board-step"><span class="step-no">5</span><strong>Compare Modes</strong><span>Time · cost · transfers · convenience.</span></div>
-                <div class="board-step"><span class="step-no">6</span><strong>Synthesize</strong><span>Return the clearest recommendation and supporting evidence.</span></div>
-              </div>
-            </div>
-
-            <div class="board-section">
-              <div class="board-title"><span class="num">4</span>Result</div>
-              <div class="board-result">
-                <div class="board-result-panel"><h4>Travel Mode Comparison</h4><table class="board-table"><thead><tr><th>Mode</th><th>Trade-off</th><th>Role in answer</th></tr></thead><tbody><tr><td>Transit</td><td>balanced time / cost</td><td>recommended</td></tr><tr><td>Walking</td><td>zero fare / longer time</td><td>alternative</td></tr><tr><td>Driving</td><td>fast but traffic-sensitive</td><td>contextual option</td></tr></tbody></table></div>
-                <div class="board-result-panel"><h4>Final Recommendation</h4><p>The Agent does not merely return one route. It compares candidate modes, cites observations, and produces an actionable answer for the user.</p></div>
-              </div>
-              <div class="board-takeaways"><span>Single-Agent</span><span>ReAct Loop</span><span>Tool-Using</span><span>Chat + Map Output</span></div>
-            </div>
+            <div class="board-section"><div class="board-title"><span class="num">1</span>User Request</div><div class="board-card blue"><strong>Tokyo Tower → University of Tokyo Hongo Campus</strong><p>Plan a route, compare travel modes, and summarize the easiest option.</p></div></div>
+            <div class="board-section"><div class="board-title"><span class="num">2</span>Runtime Structure</div><div class="board-grid cols-4"><div class="board-card"><span class="mono">Input</span><strong>User</strong><p>Natural-language transportation request.</p></div><div class="board-card blue"><span class="mono">Decision</span><strong>Single Navigation Agent</strong><p>Reason → choose tool → read observation → next action.</p></div><div class="board-card"><span class="mono">Capability</span><strong>Domain Tool Layer</strong><p>Maps · route planner · retrieval · traffic / mobility context.</p></div><div class="board-card green"><span class="mono">Output</span><strong>Answer</strong><p>Comparison, recommendation and map-oriented result.</p></div></div></div>
+            <div class="board-section"><div class="board-title"><span class="num">3</span>Agent Trace — ReAct-like Loop</div><div class="board-flow" style="--steps:6"><div class="board-step"><span class="step-no">1</span><strong>Intent Detection</strong><span>Route planning + travel-mode comparison.</span></div><div class="board-step"><span class="step-no">2</span><strong>Plan Route</strong><span>Establish origin, destination and task constraints.</span></div><div class="board-step"><span class="step-no">3</span><strong>Geocode</strong><span>Resolve origin and destination into spatial entities.</span></div><div class="board-step"><span class="step-no">4</span><strong>Retrieve Options</strong><span>Call routing / traffic capabilities and collect observations.</span></div><div class="board-step"><span class="step-no">5</span><strong>Compare Modes</strong><span>Time · cost · transfers · convenience.</span></div><div class="board-step"><span class="step-no">6</span><strong>Synthesize</strong><span>Return the clearest recommendation and supporting evidence.</span></div></div></div>
+            <div class="board-section"><div class="board-title"><span class="num">4</span>Result</div><div class="board-result"><div class="board-result-panel"><h4>Travel Mode Comparison</h4><table class="board-table"><thead><tr><th>Mode</th><th>Trade-off</th><th>Role in answer</th></tr></thead><tbody><tr><td>Transit</td><td>balanced time / cost</td><td>recommended</td></tr><tr><td>Walking</td><td>zero fare / longer time</td><td>alternative</td></tr><tr><td>Driving</td><td>fast but traffic-sensitive</td><td>contextual option</td></tr></tbody></table></div><div class="board-result-panel"><h4>Final Recommendation</h4><p>The Agent does not merely return one route. It compares candidate modes, cites observations, and produces an actionable answer for the user.</p></div></div><div class="board-takeaways"><span>Single-Agent</span><span>ReAct Loop</span><span>Tool-Using</span><span>Chat + Map Output</span></div></div>
           </div>
           <div class="case-evidence-note"><span><strong>Watermarked case-study board:</strong> web rendition based on the supplied PDF.</span><span>© Hu Nan · sanitized for public display</span></div>
 
@@ -134,12 +102,7 @@
         <div class="case-content">
           <h2>One agent, several traffic capabilities.</h2>
           <div class="metric-grid">
-            <div><strong>Route planning</strong><span>地图路线生成与比较。</span></div>
-            <div><strong>Crowd anomaly</strong><span>异常人流查询与分析。</span></div>
-            <div><strong>Traffic QA</strong><span>检索增强的领域知识问答。</span></div>
-            <div><strong>Traffic forecasting</strong><span>预测模型辅助态势分析。</span></div>
-            <div><strong>RAG</strong><span>FAISS 等知识检索补充上下文。</span></div>
-            <div><strong>Chat + map</strong><span>对话与地图共同承载 Agent 输出。</span></div>
+            <div><strong>Route planning</strong><span>地图路线生成与比较。</span></div><div><strong>Crowd anomaly</strong><span>异常人流查询与分析。</span></div><div><strong>Traffic QA</strong><span>检索增强的领域知识问答。</span></div><div><strong>Traffic forecasting</strong><span>预测模型辅助态势分析。</span></div><div><strong>RAG</strong><span>FAISS 等知识检索补充上下文。</span></div><div><strong>Chat + map</strong><span>对话与地图共同承载 Agent 输出。</span></div>
           </div>
           <div class="case-callout"><strong>Architecture takeaway</strong><p>这一代解决“一个 Agent 如何真正用工具完成任务”。GIS Agent 随后把问题推进到“多个明确职责的 Agent 如何协作完成长期、状态化、可恢复的空间工作流”。</p></div>
         </div>
@@ -149,5 +112,6 @@
 
   <div class="container"><a class="project-next" href="../gis-agent/"><span><span class="mono">Next architecture era</span><strong>GIS Agent</strong></span><span>→</span></a></div>
   <footer class="footer"><div class="container footer-inner"><span>© 2026 Hu Nan</span><span class="mono">Project / Navigation Agent</span></div></footer>
+  <script src="../../assets/project-interaction-v6.js" defer></script>
 </body>
 </html>
