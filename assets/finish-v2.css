@@ -118,6 +118,29 @@ body.nav-open { overflow: hidden; }
 .project-next:hover strong { color: var(--blue-deep); }
 .project-next strong { transition: color .22s var(--ease-out); }
 
+/* Project pages keep a very low-frequency ambient layer even without homepage toys. */
+.project-page-body::after {
+  content: "";
+  position: fixed;
+  inset: -8%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .18;
+  background:
+    radial-gradient(circle at 74% 18%, rgba(37,99,235,.12) 0 1px, transparent 1.4px),
+    linear-gradient(118deg, transparent 0 38%, rgba(37,99,235,.035) 38.2%, transparent 38.5% 68%, rgba(37,99,235,.025) 68.2%, transparent 68.5%);
+  background-size: 92px 92px, 420px 420px;
+  animation: project-trace-drift 42s linear infinite;
+}
+.project-page-body > header,
+.project-page-body > main,
+.project-page-body > .container,
+.project-page-body > footer { position: relative; z-index: 1; }
+@keyframes project-trace-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 92px 46px, 210px 105px; }
+}
+
 @media (max-width: 900px) {
   .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
   .topbar .nav {
@@ -189,10 +212,12 @@ body.nav-open { overflow: hidden; }
 
   .project-topbar .project-back { max-width: 50vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .project-page-body .project-hero::before { background-size: 34px 34px; }
+  .project-page-body::after { opacity: .11; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .project-link span,
   .project-fact,
   .contribution-list li { transition: none !important; }
+  .project-page-body::after { animation: none !important; }
 }
