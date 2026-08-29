@@ -1,0 +1,28 @@
+/* Small visual refinements for the resume-first homepage. */
+.resume-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: #75859a;
+  font-size: 11px;
+}
+.resume-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6e9df8;
+}
+.experience-panel .company-line {
+  margin-top: 5px;
+  color: #7c8b9d;
+  font-size: 12px;
+}
+.experience-index button .confidential-mark {
+  color: #718198;
+  font-size: 9px;
+  font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
