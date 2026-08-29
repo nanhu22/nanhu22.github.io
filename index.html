@@ -67,22 +67,22 @@
             <div class="section-number mono">01 / Profile</div>
             <div>
               <h2 class="section-title">Engineering AI systems,<br>informed by research.</h2>
-              <p class="section-intro">从交通场景的单 Agent，到多步 GIS Agent，再到通用 Agent Runtime，我持续围绕真实业务中的工具调用、上下文组织、空间智能和 Agent 可靠运行做工程迭代。</p>
+              <p class="section-intro">从交通场景 Agent 到 GIS Agent，再到通用 Agent Runtime，我持续围绕真实业务中的空间智能、工具调用、上下文组织与可靠运行做工程实践。</p>
             </div>
           </div>
 
           <div class="profile-grid">
             <article class="editorial-card">
               <div class="eyebrow mono">About</div>
-              <p>我是一名 AI 应用研发工程师，关注 Agent 系统在复杂业务中的落地。工作主线覆盖 Navigation Agent、GIS Agent、通用地理 Agent，以及由这些项目逐步沉淀出的 Memory、Context Engineering 与 Agent Harness 研究。</p>
+              <p>我是一名 AI 应用研发工程师，关注 Agent 系统在复杂业务中的落地。工作与研究主要围绕 Navigation Agent、GIS Agent、GGAI，以及持续延伸的 Memory 与 Agent Harness 方向。</p>
             </article>
             <article class="editorial-card">
               <div class="eyebrow mono">Current focus</div>
               <ul class="focus-list">
                 <li><span>Agent Applications</span><small>Navigation · GIS · GGAI</small></li>
-                <li><span>Agent Runtime</span><small>Tool · Skill · MCP</small></li>
-                <li><span>Context &amp; Memory</span><small>QueryEngine · Retrieval</small></li>
-                <li><span>Evaluation</span><small>Trace · LLM-as-Judge</small></li>
+                <li><span>Agent Runtime</span><small>Tools · Skills · MCP</small></li>
+                <li><span>Context &amp; Memory</span><small>Long-context · Retrieval</small></li>
+                <li><span>Evaluation</span><small>Trace · Reliability</small></li>
               </ul>
             </article>
           </div>
@@ -94,8 +94,8 @@
           <div class="section-head">
             <div class="section-number mono">02 / Experience</div>
             <div>
-              <h2 class="section-title">Three iterations of<br>an agent systems practice.</h2>
-              <p class="section-intro">项目经历按时间形成一条连续演进路线：从交通领域 Agent 的工具闭环，到复杂 GIS 多步执行，再到通用 Runtime、可插拔 Skill/MCP 与 Trace Eval。</p>
+              <h2 class="section-title">Selected project<br>experience.</h2>
+              <p class="section-intro">近两年的项目主线围绕空间 Agent 与通用 Agent 系统展开。这里保留快速浏览所需的信息，技术设计与完整贡献放在各项目 Case Study 中。</p>
             </div>
           </div>
 
@@ -114,59 +114,35 @@
 
             <div>
               <article class="experience-panel" data-experience-panel="ggai">
-                <div class="eyebrow mono">2026.04 – Present · Design Lead</div>
+                <div class="eyebrow mono">2026.04 – Present</div>
                 <h3>GGAI · General Geographical Agent</h3>
-                <div class="experience-period mono">General Agent Runtime · Pluggable Skill/MCP · Trace Eval</div>
-                <p class="experience-summary">构建生产级通用地理信息系统 GGAI，将既有领域能力收敛到“通用单 Agent Runtime + 可插拔 Skill/MCP + Trace Eval”的 Agent Harness。用户可按需启用 QGIS、本地路线规划、OpenStreet、人流分析、灾害分析等领域能力，并将 Sub Agent 作为主 Agent 的工具进行任务派发。</p>
-                <ul class="experience-highlights">
-                  <li data-index="01"><span><strong>Runtime 架构重构：</strong>将领域逻辑从 Runtime 下沉到 Skill 与 MCP，保持通用运行时的业务无关性。</span></li>
-                  <li data-index="02"><span><strong>Context + Tool Orchestrator：</strong>参与 QueryEngine、消息构造、历史/Memory/压缩上下文管理，并统一本地工具与 MCP 工具的 schema 校验、执行、失败识别与恢复元数据。</span></li>
-                  <li data-index="03"><span><strong>Trace Eval 驱动迭代：</strong>覆盖任务成功率、工具调用正确率、tool call F1、参数合法性、恢复成功率与最终答案完整性，并通过 LLM-as-Judge 定位工具误判、Skill loop、schema 缺失和领域工具误触发。</span></li>
-                </ul>
-                <div class="experience-footer">
-                  <div class="experience-tech"><span>Python</span><span>PocketFlow</span><span>MCP</span><span>Agent Runtime</span><span>QueryEngine</span><span>Context Engineering</span><span>Tool Orchestrator</span><span>Skill</span><span>Memory</span><span>Trace Eval</span></div>
-                  <a class="experience-case-link" href="./projects/ggai/">Full case study ↗</a>
-                </div>
+                <p class="experience-summary">负责通用地理 Agent 系统设计，将既有领域能力逐步收敛为通用 Agent Runtime，并通过可插拔能力扩展到 QGIS、路线规划、OpenStreet、人流与灾害分析等场景。</p>
+                <div class="experience-themes"><span>General Runtime</span><span>Pluggable Capability</span><span>Trace Evaluation</span></div>
+                <div class="experience-footer"><span class="experience-role-note">设计负责人</span><a class="experience-case-link" href="./projects/ggai/">View case study ↗</a></div>
               </article>
 
               <article class="experience-panel" data-experience-panel="gis" hidden>
-                <div class="eyebrow mono">2025.08 – 2026.03 · Design Lead</div>
+                <div class="eyebrow mono">2025.08 – 2026.03</div>
                 <h3>GIS Agent</h3>
-                <div class="experience-period mono">Planner · ReAct ExecutorFlow · MCP · PostGIS</div>
-                <p class="experience-summary">面向 GIS 场景设计 GIS-Agent，将 QGIS、MCP Server、PostgreSQL/PostGIS 工作流与大模型推理结合，用于灾害预警、土地价格、洪涝风险、人口流动等日本国土数据分析任务。</p>
-                <ul class="experience-highlights">
-                  <li data-index="01"><span><strong>多步 Agent Runtime：</strong>设计 Planner、ExecutorFlow、Orchestrator、Answer 与 human-interaction 节点；ExecutorFlow 采用 ReAct 范式完成分步推理、工具调用、观察读取和错误恢复。</span></li>
-                  <li data-index="02"><span><strong>MCP + Skill 渐进披露：</strong>接入 QGIS MCP Server、MLIT MCP Server 与 PostGIS，并在 Planner 阶段按需暴露工具能力，降低复杂工具集带来的选择错误。</span></li>
-                  <li data-index="03"><span><strong>复杂任务执行与 Harness 沉淀：</strong>无需模型微调，通过 Prompt Engineering + Tool Use 支持 20+ 工具步骤，并沉淀工具可见性、MCP 合约、失败恢复和 Trace 记录经验。</span></li>
-                </ul>
-                <div class="experience-footer">
-                  <div class="experience-tech"><span>PocketFlow</span><span>MCP</span><span>QGIS MCP Server</span><span>MLIT MCP Server</span><span>PostgreSQL</span><span>PostGIS</span><span>QGIS</span><span>ReAct</span><span>Prompt Engineering</span><span>DeepSeek</span><span>GPT-5-mini</span><span>Bedrock</span></div>
-                  <a class="experience-case-link" href="./projects/gis-agent/">Full case study ↗</a>
-                </div>
+                <p class="experience-summary">负责面向 GIS 场景的 Agent 系统设计，把自然语言任务、GIS 工具和国土空间数据连接成可执行的多步分析流程，覆盖灾害、土地、洪涝与人口流动等任务。</p>
+                <div class="experience-themes"><span>GIS Workflows</span><span>Multi-step Agent</span><span>Tool Use</span></div>
+                <div class="experience-footer"><span class="experience-role-note">设计负责人</span><a class="experience-case-link" href="./projects/gis-agent/">View case study ↗</a></div>
               </article>
 
               <article class="experience-panel" data-experience-panel="navigation" hidden>
-                <div class="eyebrow mono">2024.09 – 2025.08 · Design Lead</div>
+                <div class="eyebrow mono">2024.09 – 2025.08</div>
                 <h3>Navigation Agent</h3>
-                <div class="experience-period mono">LangGraph · ReAct · MCP · RAG</div>
-                <p class="experience-summary">面向交通场景设计基于 LangGraph 的 ReAct 单智能体系统，用于路线规划、异常人流分析、交通知识问答与交通态势分析，并通过 Chatbot 提供交互服务。</p>
-                <ul class="experience-highlights">
-                  <li data-index="01"><span><strong>Agent 状态流：</strong>基于 LangGraph 设计用户意图识别、任务拆解、工具调用与结果生成流程，并以 ReAct 组织多步骤交通任务。</span></li>
-                  <li data-index="02"><span><strong>统一工具闭环：</strong>通过 MCP 接入 Google Maps API、FAISS、MySQL 与深度学习预测模型，覆盖路线、知识检索、异常人流与交通预测。</span></li>
-                  <li data-index="03"><span><strong>交互与能力沉淀：</strong>参与 Gradio 对话式前端，支持地图路线、地图与思维链展示，并沉淀交通领域 Prompt、工具描述与知识检索策略。</span></li>
-                </ul>
-                <div class="experience-footer">
-                  <div class="experience-tech"><span>LangGraph</span><span>MCP</span><span>Google Maps API</span><span>FAISS</span><span>MySQL</span><span>ReAct Agent</span><span>RAG</span><span>Deep Learning</span><span>Gradio</span></div>
-                  <a class="experience-case-link" href="./projects/navigation-agent/">Full case study ↗</a>
-                </div>
+                <p class="experience-summary">负责交通场景 Agent 系统设计，围绕路线规划、异常人流、交通知识问答与交通态势分析，构建对话式任务执行与工具调用流程。</p>
+                <div class="experience-themes"><span>Navigation</span><span>Traffic Analysis</span><span>ReAct Agent</span></div>
+                <div class="experience-footer"><span class="experience-role-note">设计负责人</span><a class="experience-case-link" href="./projects/navigation-agent/">View case study ↗</a></div>
               </article>
             </div>
           </div>
 
           <div class="experience-arc" aria-label="Agent 项目演进路线">
-            <a href="./projects/navigation-agent/"><span>2024.09</span><strong>Navigation Agent</strong>Domain tools &amp; ReAct loop</a>
-            <a href="./projects/gis-agent/"><span>2025.08</span><strong>GIS Agent</strong>Multi-step execution &amp; MCP</a>
-            <a href="./projects/ggai/"><span>2026.04</span><strong>GGAI</strong>General runtime &amp; evaluation</a>
+            <a href="./projects/navigation-agent/"><span>2024.09</span><strong>Navigation Agent</strong>Traffic agent application</a>
+            <a href="./projects/gis-agent/"><span>2025.08</span><strong>GIS Agent</strong>Complex spatial workflows</a>
+            <a href="./projects/ggai/"><span>2026.04</span><strong>GGAI</strong>General agent system</a>
           </div>
         </div>
       </section>
@@ -177,7 +153,7 @@
             <div class="section-number mono">03 / Selected projects</div>
             <div>
               <h2 class="section-title">Applications evolve<br>into infrastructure.</h2>
-              <p class="section-intro">Navigation Agent、GIS Agent 与 GGAI 是连续的应用演进；Memory 与 Agent Harness 则把跨项目反复出现的上下文、工具、运行与评测问题抽象为持续研究方向。</p>
+              <p class="section-intro">Navigation Agent、GIS Agent 与 GGAI 是连续的应用演进；Memory 与 Agent Harness 则把跨项目反复出现的上下文、运行与可靠性问题抽象为持续研究方向。</p>
             </div>
           </div>
 
