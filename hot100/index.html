@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="LeetCode Hot 100 Practice Lab：Python/C++ 最小模板、今日复习、考试模式、错题与间隔复习。">
-  <title>Hot 100 Practice Lab</title>
+  <meta name="description" content="LeetCode Hot 100 Memory Lab：一句口诀、三步推导、不变量、Python/C++ ACM 学习版与间隔复习。">
+  <title>Hot 100 Memory Lab</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./memory-v5.css">
+  <script src="./data/memory-v5.js" defer></script>
   <script src="./app.js" defer></script>
+  <script src="./memory-ui-v5.js" defer></script>
 </head>
 <body>
   <div class="wrap">
     <header class="top">
       <div>
-        <div class="eyebrow">Knowledge Lab · Practice System v4</div>
+        <div class="eyebrow">Knowledge Lab · Memory System v5</div>
         <h1>LeetCode Hot 100</h1>
-        <div class="muted">Python + C++ 最小模板 · 今日复习 · 考试模式 · 错题与薄弱追踪</div>
+        <div class="muted">一句口诀 · 三步推导 · 不变量 · Python/C++ ACM 学习版 · 间隔复习</div>
       </div>
       <a class="back" href="../">← 返回个人主页</a>
     </header>
@@ -22,8 +25,8 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <h2>从“刷过”走到“长期能复现”</h2>
-          <p class="muted">100 道 Hot100 是主干。每次训练结果都会更新复习阶段、薄弱状态和下次复习日期；数据默认只保存在你的浏览器。</p>
+          <h2>不是背代码，而是背“为什么这样写”</h2>
+          <p class="muted">每张卡按固定顺序记忆：先记一句口诀，再默写三步法和不变量，最后才看代码。ACM 学习版会把口诀、复杂度和建模思路直接写进代码注释。</p>
           <div class="stats stats-v4">
             <div class="stat"><b id="total">0</b>Hot100</div>
             <div class="stat"><b id="mastery">0%</b>掌握度</div>
@@ -39,22 +42,22 @@
         </div>
 
         <aside class="practice-panel">
-          <div class="practice-title"><h3>刷题模式</h3><span class="tag">local-first</span></div>
+          <div class="practice-title"><h3>背诵 / 刷题模式</h3><span class="tag">memory-first</span></div>
           <div class="mode-row">
             <button type="button" class="mode-btn active" data-mode="all">全部题卡</button>
             <button type="button" class="mode-btn" data-mode="today">今日复习 <strong id="todayN">0</strong></button>
             <button type="button" class="mode-btn" data-mode="starred">收藏 <strong id="starN">0</strong></button>
             <button type="button" class="mode-btn" data-mode="mistake">错题本 <strong id="mistakeN">0</strong></button>
             <button type="button" class="mode-btn" data-mode="weak">薄弱题 <strong id="weakN">0</strong></button>
-            <button type="button" class="mode-btn" id="randomBtn">随机抽卡</button>
+            <button type="button" class="mode-btn" id="randomBtn">随机抽背</button>
             <button type="button" class="mode-btn" id="interviewBtn">20 分钟面试</button>
-            <button type="button" class="mode-btn exam-mode-btn" id="examBtn">考试模式</button>
+            <button type="button" class="mode-btn exam-mode-btn" id="examBtn">闭卷默写</button>
           </div>
           <div class="daily-progress">
             <div class="daily-title"><span>今日计划</span><b><span id="dailyDone">0</span> / <span id="dailyTotal">0</span></b></div>
             <div class="mini-progress"><span id="dailyBar" style="width:0"></span></div>
           </div>
-          <p class="card-note">推荐：先口述 → 独立写代码 → 再看模板与易错点 → 标记“掌握 / 模糊 / 不会”。</p>
+          <p class="card-note">推荐背法：题名 → 说口诀 → 说三步 → 说不变量 → 默写代码 → 最后才展开答案。</p>
           <div class="data-actions">
             <button type="button" class="ghost-btn" id="exportBtn">备份进度</button>
             <button type="button" class="ghost-btn" id="importBtn">恢复进度</button>
@@ -87,7 +90,7 @@
 
     <div class="result-summary">
       <strong id="resultCount">当前 0 题</strong>
-      <span class="muted">展开卡片可切换 <span class="kbd">Python</span> / <span class="kbd">C++</span></span>
+      <span class="muted">展开顺序：<span class="kbd">背诵卡</span> → <span class="kbd">题解推导</span> → <span class="kbd">ACM 代码</span></span>
     </div>
 
     <main id="grid" class="grid"></main>
@@ -100,7 +103,7 @@
       <div id="historyList" class="history-list"></div>
     </section>
 
-    <div class="footer-note">Hot 100 Practice Lab v4 · 复习状态、收藏、错题、训练记录和连续天数均保存在浏览器 localStorage，可手动备份为 JSON。</div>
+    <div class="footer-note">Hot 100 Memory Lab v5 · 判断“掌握”的标准不是看懂，而是关掉答案后能说出口诀、三步法、不变量，并独立写出核心代码。</div>
   </div>
 </body>
 </html>
