@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="LeetCode Hot 100 Memory Lab：一句口诀、三步推导、不变量、Python/C++ ACM 学习版与间隔复习。">
-  <title>Hot 100 Memory Lab</title>
+  <meta name="description" content="LeetCode Hot 100 Memory Lab v6：优先常规、可读、面试友好的 Python/C++ 解法，一句口诀、三步推导、不变量与间隔复习。">
+  <title>Hot 100 Readable Memory Lab</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./memory-v5.css">
+  <link rel="stylesheet" href="./readable-v6.css">
   <script src="./data/memory-v5.js" defer></script>
   <script src="./app.js" defer></script>
   <script src="./memory-ui-v5.js" defer></script>
+  <script src="./readable-v6.js" defer></script>
 </head>
 <body>
   <div class="wrap">
     <header class="top">
       <div>
-        <div class="eyebrow">Knowledge Lab · Memory System v5</div>
+        <div class="eyebrow">Knowledge Lab · Readable Memory System v6</div>
         <h1>LeetCode Hot 100</h1>
-        <div class="muted">一句口诀 · 三步推导 · 不变量 · Python/C++ ACM 学习版 · 间隔复习</div>
+        <div class="muted">常规方法优先 · 可读代码 · 一句口诀 · 三步推导 · Python/C++ · 间隔复习</div>
       </div>
       <a class="back" href="../">← 返回个人主页</a>
     </header>
@@ -25,8 +27,8 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <h2>不是背代码，而是背“为什么这样写”</h2>
-          <p class="muted">每张卡按固定顺序记忆：先记一句口诀，再默写三步法和不变量，最后才看代码。ACM 学习版会把口诀、复杂度和建模思路直接写进代码注释。</p>
+          <h2>先写出“正常人会写的代码”，再追求最优技巧</h2>
+          <p class="muted">v6 默认优先直观、稳定、面试友好的常规解法。对于明显偏技巧的题，会先给更容易理解的方法，再把双指针、原地哈希、二分切分、Floyd 等优化放到“进阶 / 优化”里。</p>
           <div class="stats stats-v4">
             <div class="stat"><b id="total">0</b>Hot100</div>
             <div class="stat"><b id="mastery">0%</b>掌握度</div>
@@ -42,7 +44,7 @@
         </div>
 
         <aside class="practice-panel">
-          <div class="practice-title"><h3>背诵 / 刷题模式</h3><span class="tag">memory-first</span></div>
+          <div class="practice-title"><h3>背诵 / 刷题模式</h3><span class="tag">readable-first</span></div>
           <div class="mode-row">
             <button type="button" class="mode-btn active" data-mode="all">全部题卡</button>
             <button type="button" class="mode-btn" data-mode="today">今日复习 <strong id="todayN">0</strong></button>
@@ -57,7 +59,7 @@
             <div class="daily-title"><span>今日计划</span><b><span id="dailyDone">0</span> / <span id="dailyTotal">0</span></b></div>
             <div class="mini-progress"><span id="dailyBar" style="width:0"></span></div>
           </div>
-          <p class="card-note">推荐背法：题名 → 说口诀 → 说三步 → 说不变量 → 默写代码 → 最后才展开答案。</p>
+          <p class="card-note">推荐顺序：先理解常规解法 → 说口诀和三步 → 独立写可读代码 → 最后再看进阶优化。</p>
           <div class="data-actions">
             <button type="button" class="ghost-btn" id="exportBtn">备份进度</button>
             <button type="button" class="ghost-btn" id="importBtn">恢复进度</button>
@@ -90,7 +92,7 @@
 
     <div class="result-summary">
       <strong id="resultCount">当前 0 题</strong>
-      <span class="muted">展开顺序：<span class="kbd">背诵卡</span> → <span class="kbd">题解推导</span> → <span class="kbd">ACM 代码</span></span>
+      <span class="muted">展开顺序：<span class="kbd">背诵卡</span> → <span class="kbd">先理解</span> → <span class="kbd">常规代码</span> → <span class="kbd">进阶优化</span></span>
     </div>
 
     <main id="grid" class="grid"></main>
@@ -103,7 +105,7 @@
       <div id="historyList" class="history-list"></div>
     </section>
 
-    <div class="footer-note">Hot 100 Memory Lab v5 · 判断“掌握”的标准不是看懂，而是关掉答案后能说出口诀、三步法、不变量，并独立写出核心代码。</div>
+    <div class="footer-note">Hot 100 Readable Memory Lab v6 · 第一目标是“看得懂、说得清、能独立写出正常代码”；最优技巧放在理解之后。</div>
   </div>
 </body>
 </html>
