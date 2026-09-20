@@ -629,7 +629,7 @@ class LRUCache:
   }
 };
 
-function V8_splitTopLevel(text, delimiter = ';') {
+function V8_splitTopLevel(text, delimiter = ';', keepDelimiter = false) {
   const parts = [];
   let current = '';
   let paren = 0;
@@ -682,6 +682,9 @@ function V8_splitTopLevel(text, delimiter = ';') {
       bracket === 0 &&
       brace === 0
     ) {
+      if (keepDelimiter) {
+        current += char;
+      }
       if (current.trim()) parts.push(current.trim());
       current = '';
       continue;
@@ -813,7 +816,7 @@ function V8_formatCpp(code) {
     if (inlineFunction && !body.includes('[](')) {
       output.push(indent + inlineFunction[1] + ' {');
 
-      const statements = V8_splitTopLevel(inlineFunction[2]);
+      const statements = V8_splitTopLevel(inlineFunction[2], ';', true);
       for (const statement of statements) {
         output.push(indent + '    ' + statement);
       }
@@ -891,6 +894,34 @@ function V8_profile(item) {
   };
 }
 
+
+function V8_commentBlock(item, lang) {
+  if (!V7_isDeep(item)) return '';
+
+  const guide = V7_guide(item);
+  const profile = V8_profile(item);
+  const prefix = lang === 'py' ? '# ' : '// ';
+
+  const lines = [
+    '================ 中等/困难题阅读指南 ================',
+    `题目先用人话理解：${profile.core}`,
+    `朴素想法：${guide.naive}`,
+    `为什么转到当前解法：${guide.bridge}`,
+    '',
+    '关键变量：',
+    ...guide.variables.map(([name, meaning]) => `- ${name}: ${meaning}`),
+    '',
+    '阅读代码顺序：',
+    ...guide.codeRead.map((text, index) => `${index + 1}. ${text}`),
+    '',
+    `最容易错：${profile.pitfall}`,
+    `卡住提示：${guide.stuck}`,
+    '======================================================'
+  ];
+
+  return lines.map((line) => prefix + line).join('\n');
+}
+
 function V8_header(item, lang) {
   const memory = V5_memory(item);
   const method = V6_methodInfo(item);
@@ -916,7 +947,7 @@ function V8_header(item, lang) {
 
 V5_studyPython = function V8_studyPython(item) {
   const code = V8_defaultCode(item, 'py');
-  const deepGuide = V7_isDeep(item) ? V7_commentBlock(item, 'py') + '\n\n' : '';
+  const deepGuide = V7_isDeep(item) ? V8_commentBlock(item, 'py') + '\n\n' : '';
 
   return (
     deepGuide +
@@ -929,7 +960,7 @@ V5_studyPython = function V8_studyPython(item) {
 
 V5_studyCpp = function V8_studyCpp(item) {
   const code = V8_defaultCode(item, 'cpp');
-  const deepGuide = V7_isDeep(item) ? V7_commentBlock(item, 'cpp') + '\n\n' : '';
+  const deepGuide = V7_isDeep(item) ? V8_commentBlock(item, 'cpp') + '\n\n' : '';
 
   return (
     deepGuide +
