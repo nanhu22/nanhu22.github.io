@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="LeetCode Hot 100 Readable Memory Lab v7：中等/困难题慢讲、朴素思路到常规解法、变量表、手算示例、详细注释与 Python/C++ 可读代码。">
+  <meta name="description" content="LeetCode Hot 100 Audited Readable Lab v8：全量代码可读性审计、默认方法一致性修复、复杂度约束校正与 Python/C++ 可读答案。">
   <title>Hot 100 Readable Memory Lab</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./memory-v5.css">
   <link rel="stylesheet" href="./readable-v6.css">
   <link rel="stylesheet" href="./deep-v7.css">
+  <link rel="stylesheet" href="./audit-v8.css">
   <script src="./data/memory-v5.js" defer></script>
   <script src="./app.js" defer></script>
   <script src="./memory-ui-v5.js" defer></script>
@@ -17,14 +18,15 @@
   <script src="./readable-format-v6.js" defer></script>
   <script src="./deep-methods-v7.js" defer></script>
   <script src="./deep-dive-v7.js" defer></script>
+  <script src="./audit-v8.js" defer></script>
 </head>
 <body>
   <div class="wrap">
     <header class="top">
       <div>
-        <div class="eyebrow">Knowledge Lab · Deep Readable System v7</div>
+        <div class="eyebrow">Knowledge Lab · Audited Readable System v8</div>
         <h1>LeetCode Hot 100</h1>
-        <div class="muted">常规方法优先 · 中等/困难慢讲 · 变量表 · 手算示例 · 详细注释 · Python/C++</div>
+        <div class="muted">100 题审计 · 默认方法一致 · 复杂度约束正确 · Python/C++ 可读代码</div>
       </div>
       <a class="back" href="../">← 返回个人主页</a>
     </header>
@@ -32,8 +34,8 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <h2>中等和困难题，先慢慢推出来，再写代码</h2>
-          <p class="muted">v7 对中等 / 困难题新增“慢讲层”：从朴素办法开始，解释为什么要优化，再给变量表、小例子、代码阅读顺序和卡住提示。简单题仍保持原来的轻量卡片。</p>
+          <h2>先保证答案正确、可读，再谈背诵和优化</h2>
+          <p class="muted">v8 对 100 题重新做可读性与方法一致性审计：默认代码不再显示压缩的一行写法；讲解、复杂度、口诀和代码统一到同一套方法。对题面明确要求复杂度/空间约束的题，默认答案必须满足要求。</p>
           <div class="stats stats-v4">
             <div class="stat"><b id="total">0</b>Hot100</div>
             <div class="stat"><b id="mastery">0%</b>掌握度</div>
@@ -64,7 +66,7 @@
             <div class="daily-title"><span>今日计划</span><b><span id="dailyDone">0</span> / <span id="dailyTotal">0</span></b></div>
             <div class="mini-progress"><span id="dailyBar" style="width:0"></span></div>
           </div>
-          <p class="card-note">中等/困难题推荐：先看朴素思路 → 手算小例子 → 理解变量 → 再看代码；不要直接背模板。</p>
+          <p class="card-note">推荐顺序：先确认默认方法满足题目要求 → 看详细题解 → 手算小例子 → 读可读代码 → 最后再看进阶优化。</p>
           <div class="data-actions">
             <button type="button" class="ghost-btn" id="exportBtn">备份进度</button>
             <button type="button" class="ghost-btn" id="importBtn">恢复进度</button>
@@ -110,7 +112,7 @@
       <div id="historyList" class="history-list"></div>
     </section>
 
-    <div class="footer-note">Hot 100 Deep Readable Memory Lab v7 · 中等/困难题优先理解“为什么”，代码注释用于帮助恢复思路，不鼓励逐行死记。</div>
+    <div class="footer-note">Hot 100 Audited Readable Lab v8 · 默认区只展示经过整理的可读答案；压缩速背模板不再作为主学习内容。</div>
   </div>
 </body>
 </html>
