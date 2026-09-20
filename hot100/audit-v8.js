@@ -629,6 +629,143 @@ class LRUCache:
   }
 };
 
+
+V8_READABLE_STRUCTURES['131'] = {
+  py: `def partition(s):
+    answer = []
+    current_parts = []
+
+    def is_palindrome(left, right):
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+
+        return True
+
+    def backtrack(start):
+        if start == len(s):
+            answer.append(current_parts[:])
+            return
+
+        for end in range(start, len(s)):
+            if not is_palindrome(start, end):
+                continue
+
+            current_parts.append(s[start:end + 1])
+            backtrack(end + 1)
+            current_parts.pop()
+
+    backtrack(0)
+    return answer`,
+  cpp: `vector<vector<string>> partition(string s) {
+    vector<vector<string>> answer;
+    vector<string> currentParts;
+
+    auto isPalindrome = [&](int left, int right) {
+        while (left < right) {
+            if (s[left] != s[right]) {
+                return false;
+            }
+
+            ++left;
+            --right;
+        }
+
+        return true;
+    };
+
+    function<void(int)> backtrack = [&](int start) {
+        if (start == static_cast<int>(s.size())) {
+            answer.push_back(currentParts);
+            return;
+        }
+
+        for (int end = start; end < static_cast<int>(s.size()); ++end) {
+            if (!isPalindrome(start, end)) {
+                continue;
+            }
+
+            currentParts.push_back(s.substr(start, end - start + 1));
+            backtrack(end + 1);
+            currentParts.pop_back();
+        }
+    };
+
+    backtrack(0);
+    return answer;
+}`
+};
+
+V8_READABLE_STRUCTURES['5'] = {
+  py: `def longestPalindrome(s):
+    if not s:
+        return ""
+
+    best_start = 0
+    best_length = 1
+
+    def expand(left, right):
+        nonlocal best_start, best_length
+
+        while (
+            left >= 0
+            and right < len(s)
+            and s[left] == s[right]
+        ):
+            current_length = right - left + 1
+
+            if current_length > best_length:
+                best_start = left
+                best_length = current_length
+
+            left -= 1
+            right += 1
+
+    for center in range(len(s)):
+        # 奇数长度回文：中心是一个字符。
+        expand(center, center)
+
+        # 偶数长度回文：中心在两个字符之间。
+        expand(center, center + 1)
+
+    return s[best_start:best_start + best_length]`,
+  cpp: `string longestPalindrome(string s) {
+    if (s.empty()) {
+        return "";
+    }
+
+    int bestStart = 0;
+    int bestLength = 1;
+
+    auto expand = [&](int left, int right) {
+        while (
+            left >= 0 &&
+            right < static_cast<int>(s.size()) &&
+            s[left] == s[right]
+        ) {
+            int currentLength = right - left + 1;
+
+            if (currentLength > bestLength) {
+                bestStart = left;
+                bestLength = currentLength;
+            }
+
+            --left;
+            ++right;
+        }
+    };
+
+    for (int center = 0; center < static_cast<int>(s.size()); ++center) {
+        expand(center, center);
+        expand(center, center + 1);
+    }
+
+    return s.substr(bestStart, bestLength);
+}`
+};
+
 function V8_splitTopLevel(text, delimiter = ';', keepDelimiter = false) {
   const parts = [];
   let current = '';
