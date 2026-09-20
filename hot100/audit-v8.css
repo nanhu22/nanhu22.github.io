@@ -1,0 +1,35 @@
+/* Hot100 audit/readability v8 */
+.v8-audit-note {
+  border: 1px solid #d8b899;
+  background: linear-gradient(135deg, #fffaf3, #fdf0e3);
+  border-radius: 14px;
+  padding: 16px;
+}
+.v8-audit-note > b {
+  display: block;
+  margin-bottom: 6px;
+  color: #8f432f;
+}
+.v8-soft {
+  color: var(--muted);
+}
+.v8-advanced {
+  background: #fffaf5;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.v8-advanced-code {
+  margin-top: 12px;
+}
+.v8-story section + section {
+  margin-top: 14px;
+}
+.v8-tabs {
+  margin-top: 18px;
+}
+.v8-story code {
+  background: #f6e8dc;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
