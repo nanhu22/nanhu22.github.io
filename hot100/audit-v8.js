@@ -833,7 +833,7 @@ function V8_formatCpp(code) {
       continue;
     }
 
-    const statements = V8_splitTopLevel(body);
+    const statements = V8_splitTopLevel(body, ';', true);
     if (statements.length > 1) {
       for (const statement of statements) {
         output.push(indent + statement);
