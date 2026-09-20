@@ -803,6 +803,74 @@ function V8_formatPython(code) {
 function V8_formatCpp(code) {
   const output = [];
 
+  function emitStatement(statement, indent) {
+    const text = statement.trim();
+    if (!text) return;
+
+    // Expand: if (...) action;
+    let match = text.match(/^if\s*(\(.+\))\s+([^{}].*;)$/);
+    if (match) {
+      output.push(indent + 'if ' + match[1] + ' {');
+      output.push(indent + '    ' + match[2]);
+      output.push(indent + '}');
+      return;
+    }
+
+    // Expand: else if (...) action;
+    match = text.match(/^else\s+if\s*(\(.+\))\s+([^{}].*;)$/);
+    if (match) {
+      output.push(indent + 'else if ' + match[1] + ' {');
+      output.push(indent + '    ' + match[2]);
+      output.push(indent + '}');
+      return;
+    }
+
+    // Expand: else action;
+    match = text.match(/^else\s+([^{}].*;)$/);
+    if (match) {
+      output.push(indent + 'else {');
+      output.push(indent + '    ' + match[1]);
+      output.push(indent + '}');
+      return;
+    }
+
+    // Expand simple for/while bodies that are written on the same line.
+    match = text.match(/^(for|while)\s*(\(.+\))\s+([^{}].*;)$/);
+    if (match) {
+      output.push(indent + match[1] + ' ' + match[2] + ' {');
+      output.push(indent + '    ' + match[3]);
+      output.push(indent + '}');
+      return;
+    }
+
+    // Expand a one-line control block: if/for/while (...) { a; b; }
+    match = text.match(/^(if|for|while)\s*(\(.+\))\s*\{\s*([\s\S]*)\s*\}$/);
+    if (match) {
+      output.push(indent + match[1] + ' ' + match[2] + ' {');
+      const inner = V8_splitTopLevel(match[3], ';', true);
+      for (const piece of inner) {
+        emitStatement(piece, indent + '    ');
+      }
+      output.push(indent + '}');
+      return;
+    }
+
+    // Expand a normal one-line function/method body.
+    // Lambda expressions are intentionally excluded and handled by explicit readable overrides where needed.
+    match = text.match(/^(.+\))\s*\{\s*([\s\S]+)\s*\}$/);
+    if (match && !text.includes('[](') && !text.includes('[&](')) {
+      output.push(indent + match[1] + ' {');
+      const inner = V8_splitTopLevel(match[2], ';', true);
+      for (const piece of inner) {
+        emitStatement(piece, indent + '    ');
+      }
+      output.push(indent + '}');
+      return;
+    }
+
+    output.push(indent + text);
+  }
+
   for (const originalLine of String(code || '').split('\n')) {
     const indent = (originalLine.match(/^\s*/) || [''])[0];
     const body = originalLine.slice(indent.length).trim();
@@ -812,36 +880,13 @@ function V8_formatCpp(code) {
       continue;
     }
 
-    const inlineFunction = body.match(/^(.+\))\s*\{\s*(.+)\s*\}$/);
-    if (inlineFunction && !body.includes('[](')) {
-      output.push(indent + inlineFunction[1] + ' {');
-
-      const statements = V8_splitTopLevel(inlineFunction[2], ';', true);
-      for (const statement of statements) {
-        output.push(indent + '    ' + statement);
-      }
-
-      output.push(indent + '}');
-      continue;
-    }
-
-    const inlineControl = body.match(/^(if|while)\s*(\(.+\))\s+([^{}].*;)$/);
-    if (inlineControl) {
-      output.push(indent + inlineControl[1] + ' ' + inlineControl[2] + ' {');
-      output.push(indent + '    ' + inlineControl[3]);
-      output.push(indent + '}');
-      continue;
-    }
-
+    // Important: split top-level statements FIRST.
+    // This preserves if/else relationships and avoids swallowing everything after the first if.
     const statements = V8_splitTopLevel(body, ';', true);
-    if (statements.length > 1) {
-      for (const statement of statements) {
-        output.push(indent + statement);
-      }
-      continue;
-    }
 
-    output.push(indent + body);
+    for (const statement of statements) {
+      emitStatement(statement, indent);
+    }
   }
 
   return output.join('\n')
